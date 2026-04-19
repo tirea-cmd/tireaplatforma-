@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ro">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0049)file:///C:/Users/Acer/Downloads/index%20(16).html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tirea.ro — Hub de proiecte digitale</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="./index (1)_files/css2" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -17,6 +17,24 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
+
+/* ── FLOATING TIREA.RO WORDS ── */
+.floating-words{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.fw{position:absolute;font-family:'Space Grotesk',sans-serif;font-weight:700;color:rgba(220,235,255,0.09);white-space:nowrap;user-select:none;letter-spacing:-.3px;will-change:transform;text-shadow:0 0 8px rgba(180,210,240,0.08);}
+.fw span{color:rgba(200,225,250,0.16)}
+body.fabrica-active .fw{color:rgba(230,220,200,0.08);text-shadow:0 0 8px rgba(220,200,160,0.07);}
+body.fabrica-active .fw span{color:rgba(240,225,190,0.15)}
+@keyframes floatDrift{
+  0%{transform:translate(0,0) rotate(var(--r,0deg))}
+  25%{transform:translate(var(--dx1,20px),var(--dy1,-15px)) rotate(var(--r,0deg))}
+  50%{transform:translate(var(--dx2,-10px),var(--dy2,25px)) rotate(var(--r,0deg))}
+  75%{transform:translate(var(--dx3,15px),var(--dy3,10px)) rotate(var(--r,0deg))}
+  100%{transform:translate(0,0) rotate(var(--r,0deg))}
+}
+@keyframes fadePulse{
+  0%,100%{opacity:.4}
+  50%{opacity:1}
+}
 
 /* ── BG PUBLIC ── */
 .page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,#0a0e1a 0%,#0d1a2e 35%,#112438 60%,#162e4a 80%,#1a3856 100%);}
@@ -103,6 +121,106 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .cp-ok{text-align:center;padding:12px 0}
 .cp-ok-ic{width:48px;height:48px;border-radius:50%;background:rgba(0,214,143,0.1);border:1px solid rgba(0,214,143,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
 .cp-ok-ic svg{width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:2}
+
+/* ══════════════════════════════
+   PAGINA CATEGORIE (VENIT/UTILITATE/...)
+══════════════════════════════ */
+#page-category{display:none;position:relative;z-index:1;margin-top:62px;min-height:calc(100vh - 62px);padding:60px 48px 80px;}
+.cat-page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:30px;margin-bottom:40px;flex-wrap:wrap;}
+.cat-page-head-left{flex:1;min-width:280px;}
+.cat-back{display:inline-flex;align-items:center;gap:8px;background:rgba(95,179,212,0.08);border:1px solid rgba(95,179,212,0.2);color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;padding:9px 16px;margin-bottom:22px;border-radius:9px;transition:all .2s;}
+.cat-back:hover{background:rgba(95,179,212,0.15);border-color:rgba(95,179,212,0.35);transform:translateX(-2px);}
+.cat-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+.cat-page-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.cat-page-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--cat-c);box-shadow:0 0 10px var(--cat-c);}
+.cat-page-eyebrow .txt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cat-c);}
+.cat-page-title{font-size:clamp(32px,4.5vw,52px);font-weight:700;letter-spacing:-2px;line-height:1.02;margin-bottom:10px;}
+.cat-page-title em{font-style:italic;font-weight:300;color:var(--cat-c);}
+.cat-page-sub{font-size:15px;color:var(--sub);line-height:1.7;font-weight:300;max-width:520px;}
+.cat-add-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--cat-bg-s);border:1px solid var(--cat-border-s);border-radius:10px;color:var(--cat-c);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.cat-add-btn:hover{background:var(--cat-bg-h);transform:translateY(-1px);}
+.cat-add-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+.cat-proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.cat-proj{background:rgba(15,22,40,0.75);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;transition:all .2s;backdrop-filter:blur(8px);display:flex;flex-direction:column;}
+.cat-proj:hover{border-color:var(--cat-border-s);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+.cat-proj-img{width:100%;height:180px;background:var(--bg);background-size:cover;background-position:center;border-bottom:1px solid var(--border);position:relative;}
+.cat-proj-img.empty{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:40px;}
+.cat-proj-badge{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(10,14,26,0.85);backdrop-filter:blur(8px);letter-spacing:.5px;}
+.cat-proj-body{padding:18px 20px;flex:1;display:flex;flex-direction:column;}
+.cat-proj-name{font-size:16px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px;color:var(--text);}
+.cat-proj-desc{font-size:13px;color:var(--sub);line-height:1.6;font-weight:300;margin-bottom:14px;flex:1;}
+.cat-proj-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04);}
+.cat-proj-price{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--cat-c);}
+.cat-proj-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--cat-c);text-decoration:none;padding:5px 12px;border-radius:6px;background:var(--cat-bg-s);transition:all .2s;}
+.cat-proj-link:hover{background:var(--cat-bg-h);}
+.cat-proj-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5}
+.cat-proj-admin{position:absolute;top:10px;left:10px;display:none;gap:4px;z-index:2;}
+.cat-proj.admin-mode .cat-proj-admin{display:flex;}
+.cpa-btn{width:28px;height:28px;border-radius:7px;background:rgba(10,14,26,0.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;color:var(--text);}
+.cpa-btn:hover{background:rgba(10,14,26,0.95);}
+.cpa-btn.edit:hover{color:var(--accent);border-color:rgba(95,179,212,0.4);}
+.cpa-btn.del:hover{color:var(--red);border-color:rgba(224,85,85,0.4);}
+.cpa-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+.cat-empty{grid-column:1/-1;padding:60px 30px;text-align:center;border:1.5px dashed var(--border2);border-radius:14px;background:rgba(15,22,40,0.3);}
+.cat-empty-ic{font-size:40px;margin-bottom:12px;opacity:.4;}
+.cat-empty-tt{font-size:16px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.cat-empty-sb{font-size:13px;color:var(--sub);font-weight:300;}
+
+/* ══════════════════════════════
+   PIN MODAL
+══════════════════════════════ */
+#pin-overlay,#proj-overlay{position:fixed;inset:0;z-index:700;display:none;align-items:center;justify-content:center;background:rgba(5,8,18,0.88);backdrop-filter:blur(20px);padding:20px;}
+#pin-overlay.open,#proj-overlay.open{display:flex;animation:fadeBg .2s ease;}
+@keyframes fadeBg{from{opacity:0}to{opacity:1}}
+.pin-box{width:100%;max-width:360px;background:rgba(8,12,24,0.99);border:1px solid rgba(95,179,212,0.2);border-radius:18px;padding:32px;position:relative;}
+.pin-box .cp-x{position:absolute;top:13px;right:13px;background:none;border:none;cursor:pointer;color:var(--dim);padding:4px;}
+.pin-box .cp-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.pin-icon{width:54px;height:54px;border-radius:14px;background:rgba(95,179,212,0.1);border:1px solid rgba(95,179,212,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.pin-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:2}
+.pin-title{font-size:18px;font-weight:700;text-align:center;letter-spacing:-.4px;margin-bottom:6px;}
+.pin-sub{font-size:12px;color:var(--sub);text-align:center;font-weight:300;margin-bottom:22px;line-height:1.6;}
+.pin-iw{position:relative;margin-bottom:10px;}
+.pin-i{width:100%;padding:12px 40px 12px 14px;background:rgba(5,8,18,0.9);border:1px solid rgba(95,179,212,0.15);border-radius:9px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+.pin-i:focus{border-color:rgba(95,179,212,0.5);}
+.pin-i.err{border-color:rgba(224,85,85,0.5);animation:shake .3s;}
+.pin-eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:3px;color:var(--dim);}
+.pin-eye svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.pin-btn{width:100%;padding:12px;background:rgba(95,179,212,0.12);border:1px solid rgba(95,179,212,0.3);border-radius:9px;color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:6px;}
+.pin-btn:hover{background:rgba(95,179,212,0.2);}
+.pin-err{font-size:11px;color:var(--red);min-height:14px;margin-top:6px;font-family:'JetBrains Mono',monospace;text-align:center;}
+
+/* ══════════════════════════════
+   PROIECT MODAL (ADD/EDIT)
+══════════════════════════════ */
+.proj-box{width:100%;max-width:520px;max-height:90vh;overflow-y:auto;background:rgba(8,12,24,0.99);border:1px solid rgba(95,179,212,0.2);border-radius:18px;padding:32px;position:relative;}
+.proj-box .cp-x{position:absolute;top:13px;right:13px;background:none;border:none;cursor:pointer;color:var(--dim);padding:4px;z-index:2;}
+.proj-box .cp-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.proj-h{font-size:18px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px;}
+.proj-p{font-size:12px;color:var(--sub);font-weight:300;margin-bottom:22px;}
+.proj-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.proj-fg{margin-bottom:12px;}
+.proj-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;display:block;}
+.proj-inp,.proj-ta,.proj-sel{width:100%;padding:10px 12px;background:rgba(5,8,18,0.9);border:1px solid rgba(95,179,212,0.15);border-radius:8px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+.proj-ta{resize:vertical;min-height:70px;line-height:1.5;}
+.proj-inp:focus,.proj-ta:focus,.proj-sel:focus{border-color:rgba(95,179,212,0.4);}
+.proj-sel option{background:#0a1020;}
+.proj-img-wrap{border:1.5px dashed rgba(95,179,212,0.2);border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
+.proj-img-wrap:hover{border-color:rgba(95,179,212,0.4);background:rgba(95,179,212,0.03);}
+.proj-img-wrap.has-img{padding:0;border-style:solid;overflow:hidden;}
+.proj-img-preview{width:100%;height:140px;background-size:cover;background-position:center;border-radius:8px;}
+.proj-img-placeholder{padding:20px 10px;color:var(--sub);font-size:12px;}
+.proj-img-placeholder svg{width:24px;height:24px;margin:0 auto 6px;display:block;stroke:var(--dim);fill:none;stroke-width:1.8;}
+.proj-img-rem{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:7px;background:rgba(0,0,0,0.7);border:none;color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;}
+.proj-img-wrap.has-img .proj-img-rem{display:flex;}
+.proj-img-rem svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+.proj-btns{display:flex;gap:10px;margin-top:18px;}
+.proj-btn{flex:1;padding:11px;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;border:1px solid;}
+.proj-btn.save{background:rgba(0,214,143,0.12);border-color:rgba(0,214,143,0.3);color:var(--green);}
+.proj-btn.save:hover{background:rgba(0,214,143,0.2);}
+.proj-btn.cancel{background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.1);color:var(--sub);}
+.proj-btn.cancel:hover{background:rgba(255,255,255,0.06);color:var(--text);}
 
 /* ══════════════════════════════
    PAGINA PUBLICA
@@ -350,6 +468,10 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
   #aws3 .ws-body > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
   #preview-frame,#preview-frame2{height:220px!important}
   #html-editor,#html-editor2{height:220px!important}
+  #page-category{padding:40px 20px 60px;}
+  .cat-proj-grid{grid-template-columns:1fr;}
+  .cat-page-head{flex-direction:column;}
+  .proj-row{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -362,6 +484,9 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
 <div class="fab-bg" id="bg-fab"></div>
 <div class="fab-bg-grid" id="bg-fab-grid"></div>
 
+<!-- FLOATING TIREA.RO WORDS -->
+<div class="floating-words" id="floating-words"><div class="fw" style="top: 42.9785%; left: 29.0311%; font-size: 10px; --r: 25deg; --dx1: -0.649386369479199px; --dy1: 5.513264535558806px; --dx2: 50.900766179102185px; --dy2: 40.883675762496686px; --dx3: -46.01032804399424px; --dy3: 44.94025478416353px; opacity: 0.604752; animation: 12.1463s ease-in-out -8.57006s infinite normal none running floatDrift, 8.63419s ease-in-out -0.123669s infinite normal none running fadePulse; transform: rotate(25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 4.00875%; left: 91.4829%; font-size: 10px; --r: -15deg; --dx1: 21.20504524111357px; --dy1: 51.055320015668165px; --dx2: -43.86931120899339px; --dy2: -59.30275296983061px; --dx3: 46.20314921468853px; --dy3: 4.8799123619362845px; opacity: 0.929695; animation: 12.8156s ease-in-out -7.36389s infinite normal none running floatDrift, 8.21292s ease-in-out -7.12906s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 20.9205%; left: 101.461%; font-size: 14px; --r: 0deg; --dx1: -5.207914680153138px; --dy1: -14.12244853777121px; --dx2: -60.364447089727356px; --dy2: 2.929575803795408px; --dx3: 16.886682491677043px; --dy3: -2.1290644743138576px; opacity: 0.674403; animation: 22.6043s ease-in-out -18.0858s infinite normal none running floatDrift, 8.70993s ease-in-out -4.16932s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 0.708414%; left: 51.8967%; font-size: 11px; --r: -5deg; --dx1: 61.94170952506124px; --dy1: -68.8203229775666px; --dx2: -48.31102068882425px; --dy2: 36.278118998643876px; --dx3: -24.413420139898893px; --dy3: 9.130899880461765px; opacity: 0.860665; animation: 21.9503s ease-in-out -9.30054s infinite normal none running floatDrift, 5.12657s ease-in-out -2.82373s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 93.4109%; left: 14.8039%; font-size: 11px; --r: 0deg; --dx1: 7.731891664480028px; --dy1: -57.166748703567315px; --dx2: -40.80814022531566px; --dy2: 67.86880359238948px; --dx3: -38.10146420713271px; --dy3: -48.75520313720082px; opacity: 0.802272; animation: 19.8911s ease-in-out -14.998s infinite normal none running floatDrift, 8.42186s ease-in-out -4.38517s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 57.9303%; left: 85.8008%; font-size: 12px; --r: -5deg; --dx1: -17.67505046927383px; --dy1: -8.05241898249536px; --dx2: 47.90220161880778px; --dy2: -69.83832070891225px; --dx3: -30.322842188432013px; --dy3: 60.72791443217871px; opacity: 0.65081; animation: 16.5789s ease-in-out -1.3905s infinite normal none running floatDrift, 6.6245s ease-in-out -2.0061s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 84.9525%; left: -0.081504%; font-size: 15px; --r: 5deg; --dx1: -3.2586376146481144px; --dy1: -26.541805811421174px; --dx2: -23.158983011015636px; --dy2: -56.454828829951715px; --dx3: -46.031866990735615px; --dy3: -38.66487637068813px; opacity: 0.858974; animation: 13.2048s ease-in-out -10.7767s infinite normal none running floatDrift, 6.89354s ease-in-out -1.13462s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 39.4785%; left: 60.7098%; font-size: 14px; --r: 10deg; --dx1: 0.9820078786457986px; --dy1: -29.54782043390645px; --dx2: -16.218397766689737px; --dy2: -54.437679678882496px; --dx3: -41.237200595254336px; --dy3: -67.98640163287271px; opacity: 0.738403; animation: 14.8516s ease-in-out -1.42356s infinite normal none running floatDrift, 7.82893s ease-in-out -3.80183s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 39.3695%; left: 55.057%; font-size: 14px; --r: 15deg; --dx1: -12.519207257803656px; --dy1: -62.885127022410586px; --dx2: 10.649150567362602px; --dy2: 65.71885846894577px; --dx3: 55.745509743739596px; --dy3: -42.41969642703399px; opacity: 0.701129; animation: 15.922s ease-in-out -0.155869s infinite normal none running floatDrift, 4.87305s ease-in-out -3.29639s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 63.6604%; left: 49.3434%; font-size: 15px; --r: 0deg; --dx1: -56.89136068682036px; --dy1: -59.85830445069661px; --dx2: 66.65075773943794px; --dy2: 54.106745207746755px; --dx3: -63.80256375769768px; --dy3: 27.3676497390043px; opacity: 0.918844; animation: 24.6692s ease-in-out -17.7554s infinite normal none running floatDrift, 5.52418s ease-in-out -5.4209s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 18.4477%; left: 89.1342%; font-size: 15px; --r: -15deg; --dx1: -18.655256241853117px; --dy1: 2.253381053935528px; --dx2: -6.950137494345112px; --dy2: -57.58733634805879px; --dx3: -67.06923274842221px; --dy3: 14.416463159524382px; opacity: 0.694683; animation: 16.4239s ease-in-out -5.70431s infinite normal none running floatDrift, 6.99721s ease-in-out -4.0006s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 56.5779%; left: 15.3332%; font-size: 14px; --r: 0deg; --dx1: -35.123920519725885px; --dy1: 12.260081800016511px; --dx2: -60.42504406964484px; --dy2: 32.06257876317635px; --dx3: -36.468283683192105px; --dy3: 14.646511891408647px; opacity: 0.81101; animation: 10.3399s ease-in-out -8.99771s infinite normal none running floatDrift, 6.29871s ease-in-out -2.18291s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 37.4859%; left: 87.1375%; font-size: 12px; --r: -10deg; --dx1: -14.874097254486527px; --dy1: -36.161388696617244px; --dx2: 37.408067127342505px; --dy2: -26.62537937974771px; --dx3: -24.97048395815401px; --dy3: -24.975599448770684px; opacity: 0.867436; animation: 15.4782s ease-in-out -3.17265s infinite normal none running floatDrift, 6.32646s ease-in-out -2.02036s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 50.8326%; left: 21.9297%; font-size: 12px; --r: -15deg; --dx1: -34.548428550760924px; --dy1: -46.00179466034579px; --dx2: -16.00167681445104px; --dy2: 56.98175836891383px; --dx3: -44.640667880971655px; --dy3: 43.81319154698429px; opacity: 0.691897; animation: 11.8751s ease-in-out -0.268473s infinite normal none running floatDrift, 9.33421s ease-in-out -6.71664s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 91.9157%; left: 48.4311%; font-size: 20px; --r: 0deg; --dx1: -7.781005780314896px; --dy1: -45.958726578393964px; --dx2: 59.9007735346282px; --dy2: 26.278187554966404px; --dx3: -49.14879077359465px; --dy3: -69.6420407649315px; opacity: 0.868696; animation: 25.7552s ease-in-out -9.64298s infinite normal none running floatDrift, 4.21791s ease-in-out -3.20585s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 14.1505%; left: 45.292%; font-size: 22px; --r: -15deg; --dx1: 24.89283276339752px; --dy1: 59.64815131803098px; --dx2: -47.46642180683269px; --dy2: -10.955619256277487px; --dx3: 31.505520796069842px; --dy3: 29.527589332622266px; opacity: 0.942203; animation: 11.6143s ease-in-out -2.04101s infinite normal none running floatDrift, 4.8736s ease-in-out -1.16504s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 13.6326%; left: 12.0522%; font-size: 12px; --r: 15deg; --dx1: -55.70570444113149px; --dy1: 65.09726449704804px; --dx2: 50.36059874734572px; --dy2: 69.03305733553428px; --dx3: 52.4008367835507px; --dy3: -61.558821829932675px; opacity: 0.778701; animation: 13.3147s ease-in-out -10.9804s infinite normal none running floatDrift, 8.90246s ease-in-out -3.61175s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 66.7595%; left: 97.3801%; font-size: 14px; --r: 10deg; --dx1: 40.394577200473364px; --dy1: 29.532422638822194px; --dx2: -50.93949685853898px; --dy2: 36.14423808258001px; --dx3: 52.901448510046805px; --dy3: 38.573627222601594px; opacity: 0.937588; animation: 14.12s ease-in-out -4.48689s infinite normal none running floatDrift, 4.71457s ease-in-out -2.11039s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 102.814%; left: 63.0895%; font-size: 15px; --r: 0deg; --dx1: 36.611094123712554px; --dy1: 61.18449137729014px; --dx2: 68.80014039657735px; --dy2: -7.143014176639523px; --dx3: 41.541146499308894px; --dy3: 3.7014048514937548px; opacity: 0.914529; animation: 22.156s ease-in-out -3.01191s infinite normal none running floatDrift, 5.46385s ease-in-out -0.832294s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 54.9191%; left: 71.9666%; font-size: 10px; --r: 0deg; --dx1: 21.33234199305547px; --dy1: -45.47089849155512px; --dx2: -67.08886024228313px; --dy2: -0.7020122676621865px; --dx3: -38.25177251250885px; --dy3: -67.65966518342665px; opacity: 0.975787; animation: 19.4685s ease-in-out -11.8259s infinite normal none running floatDrift, 6.02178s ease-in-out -0.285482s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 34.3898%; left: 46.8724%; font-size: 14px; --r: 0deg; --dx1: 9.810567804809637px; --dy1: 42.91249068057769px; --dx2: -6.1201349787767185px; --dy2: -2.8424076748101057px; --dx3: 52.47237736304678px; --dy3: 15.3864843877229px; opacity: 0.879047; animation: 25.3872s ease-in-out -4.01775s infinite normal none running floatDrift, 6.81035s ease-in-out -1.11984s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 67.5276%; left: 41.222%; font-size: 16px; --r: 15deg; --dx1: -47.166169963049555px; --dy1: -35.16942912052917px; --dx2: 4.1015884182126054px; --dy2: -68.76340285097938px; --dx3: 57.18851804097607px; --dy3: 43.66449722354024px; opacity: 0.830315; animation: 18.6399s ease-in-out -0.871074s infinite normal none running floatDrift, 7.51787s ease-in-out -3.04203s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 84.6016%; left: 95.9611%; font-size: 11px; --r: -10deg; --dx1: -0.1470536454936333px; --dy1: 39.775561954539135px; --dx2: -49.09393676838922px; --dy2: 1.5554198076924686px; --dx3: 10.023039364715636px; --dy3: -64.86475418526041px; opacity: 0.611148; animation: 17.3418s ease-in-out -10.4647s infinite normal none running floatDrift, 7.8585s ease-in-out -3.47981s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 32.9067%; left: 33.3106%; font-size: 16px; --r: 0deg; --dx1: 20.42226981611839px; --dy1: 9.099855700089057px; --dx2: 26.946147885704466px; --dy2: 36.03123404808094px; --dx3: -60.756998079916784px; --dy3: 51.05580085402453px; opacity: 0.89772; animation: 27.5598s ease-in-out -26.3245s infinite normal none running floatDrift, 7.1236s ease-in-out -0.88904s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 35.777%; left: 69.3504%; font-size: 12px; --r: 10deg; --dx1: -47.48743844622566px; --dy1: 7.861207518239777px; --dx2: -8.549845636321837px; --dy2: -22.503128234701876px; --dx3: 8.02893405860468px; --dy3: 58.52928018444117px; opacity: 0.990244; animation: 23.2716s ease-in-out -7.70601s infinite normal none running floatDrift, 7.89943s ease-in-out -1.85422s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: -0.151236%; left: 101.073%; font-size: 15px; --r: 5deg; --dx1: -0.5077449914292131px; --dy1: -62.72078504851968px; --dx2: -4.339635774739412px; --dy2: -51.520817702566085px; --dx3: -8.379657715053243px; --dy3: -24.282304597579593px; opacity: 0.985672; animation: 27.4684s ease-in-out -22.9025s infinite normal none running floatDrift, 6.8737s ease-in-out -1.46727s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 94.797%; left: 36.5162%; font-size: 13px; --r: -10deg; --dx1: 60.64398181661978px; --dy1: -19.236981821906692px; --dx2: 32.05966163033334px; --dy2: -33.6106964545429px; --dx3: -50.26368504787708px; --dy3: 19.8233470709519px; opacity: 0.617759; animation: 20.3919s ease-in-out -5.21497s infinite normal none running floatDrift, 7.21261s ease-in-out -2.27282s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 41.895%; left: 22.8868%; font-size: 12px; --r: 0deg; --dx1: -39.10470308440498px; --dy1: 54.711168220977605px; --dx2: 1.0510322766842495px; --dy2: -60.548105097468785px; --dx3: -55.86807644398052px; --dy3: -8.22010350940291px; opacity: 0.953395; animation: 19.9249s ease-in-out -3.08245s infinite normal none running floatDrift, 8.82756s ease-in-out -0.0628167s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 41.9683%; left: 62.2722%; font-size: 15px; --r: -15deg; --dx1: 25.842515097686885px; --dy1: -44.52989258755848px; --dx2: 10.414343354809938px; --dy2: -68.96447105330402px; --dx3: 25.39044678727881px; --dy3: 62.60425993746689px; opacity: 0.980584; animation: 17.1246s ease-in-out -14.4707s infinite normal none running floatDrift, 9.75583s ease-in-out -8.48964s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 83.804%; left: 81.4235%; font-size: 15px; --r: 0deg; --dx1: 28.20926873478788px; --dy1: 37.929186952848504px; --dx2: 13.51959388757427px; --dy2: -55.45657783310361px; --dx3: -3.7002186318531027px; --dy3: 51.593044952479964px; opacity: 0.991231; animation: 19.6841s ease-in-out -1.20182s infinite normal none running floatDrift, 4.36649s ease-in-out -1.97936s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 29.8734%; left: 58.3685%; font-size: 22px; --r: -15deg; --dx1: -56.69626537723533px; --dy1: 28.52539009933382px; --dx2: 43.375630007900966px; --dy2: 66.79729617336554px; --dx3: -6.723306177562693px; --dy3: 22.580092676856747px; opacity: 0.88291; animation: 22.0707s ease-in-out -4.24035s infinite normal none running floatDrift, 4.77605s ease-in-out -1.43165s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 34.3625%; left: 79.4587%; font-size: 16px; --r: 15deg; --dx1: -49.154022158301885px; --dy1: 2.4203881399589533px; --dx2: -18.32937479405219px; --dy2: -9.98286494809162px; --dx3: 24.55493677489848px; --dy3: -24.25067059571178px; opacity: 0.774897; animation: 20.9525s ease-in-out -7.46325s infinite normal none running floatDrift, 4.58014s ease-in-out -2.22535s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 76.6976%; left: 58.9925%; font-size: 22px; --r: 10deg; --dx1: 37.736767993333906px; --dy1: 56.49812917545104px; --dx2: -39.17467480124385px; --dy2: 39.765391511546056px; --dx3: 17.300937408688164px; --dy3: 23.09854182246339px; opacity: 0.998918; animation: 25.7116s ease-in-out -23.798s infinite normal none running floatDrift, 4.56231s ease-in-out -3.66438s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: -2.99295%; left: 99.0577%; font-size: 22px; --r: -5deg; --dx1: 17.330446463059705px; --dy1: -2.6893873165775983px; --dx2: 61.987246857774124px; --dy2: 38.16420074494864px; --dx3: -3.4944115374090967px; --dy3: 14.698768652837229px; opacity: 0.89772; animation: 19.0791s ease-in-out -15.0943s infinite normal none running floatDrift, 6.54652s ease-in-out -0.023611s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 93.7406%; left: 64.7273%; font-size: 12px; --r: -15deg; --dx1: -8.399218180927758px; --dy1: 43.64671983142474px; --dx2: 17.837069723923953px; --dy2: 26.076178906702047px; --dx3: 68.70529319125087px; --dy3: 23.334757494415392px; opacity: 0.628642; animation: 11.8833s ease-in-out -10.8156s infinite normal none running floatDrift, 4.4209s ease-in-out -2.9932s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 54.0594%; left: 69.5962%; font-size: 22px; --r: 5deg; --dx1: 60.45823740663004px; --dy1: 21.907025111838873px; --dx2: -64.10399443855579px; --dy2: -25.897506464029362px; --dx3: -3.644014146162724px; --dy3: -7.491500994223486px; opacity: 0.636904; animation: 27.5706s ease-in-out -9.99928s infinite normal none running floatDrift, 5.00248s ease-in-out -3.85037s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 12.9428%; left: 28.9135%; font-size: 18px; --r: 5deg; --dx1: -24.24569466081714px; --dy1: -15.678941102707807px; --dx2: -10.32344335907084px; --dy2: 19.77766599150717px; --dx3: -23.826226629457786px; --dy3: -41.22154563204921px; opacity: 0.691048; animation: 14.0313s ease-in-out -2.97965s infinite normal none running floatDrift, 9.18409s ease-in-out -5.11548s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 54.9841%; left: 37.259%; font-size: 12px; --r: 0deg; --dx1: 25.220460304858257px; --dy1: 52.13001257647127px; --dx2: -17.470817529667887px; --dy2: -9.275432292605956px; --dx3: -49.29279163387301px; --dy3: 39.561387836350605px; opacity: 0.77529; animation: 16.3118s ease-in-out -11.4128s infinite normal none running floatDrift, 6.69465s ease-in-out -3.40818s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 104.374%; left: 41.531%; font-size: 22px; --r: -15deg; --dx1: -15.742252769217401px; --dy1: -26.24108126925703px; --dx2: -32.61935835454247px; --dy2: 41.34772690459959px; --dx3: -39.97839021457467px; --dy3: -43.55415437853994px; opacity: 0.728495; animation: 25.9076s ease-in-out -12.7138s infinite normal none running floatDrift, 4.90203s ease-in-out -3.48717s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 11.3945%; left: 104.732%; font-size: 22px; --r: 15deg; --dx1: 64.78196010544858px; --dy1: -23.119372494372993px; --dx2: -53.90459198519876px; --dy2: 67.0800495624299px; --dx3: -42.36419171905586px; --dy3: 5.2439002307484905px; opacity: 0.809482; animation: 26.2234s ease-in-out -0.880945s infinite normal none running floatDrift, 4.13484s ease-in-out -3.79239s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 44.5069%; left: 1.01402%; font-size: 22px; --r: 15deg; --dx1: 1.758548747042532px; --dy1: 40.16249410344704px; --dx2: -55.90341055765744px; --dy2: -40.00922924341611px; --dx3: -37.524555171563605px; --dy3: -46.87692174113484px; opacity: 0.622788; animation: 19.2973s ease-in-out -3.25688s infinite normal none running floatDrift, 9.53787s ease-in-out -4.17824s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 56.0766%; left: 33.6216%; font-size: 18px; --r: -10deg; --dx1: -8.423954672019878px; --dy1: -67.99164760588349px; --dx2: 7.282293479125983px; --dy2: 62.71127610646656px; --dx3: 46.84533850636839px; --dy3: 48.379857440340885px; opacity: 0.89084; animation: 18.2168s ease-in-out -15.1973s infinite normal none running floatDrift, 4.40008s ease-in-out -3.4685s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 75.0372%; left: 87.4366%; font-size: 20px; --r: -25deg; --dx1: -69.14065000181961px; --dy1: 51.316102964191295px; --dx2: -24.903247910602px; --dy2: 69.58172540459731px; --dx3: -9.616838472047986px; --dy3: 67.54797621184494px; opacity: 0.607028; animation: 22.1796s ease-in-out -14.2143s infinite normal none running floatDrift, 8.32205s ease-in-out -2.88755s infinite normal none running fadePulse; transform: rotate(-25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 22.2064%; left: 89.3084%; font-size: 10px; --r: 0deg; --dx1: 24.835186380046167px; --dy1: 51.80011571175901px; --dx2: -51.16605673109911px; --dy2: -19.272802372174258px; --dx3: -44.09260129085162px; --dy3: -55.87688443199963px; opacity: 0.922547; animation: 24.3921s ease-in-out -22.3925s infinite normal none running floatDrift, 6.78691s ease-in-out -3.45919s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 26.3944%; left: 85.444%; font-size: 16px; --r: -10deg; --dx1: -12.224618339252391px; --dy1: 60.673379517350845px; --dx2: -42.26482444799967px; --dy2: -53.54503849126611px; --dx3: -28.32976438729767px; --dy3: 38.01673867390591px; opacity: 0.942532; animation: 23.5651s ease-in-out -4.20705s infinite normal none running floatDrift, 5.92505s ease-in-out -1.01567s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 72.0159%; left: 64.4368%; font-size: 14px; --r: 15deg; --dx1: -14.938689940185586px; --dy1: 69.60201927794684px; --dx2: -62.30872670662271px; --dy2: 64.86990877614109px; --dx3: 32.45281520883047px; --dy3: -22.844258867864347px; opacity: 0.87453; animation: 13.9374s ease-in-out -12.8428s infinite normal none running floatDrift, 9.85537s ease-in-out -1.18941s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 14.7253%; left: 76.5163%; font-size: 18px; --r: -10deg; --dx1: -25.9069798448267px; --dy1: 5.412870791842803px; --dx2: 15.853681387619481px; --dy2: -32.1032580678056px; --dx3: 16.87992693829565px; --dy3: 32.9775301425981px; opacity: 0.688768; animation: 11.4811s ease-in-out -6.9219s infinite normal none running floatDrift, 6.46611s ease-in-out -4.87386s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 72.495%; left: 64.1811%; font-size: 22px; --r: 10deg; --dx1: 30.02885525348404px; --dy1: -39.0063672842769px; --dx2: 23.326133061072845px; --dy2: -0.6699468060416391px; --dx3: 41.92173774283991px; --dy3: -9.405687217369636px; opacity: 0.864721; animation: 24.2642s ease-in-out -11.2488s infinite normal none running floatDrift, 8.73614s ease-in-out -6.83159s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 38.6585%; left: 33.581%; font-size: 11px; --r: -5deg; --dx1: -25.617571352963903px; --dy1: -12.607784721533362px; --dx2: -0.40504042424575726px; --dy2: -62.53791274670277px; --dx3: 7.197778552891537px; --dy3: 54.138028019888644px; opacity: 0.745599; animation: 21.3116s ease-in-out -14.9588s infinite normal none running floatDrift, 7.76878s ease-in-out -2.23413s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 29.0892%; left: 7.54113%; font-size: 22px; --r: 15deg; --dx1: 30.306452690278277px; --dy1: 11.341589599204205px; --dx2: -6.056837473749043px; --dy2: -26.3459560056204px; --dx3: 45.814431606452814px; --dy3: -27.885506018318967px; opacity: 0.682232; animation: 17.7803s ease-in-out -10.6296s infinite normal none running floatDrift, 8.22873s ease-in-out -7.02745s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 104.916%; left: 45.9596%; font-size: 15px; --r: 0deg; --dx1: 53.97223572961249px; --dy1: -9.452089020619255px; --dx2: -28.23185032192477px; --dy2: 12.184253767503531px; --dx3: 5.990136454423352px; --dy3: 28.72497739798706px; opacity: 0.652246; animation: 12.1508s ease-in-out -8.07005s infinite normal none running floatDrift, 7.97105s ease-in-out -1.04961s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 34.4583%; left: 7.9445%; font-size: 18px; --r: -5deg; --dx1: -31.45110097608276px; --dy1: 47.406203028916px; --dx2: 11.635941300173773px; --dy2: -53.705562229190356px; --dx3: -53.71518720205033px; --dy3: 10.343272019495352px; opacity: 0.70313; animation: 15.821s ease-in-out -9.07868s infinite normal none running floatDrift, 9.18573s ease-in-out -2.16444s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 33.9335%; left: 28.0538%; font-size: 12px; --r: 0deg; --dx1: 54.44429538569455px; --dy1: -69.51965447145946px; --dx2: 6.391611072754846px; --dy2: 64.45877586928259px; --dx3: -10.07299425735251px; --dy3: -46.34486186438176px; opacity: 0.993246; animation: 25.6942s ease-in-out -4.6522s infinite normal none running floatDrift, 5.78837s ease-in-out -4.14105s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 99.6806%; left: 3.80179%; font-size: 22px; --r: 5deg; --dx1: -44.00772030772472px; --dy1: -31.619142800499px; --dx2: 45.425384924181344px; --dy2: -67.7825847663179px; --dx3: 36.82969114911196px; --dy3: 1.2211854847736503px; opacity: 0.928947; animation: 23.8814s ease-in-out -16.8503s infinite normal none running floatDrift, 7.8625s ease-in-out -5.78502s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 65.2112%; left: 67.8845%; font-size: 14px; --r: -5deg; --dx1: -32.5366863526324px; --dy1: 1.780890144119709px; --dx2: -42.229419837937414px; --dy2: -52.02700145387761px; --dx3: 17.2746198962814px; --dy3: -1.4798403637944935px; opacity: 0.944653; animation: 21.7331s ease-in-out -6.40971s infinite normal none running floatDrift, 5.17871s ease-in-out -3.72252s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 6.60437%; left: 37.4837%; font-size: 11px; --r: 15deg; --dx1: -25.453629839817392px; --dy1: -38.993341535533744px; --dx2: -60.69444624983691px; --dy2: 25.179277736222506px; --dx3: -50.21697899049566px; --dy3: 9.583507243031226px; opacity: 0.892022; animation: 11.4476s ease-in-out -9.23752s infinite normal none running floatDrift, 9.18397s ease-in-out -3.09072s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 53.1561%; left: 11.8277%; font-size: 20px; --r: 25deg; --dx1: -21.904749547359323px; --dy1: -41.32151565084474px; --dx2: 2.3919830545298093px; --dy2: -59.5594027299623px; --dx3: -9.181866975765749px; --dy3: 39.56855965455468px; opacity: 0.887089; animation: 25.0099s ease-in-out -15.6152s infinite normal none running floatDrift, 6.75317s ease-in-out -6.58985s infinite normal none running fadePulse; transform: rotate(25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 93.3774%; left: 26.5637%; font-size: 16px; --r: -15deg; --dx1: 11.091060744097883px; --dy1: 58.668148820140274px; --dx2: 67.4555182506009px; --dy2: -12.555872357918318px; --dx3: -22.72912653795175px; --dy3: 58.40317233673605px; opacity: 0.731569; animation: 27.9236s ease-in-out -18.9096s infinite normal none running floatDrift, 5.29673s ease-in-out -3.38s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 103.997%; left: 42.807%; font-size: 20px; --r: -15deg; --dx1: -10.014811750172473px; --dy1: -10.931803438742435px; --dx2: 16.29646311938749px; --dy2: 23.744618200408105px; --dx3: 17.894996830821338px; --dy3: -52.02605571543337px; opacity: 0.969057; animation: 14.6838s ease-in-out -3.2786s infinite normal none running floatDrift, 5.95967s ease-in-out -0.63875s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 52.635%; left: 65.0941%; font-size: 12px; --r: -25deg; --dx1: 42.572984143529744px; --dy1: 5.58219741546133px; --dx2: -67.86597826020082px; --dy2: 29.864848983813445px; --dx3: -36.81390205467381px; --dy3: -5.671347728846737px; opacity: 0.795431; animation: 21.7877s ease-in-out -3.28358s infinite normal none running floatDrift, 5.88155s ease-in-out -1.44795s infinite normal none running fadePulse; transform: rotate(-25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 8.93833%; left: 57.059%; font-size: 11px; --r: -25deg; --dx1: -23.150825650099822px; --dy1: -16.721012257284244px; --dx2: 39.66641587038311px; --dy2: -42.165605147323895px; --dx3: -27.853844274246036px; --dy3: 35.58439693964351px; opacity: 0.611491; animation: 14.4465s ease-in-out -11.9598s infinite normal none running floatDrift, 6.43211s ease-in-out -3.68043s infinite normal none running fadePulse; transform: rotate(-25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 2.77295%; left: 47.8913%; font-size: 18px; --r: 0deg; --dx1: 7.113212574419954px; --dy1: -8.65595483031521px; --dx2: 51.6346621303157px; --dy2: -6.778125934918009px; --dx3: 45.46455454815384px; --dy3: 66.72353243282615px; opacity: 0.616058; animation: 20.5311s ease-in-out -0.968604s infinite normal none running floatDrift, 4.38418s ease-in-out -0.569404s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 72.5629%; left: 26.4542%; font-size: 15px; --r: -10deg; --dx1: 67.74685931915624px; --dy1: -25.822452777466864px; --dx2: -5.586874710114664px; --dy2: 23.233067221826897px; --dx3: 44.51266969883919px; --dy3: 68.10450476411708px; opacity: 0.817414; animation: 18.8356s ease-in-out -11.7748s infinite normal none running floatDrift, 9.51021s ease-in-out -7.22294s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 36.2815%; left: 91.2162%; font-size: 20px; --r: -5deg; --dx1: -40.18486526666611px; --dy1: 4.116113658661873px; --dx2: -23.274147800147308px; --dy2: -47.63375702201427px; --dx3: 1.705288716182931px; --dy3: -59.330791411163894px; opacity: 0.647602; animation: 18.9562s ease-in-out -13.795s infinite normal none running floatDrift, 5.48s ease-in-out -0.781329s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 70.3534%; left: 59.1518%; font-size: 18px; --r: 25deg; --dx1: 62.10823402343574px; --dy1: 34.582781721930786px; --dx2: -35.82407498293517px; --dy2: 54.93856717234701px; --dx3: -25.535725850483328px; --dy3: -0.6335914325553249px; opacity: 0.72318; animation: 16.6107s ease-in-out -7.97714s infinite normal none running floatDrift, 9.05745s ease-in-out -3.62256s infinite normal none running fadePulse; transform: rotate(25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 102.886%; left: 64.7577%; font-size: 14px; --r: -25deg; --dx1: 30.618635371118998px; --dy1: -38.56773281625437px; --dx2: 42.15866760758901px; --dy2: 49.27582255173319px; --dx3: 27.509459545676762px; --dy3: 21.14248687206637px; opacity: 0.941858; animation: 19.1916s ease-in-out -11.3086s infinite normal none running floatDrift, 8.15149s ease-in-out -3.28455s infinite normal none running fadePulse; transform: rotate(-25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 10.7219%; left: 92.4658%; font-size: 20px; --r: -10deg; --dx1: -0.11122656213412352px; --dy1: -60.82208253399356px; --dx2: -51.98313966543687px; --dy2: 45.79539866048899px; --dx3: -37.68007588919503px; --dy3: -47.0288676893157px; opacity: 0.655287; animation: 12.3981s ease-in-out -2.56088s infinite normal none running floatDrift, 5.50341s ease-in-out -3.80571s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 88.8575%; left: 52.088%; font-size: 14px; --r: -5deg; --dx1: -16.63554843027676px; --dy1: -59.28721409070361px; --dx2: -46.859825282602095px; --dy2: -41.201633647567384px; --dx3: 17.63160072718665px; --dy3: 16.62512930917876px; opacity: 0.652135; animation: 23.3246s ease-in-out -20.2783s infinite normal none running floatDrift, 6.48672s ease-in-out -0.142313s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 83.7387%; left: 64.2287%; font-size: 14px; --r: 10deg; --dx1: -62.76290780545508px; --dy1: -48.57515848066381px; --dx2: 67.98339626140326px; --dy2: 26.435954120898195px; --dx3: 5.4319695135627155px; --dy3: -64.01604826032792px; opacity: 0.810512; animation: 18.7312s ease-in-out -14.4165s infinite normal none running floatDrift, 4.08936s ease-in-out -0.819171s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 96.2824%; left: 44.1104%; font-size: 15px; --r: 0deg; --dx1: -41.14285147459352px; --dy1: -54.385120367357636px; --dx2: -47.76364737998317px; --dy2: 35.35458163036146px; --dx3: -26.16611496076677px; --dy3: -13.39549131698716px; opacity: 0.759543; animation: 25.9066s ease-in-out -8.43562s infinite normal none running floatDrift, 8.18249s ease-in-out -4.49538s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 84.2781%; left: 14.1451%; font-size: 14px; --r: 5deg; --dx1: -25.754850182948083px; --dy1: 16.31808482552707px; --dx2: -32.57055882486965px; --dy2: 13.35574769153514px; --dx3: 61.9184462054889px; --dy3: 19.681604035894768px; opacity: 0.655954; animation: 13.1924s ease-in-out -10.1845s infinite normal none running floatDrift, 8.4867s ease-in-out -8.23468s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 46.1842%; left: 62.5977%; font-size: 16px; --r: 0deg; --dx1: 67.29459822038655px; --dy1: 6.699804098453422px; --dx2: 41.16439589902635px; --dy2: -19.248244215994333px; --dx3: 3.3937528801546413px; --dy3: -3.7037635884381537px; opacity: 0.981927; animation: 15.1942s ease-in-out -3.44589s infinite normal none running floatDrift, 4.5707s ease-in-out -3.27212s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 88.1467%; left: 54.3946%; font-size: 14px; --r: 5deg; --dx1: -64.61936563884929px; --dy1: -61.682173161573964px; --dx2: 55.63321858205891px; --dy2: -60.12851253425817px; --dx3: 25.779320054686288px; --dy3: 58.439674977301465px; opacity: 0.801977; animation: 18.6443s ease-in-out -5.05807s infinite normal none running floatDrift, 8.7239s ease-in-out -6.50696s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 2.77687%; left: 43.2891%; font-size: 11px; --r: -15deg; --dx1: -68.5446579670177px; --dy1: -40.30840135897641px; --dx2: -42.46719355238098px; --dy2: 65.14126094604468px; --dx3: -66.5378420608184px; --dy3: 24.080443543806783px; opacity: 0.875416; animation: 27.1426s ease-in-out -25.3609s infinite normal none running floatDrift, 4.02358s ease-in-out -2.57073s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 101.476%; left: 94.1247%; font-size: 20px; --r: -15deg; --dx1: -54.031603346502905px; --dy1: 47.09775433176564px; --dx2: 10.902179769402114px; --dy2: -24.80875247032493px; --dx3: 26.854089216436773px; --dy3: -53.77723629192762px; opacity: 0.896884; animation: 23.0452s ease-in-out -6.14727s infinite normal none running floatDrift, 9.4275s ease-in-out -3.29717s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 19.2569%; left: 70.1636%; font-size: 20px; --r: 5deg; --dx1: -7.447763534718268px; --dy1: 63.92716398907598px; --dx2: -38.10851209349127px; --dy2: 41.0019797666398px; --dx3: -24.1770095361771px; --dy3: -68.64962648770266px; opacity: 0.788843; animation: 24.6847s ease-in-out -11.9655s infinite normal none running floatDrift, 7.95229s ease-in-out -3.50366s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 14.8191%; left: 69.2589%; font-size: 18px; --r: 5deg; --dx1: -54.95625576139032px; --dy1: -18.971415649791098px; --dx2: 15.495187054802763px; --dy2: 2.352159986926663px; --dx3: -56.368215880948945px; --dy3: 8.644323555173724px; opacity: 0.91782; animation: 12.9514s ease-in-out -8.67657s infinite normal none running floatDrift, 8.69673s ease-in-out -1.25542s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 81.6134%; left: 63.9912%; font-size: 22px; --r: 15deg; --dx1: 29.95403669285794px; --dy1: -24.02920687923939px; --dx2: 22.031613243820885px; --dy2: -14.777992896065289px; --dx3: -29.85880390613009px; --dy3: -6.615742031813461px; opacity: 0.623798; animation: 22.948s ease-in-out -6.13359s infinite normal none running floatDrift, 6.34688s ease-in-out -6.01764s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 6.50946%; left: 62.2413%; font-size: 14px; --r: -5deg; --dx1: 6.624501051365339px; --dy1: 44.8720128091117px; --dx2: 23.403224330013437px; --dy2: -44.61038670942862px; --dx3: -60.22753738641367px; --dy3: -50.73921619439821px; opacity: 0.839903; animation: 21.9153s ease-in-out -4.28341s infinite normal none running floatDrift, 9.35389s ease-in-out -1.10516s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 19.1024%; left: 38.928%; font-size: 20px; --r: -15deg; --dx1: -58.65419445317529px; --dy1: -26.2940707481941px; --dx2: -32.66373430765517px; --dy2: 18.259851921549654px; --dx3: -47.43948358261605px; --dy3: 57.30246103913223px; opacity: 0.884177; animation: 19.2798s ease-in-out -4.47916s infinite normal none running floatDrift, 6.13277s ease-in-out -2.16533s infinite normal none running fadePulse; transform: rotate(-15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 64.8945%; left: 87.4385%; font-size: 14px; --r: -10deg; --dx1: 15.659079065999173px; --dy1: 31.89275471989795px; --dx2: -56.5099207025445px; --dy2: 66.28871919581259px; --dx3: -34.46114218388378px; --dy3: 16.25907006008155px; opacity: 0.677813; animation: 24.6454s ease-in-out -0.219082s infinite normal none running floatDrift, 9.79614s ease-in-out -2.55001s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 77.0137%; left: 101.142%; font-size: 20px; --r: 15deg; --dx1: -48.63702936333522px; --dy1: -53.5620049297628px; --dx2: 13.353654008504183px; --dy2: -6.379068551875746px; --dx3: 46.88313228252685px; --dy3: 25.98684756627572px; opacity: 0.759499; animation: 25.0332s ease-in-out -2.73911s infinite normal none running floatDrift, 6.82109s ease-in-out -2.17251s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 103.85%; left: 92.0665%; font-size: 16px; --r: 0deg; --dx1: -48.39352234035003px; --dy1: -27.459939498777597px; --dx2: 44.07980258808049px; --dy2: -25.364168517916546px; --dx3: -49.25616801011098px; --dy3: 14.386456999518478px; opacity: 0.72944; animation: 23.7088s ease-in-out -10.2863s infinite normal none running floatDrift, 4.6177s ease-in-out -4.09964s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 79.921%; left: -2.88055%; font-size: 16px; --r: 0deg; --dx1: -52.43531510516257px; --dy1: 36.68467022644517px; --dx2: 67.26883090913506px; --dy2: 43.34485736585784px; --dx3: -44.95115350592704px; --dy3: 24.017291691637336px; opacity: 0.933692; animation: 11.0855s ease-in-out -10.9107s infinite normal none running floatDrift, 4.48432s ease-in-out -0.687979s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: -0.579381%; left: 25.1345%; font-size: 15px; --r: -5deg; --dx1: -50.26791483895485px; --dy1: -62.46173209734974px; --dx2: -0.7300810732582308px; --dy2: -42.35719062173695px; --dx3: -39.63217458273073px; --dy3: 34.559489416001135px; opacity: 0.635351; animation: 27.9721s ease-in-out -17.5928s infinite normal none running floatDrift, 8.93422s ease-in-out -7.93238s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 89.0454%; left: 69.6977%; font-size: 11px; --r: 10deg; --dx1: 0.11899364811543522px; --dy1: 46.80971912863941px; --dx2: -22.17946280811187px; --dy2: -21.79960024559817px; --dx3: 8.158989180459857px; --dy3: -6.804365185384171px; opacity: 0.688469; animation: 11.2462s ease-in-out -5.511s infinite normal none running floatDrift, 7.32385s ease-in-out -5.65181s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 79.6225%; left: 55.9899%; font-size: 12px; --r: -25deg; --dx1: 0.33333969667426855px; --dy1: 28.839806117387322px; --dx2: -63.349901518662676px; --dy2: -55.80082201811685px; --dx3: -36.395063824618404px; --dy3: -64.58674878829848px; opacity: 0.883399; animation: 24.8074s ease-in-out -4.0103s infinite normal none running floatDrift, 7.23067s ease-in-out -2.2902s infinite normal none running fadePulse; transform: rotate(-25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 42.2502%; left: 55.3381%; font-size: 13px; --r: 10deg; --dx1: 22.4880403342181px; --dy1: 28.80338931836124px; --dx2: 0.7269101959522484px; --dy2: 43.980612478474576px; --dx3: -32.83228665688525px; --dy3: -65.5181726247887px; opacity: 0.847316; animation: 22.6064s ease-in-out -14.3617s infinite normal none running floatDrift, 7.79894s ease-in-out -3.32149s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 104.197%; left: 100.16%; font-size: 10px; --r: -5deg; --dx1: 16.80953087218514px; --dy1: -47.35497097550844px; --dx2: 53.9613125473591px; --dy2: 52.66016898019801px; --dx3: 45.684634779315196px; --dy3: -12.805175332970878px; opacity: 0.938669; animation: 27.2434s ease-in-out -16.3415s infinite normal none running floatDrift, 6.34695s ease-in-out -5.14824s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 38.3334%; left: 55.3414%; font-size: 22px; --r: -25deg; --dx1: -29.780816011067287px; --dy1: 61.66222914067494px; --dx2: -31.43258471219609px; --dy2: -17.063382875636886px; --dx3: 39.67781168988845px; --dy3: 44.92508573476802px; opacity: 0.775562; animation: 12.6251s ease-in-out -3.80781s infinite normal none running floatDrift, 7.41897s ease-in-out -7.15043s infinite normal none running fadePulse; transform: rotate(-25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 78.0479%; left: 63.3588%; font-size: 20px; --r: -5deg; --dx1: 5.98150690406857px; --dy1: -19.45610433538822px; --dx2: 34.033461373678584px; --dy2: 53.153928460538644px; --dx3: -51.961386328514905px; --dy3: -0.7115358702734698px; opacity: 0.697504; animation: 13.729s ease-in-out -4.48891s infinite normal none running floatDrift, 7.42115s ease-in-out -2.43497s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 62.7028%; left: 24.7328%; font-size: 13px; --r: 0deg; --dx1: -47.61930173059123px; --dy1: 48.92029331670249px; --dx2: 49.15075829697688px; --dy2: -28.182768861981128px; --dx3: -64.85671894881376px; --dy3: 3.7260580544435773px; opacity: 0.969863; animation: 23.9733s ease-in-out -16.1995s infinite normal none running floatDrift, 7.33718s ease-in-out -3.31239s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 47.4285%; left: 70.7864%; font-size: 13px; --r: 15deg; --dx1: -36.25961559404708px; --dy1: -32.363272811060604px; --dx2: -3.4303760933143312px; --dy2: -39.68919313172533px; --dx3: 30.205980982971333px; --dy3: 38.16354518505558px; opacity: 0.935084; animation: 14.4274s ease-in-out -13.3859s infinite normal none running floatDrift, 8.79255s ease-in-out -3.2285s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 92.9598%; left: 62.2972%; font-size: 22px; --r: 0deg; --dx1: -50.472787182969775px; --dy1: 27.309098455574766px; --dx2: -58.69132125773955px; --dy2: 54.330507877624385px; --dx3: -42.33071866153582px; --dy3: 32.328195021757075px; opacity: 0.620946; animation: 23.7879s ease-in-out -5.19254s infinite normal none running floatDrift, 6.62942s ease-in-out -2.50644s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 50.9649%; left: 18.6621%; font-size: 10px; --r: 0deg; --dx1: 31.56451979152695px; --dy1: 59.05191524339017px; --dx2: -48.37273266678821px; --dy2: 68.79958462138407px; --dx3: -31.90547958596808px; --dy3: 53.98552132633459px; opacity: 0.92722; animation: 27.5504s ease-in-out -12.7374s infinite normal none running floatDrift, 9.63228s ease-in-out -5.15275s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 39.1658%; left: 21.3566%; font-size: 20px; --r: -10deg; --dx1: 56.2580353492533px; --dy1: -21.360840512640053px; --dx2: -21.191303330909864px; --dy2: -40.119001118584364px; --dx3: 43.204008562509976px; --dy3: 8.58639756835396px; opacity: 0.955905; animation: 17.9339s ease-in-out -16.3028s infinite normal none running floatDrift, 8.19165s ease-in-out -4.67815s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 94.9754%; left: 92.1651%; font-size: 10px; --r: 0deg; --dx1: 48.15714005843924px; --dy1: -58.95077400149002px; --dx2: -10.418576526001937px; --dy2: 1.9228042558635705px; --dx3: -15.640899786855142px; --dy3: -28.927692119502815px; opacity: 0.734347; animation: 27.5602s ease-in-out -3.00272s infinite normal none running floatDrift, 6.82463s ease-in-out -2.77158s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 59.223%; left: 24.3884%; font-size: 18px; --r: 0deg; --dx1: 57.680626023909724px; --dy1: -11.00076456743775px; --dx2: 48.98440662350873px; --dy2: -38.532060236572065px; --dx3: 40.574496127298px; --dy3: 42.88217708622741px; opacity: 0.973316; animation: 25.2358s ease-in-out -19.2794s infinite normal none running floatDrift, 5.89405s ease-in-out -2.75895s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 7.61181%; left: 60.658%; font-size: 16px; --r: 0deg; --dx1: -26.80141668033667px; --dy1: 64.73304971291934px; --dx2: 62.045400207600835px; --dy2: 51.56504632824832px; --dx3: -42.55090323751021px; --dy3: -35.761071046483096px; opacity: 0.945642; animation: 27.4642s ease-in-out -24.9652s infinite normal none running floatDrift, 4.00512s ease-in-out -2.37209s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 3.03053%; left: -1.97612%; font-size: 22px; --r: 0deg; --dx1: -35.27080989341548px; --dy1: -25.88365471700865px; --dx2: 24.374383596037223px; --dy2: 32.757126987144325px; --dx3: 15.800369110006544px; --dy3: 23.139368530481295px; opacity: 0.769883; animation: 13.9276s ease-in-out -0.308219s infinite normal none running floatDrift, 7.9999s ease-in-out -1.74838s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 72.4811%; left: 19.7521%; font-size: 20px; --r: 5deg; --dx1: 30.827446768619062px; --dy1: 65.9769190905027px; --dx2: -9.282560551223984px; --dy2: 1.8485228995116576px; --dx3: 60.002761135232596px; --dy3: -36.2614196349892px; opacity: 0.920615; animation: 13.6588s ease-in-out -3.31352s infinite normal none running floatDrift, 7.13573s ease-in-out -6.17518s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 24.4075%; left: 36.8493%; font-size: 18px; --r: 25deg; --dx1: -29.214969751171033px; --dy1: -4.247229550733895px; --dx2: 38.786061069389824px; --dy2: -19.09536325006681px; --dx3: -11.248136233989126px; --dy3: 14.773995415556405px; opacity: 0.860777; animation: 14.1258s ease-in-out -7.55072s infinite normal none running floatDrift, 4.71619s ease-in-out -3.61052s infinite normal none running fadePulse; transform: rotate(25deg);">tirea<span>.</span>ro</div><div class="fw" style="top: -4.55919%; left: 12.1877%; font-size: 11px; --r: 0deg; --dx1: -0.7847136020152323px; --dy1: 53.47657169907014px; --dx2: 48.51160285674836px; --dy2: -24.879777468958025px; --dx3: 13.387128489659775px; --dy3: 57.10960870260181px; opacity: 0.683607; animation: 21.262s ease-in-out -7.34155s infinite normal none running floatDrift, 7.46786s ease-in-out -0.963497s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 88.2262%; left: 89.2052%; font-size: 13px; --r: 0deg; --dx1: -53.07183280373293px; --dy1: 61.59566102672027px; --dx2: 27.446758480259504px; --dy2: -64.54914878815944px; --dx3: 33.99964890706607px; --dy3: 26.07157491406832px; opacity: 0.672846; animation: 12.8415s ease-in-out -9.20199s infinite normal none running floatDrift, 6.43863s ease-in-out -4.68229s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 100.772%; left: 28.2442%; font-size: 11px; --r: 10deg; --dx1: 43.63046657749044px; --dy1: 6.712638086777403px; --dx2: 32.819325959346045px; --dy2: -28.047068736777863px; --dx3: 48.1136392000034px; --dy3: -39.26483582246701px; opacity: 0.693664; animation: 11.9328s ease-in-out -6.83314s infinite normal none running floatDrift, 7.15441s ease-in-out -2.10344s infinite normal none running fadePulse; transform: rotate(10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 88.0263%; left: 54.9347%; font-size: 18px; --r: -10deg; --dx1: -18.042098777301263px; --dy1: 33.762109619099796px; --dx2: -43.025005186572784px; --dy2: -7.424852887363789px; --dx3: -18.150271592783454px; --dy3: 59.57424399507327px; opacity: 0.976361; animation: 16.9314s ease-in-out -1.24873s infinite normal none running floatDrift, 4.4415s ease-in-out -1.84406s infinite normal none running fadePulse; transform: rotate(-10deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 58.8575%; left: 87.0088%; font-size: 14px; --r: 15deg; --dx1: -37.393842184254815px; --dy1: 35.32076327187641px; --dx2: -52.72095964823793px; --dy2: 47.79624637043418px; --dx3: 66.6121266229988px; --dy3: 24.7674173902417px; opacity: 0.897093; animation: 17.9468s ease-in-out -7.08264s infinite normal none running floatDrift, 6.73637s ease-in-out -3.13035s infinite normal none running fadePulse; transform: rotate(15deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 23.8626%; left: 78.6229%; font-size: 22px; --r: 0deg; --dx1: -8.75814775735565px; --dy1: -10.763499647691964px; --dx2: 14.688247239577606px; --dy2: 33.83647720579284px; --dx3: 69.05265905685032px; --dy3: -44.1730061264923px; opacity: 0.805994; animation: 24.2687s ease-in-out -3.68805s infinite normal none running floatDrift, 4.49634s ease-in-out -4.34793s infinite normal none running fadePulse; transform: rotate(0deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 0.817842%; left: 72.5373%; font-size: 11px; --r: -5deg; --dx1: -69.07158617657197px; --dy1: 65.14120365435326px; --dx2: -3.438772731853723px; --dy2: -31.798303704421354px; --dx3: -21.59918351406382px; --dy3: 36.56755394699683px; opacity: 0.954504; animation: 23.4432s ease-in-out -11.0303s infinite normal none running floatDrift, 7.51954s ease-in-out -1.86831s infinite normal none running fadePulse; transform: rotate(-5deg);">tirea<span>.</span>ro</div><div class="fw" style="top: 100.975%; left: 36.0526%; font-size: 10px; --r: 5deg; --dx1: -45.126660660266964px; --dy1: 29.47868027103104px; --dx2: -22.31742047031225px; --dy2: 46.25611848937973px; --dx3: 41.321077935070434px; --dy3: -16.33623139356432px; opacity: 0.817238; animation: 21.4953s ease-in-out -9.36773s infinite normal none running floatDrift, 6.66647s ease-in-out -1.29992s infinite normal none running fadePulse; transform: rotate(5deg);">tirea<span>.</span>ro</div></div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"><span class="ti-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span id="toast-msg"></span></div>
 
@@ -372,8 +497,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
   <p class="lp-sub">Zona privată de producție.</p>
   <div class="lp-lbl">Parolă</div>
   <div class="lp-iw">
-    <input type="password" id="lp-i" class="lp-i" placeholder="Parola ta..." onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="lp-eye" onclick="tvis('lp-i',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+    <input type="password" id="lp-i" class="lp-i" placeholder="Parola ta..." onkeydown="if(event.key===&#39;Enter&#39;)doLogin()">
+    <button class="lp-eye" onclick="tvis(&#39;lp-i&#39;,this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
   </div>
   <button class="lp-btn" onclick="doLogin()">Intră în Fabrică →</button>
   <div class="lp-err" id="lp-e"></div>
@@ -388,7 +513,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
     <p class="cp-p">Confirmare în 3 pași prin email.</p>
     <div class="cp-step on" id="cp1">
       <div class="cp-lbl">Parola curentă</div>
-      <div class="cp-iw"><input type="password" id="cp-cur" class="cp-i" placeholder="Parola actuală..."><button class="cp-eye" onclick="tvis('cp-cur',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+      <div class="cp-iw"><input type="password" id="cp-cur" class="cp-i" placeholder="Parola actuală..."><button class="cp-eye" onclick="tvis(&#39;cp-cur&#39;,this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
       <div class="cp-lbl" style="margin-top:6px">Email confirmare</div>
       <div class="cp-iw"><input type="email" id="cp-em" class="cp-i" placeholder="email@domeniu.ro"></div>
       <div class="cp-e" id="cp-e1"></div>
@@ -409,15 +534,15 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
       </div>
       <div class="cp-e" id="cp-e2"></div>
       <button class="cp-btn" id="cp-vb" onclick="cpS2()">Verifică →</button>
-      <p class="cp-note"><button style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:11px;font-family:'Space Grotesk',sans-serif;padding:0" onclick="cpResend()">Retrimite codul</button></p>
+      <p class="cp-note"><button style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:11px;font-family:&#39;Space Grotesk&#39;,sans-serif;padding:0" onclick="cpResend()">Retrimite codul</button></p>
     </div>
     <div class="cp-step" id="cp3">
       <div class="cp-lbl">Parolă nouă</div>
-      <div class="cp-iw"><input type="password" id="cp-new" class="cp-i" placeholder="Minim 8 caractere..." oninput="chkStr(this.value)"><button class="cp-eye" onclick="tvis('cp-new',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+      <div class="cp-iw"><input type="password" id="cp-new" class="cp-i" placeholder="Minim 8 caractere..." oninput="chkStr(this.value)"><button class="cp-eye" onclick="tvis(&#39;cp-new&#39;,this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
       <div class="str-bar"><div class="str-fill" id="sf"></div></div>
       <div class="str-lbl" id="sl">—</div>
       <div class="cp-lbl">Confirmă</div>
-      <div class="cp-iw"><input type="password" id="cp-cf" class="cp-i" placeholder="Repetă parola..."><button class="cp-eye" onclick="tvis('cp-cf',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+      <div class="cp-iw"><input type="password" id="cp-cf" class="cp-i" placeholder="Repetă parola..."><button class="cp-eye" onclick="tvis(&#39;cp-cf&#39;,this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
       <div class="cp-e" id="cp-e3"></div>
       <button class="cp-btn" onclick="cpS3()">Salvează parola →</button>
     </div>
@@ -437,24 +562,24 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
     <span class="nav-logo-text">tirea<span>.</span>ro</span>
   </button>
   <div class="nav-links" id="pub-links">
-    <a href="#categorii" class="nl">Categorii</a>
-    <a href="#despre" class="nl">Despre</a>
-    <a href="#contact" class="nl">Contact</a>
+    <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#categorii" class="nl">Categorii</a>
+    <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#despre" class="nl">Despre</a>
+    <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#contact" class="nl">Contact</a>
   </div>
   <div class="nav-right">
     <div class="nav-live" id="pub-live"><div class="live-dot"></div>platformă activă</div>
-    <span class="nav-clock" id="nav-clock"></span>
+    <span class="nav-clock" id="nav-clock">17:09:15</span>
     <div class="nav-fab-badge" id="fab-badge"><div class="nav-fab-badge-dot"></div>Fabrică Activă</div>
-    <a href="#contact" class="nav-cta" id="pub-cta">Colaborare →</a>
+    <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#contact" class="nav-cta" id="pub-cta">Colaborare →</a>
     <button class="nav-out" id="fab-out" onclick="doLogout()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path></svg>Ieși</button>
     <button class="hamburger" onclick="toggleMob()"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg></button>
   </div>
 </nav>
 
 <div id="mob" style="display:none;position:fixed;top:62px;left:0;right:0;z-index:150;background:rgba(10,14,26,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 20px">
-  <a href="#categorii" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--border)">Categorii</a>
-  <a href="#despre" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--border)">Despre</a>
-  <a href="#contact" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none">Contact</a>
+  <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#categorii" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--border)">Categorii</a>
+  <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#despre" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--border)">Despre</a>
+  <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#contact" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none">Contact</a>
 </div>
 
 <!-- ══════════ PAGINA PUBLICA ══════════ -->
@@ -483,14 +608,14 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
       <h1 class="hero-title"><span class="l1">Fiecare idee</span><span class="l2">devine un</span><span class="l3">produs real.</span></h1>
       <p class="hero-desc">Platformă independentă de aplicații și servicii digitale — construite cu scop comercial clar, fiecare cu subdomeniu propriu și model de venit definit de la prima linie de cod.</p>
       <div class="hero-btns">
-        <a href="#categorii" class="btn-main"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>Descoperă categoriile</a>
-        <a href="#contact" class="btn-ghost">Colaborare</a>
+        <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#categorii" class="btn-main"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>Descoperă categoriile</a>
+        <a href="file:///C:/Users/Acer/Downloads/index%20(16).html#contact" class="btn-ghost">Colaborare</a>
       </div>
       <div class="hero-metrics">
-        <div class="hm"><div class="hm-num">4</div><div class="hm-label">Categorii</div></div>
-        <div class="hm"><div class="hm-num">100%</div><div class="hm-label">Scop comercial</div></div>
-        <div class="hm"><div class="hm-num">1:1</div><div class="hm-label">Proiect / subdomeniu</div></div>
-        <div class="hm"><div class="hm-num">2025</div><div class="hm-label">Lansare</div></div>
+        <div class="hm" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s, transform 0.5s;"><div class="hm-num">4</div><div class="hm-label">Categorii</div></div>
+        <div class="hm" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.06s, transform 0.5s 0.06s;"><div class="hm-num">100%</div><div class="hm-label">Scop comercial</div></div>
+        <div class="hm" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.12s, transform 0.5s 0.12s;"><div class="hm-num">1:1</div><div class="hm-label">Proiect / subdomeniu</div></div>
+        <div class="hm" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.18s, transform 0.5s 0.18s;"><div class="hm-num">2025</div><div class="hm-label">Lansare</div></div>
       </div>
     </div>
   </section>
@@ -500,10 +625,10 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
       <div class="sec-title">Patru direcții.<br>Un singur standard.</div>
       <p class="sec-sub">Fiecare proiect se încadrează într-una din cele patru categorii — gândite să acopere nevoi reale cu model de monetizare clar.</p>
       <div class="cat-grid">
-        <div class="cat-card" style="--c-color:var(--green);--c-glow:rgba(0,214,143,0.06);--c-bg:rgba(0,214,143,0.07);--c-border:rgba(0,214,143,0.15)"><div class="cat-icon">💰</div><div class="cat-body"><div class="cat-tag">Venit</div><div class="cat-name">Proiecte care generează câștig</div><div class="cat-desc">Platforme cu abonament, venit pasiv din infrastructură sau servicii pay-per-use.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
-        <div class="cat-card" style="--c-color:var(--accent);--c-glow:rgba(95,179,212,0.06);--c-bg:rgba(95,179,212,0.07);--c-border:rgba(95,179,212,0.15)"><div class="cat-icon">⚡</div><div class="cat-body"><div class="cat-tag">Utilitate</div><div class="cat-name">Proiecte care îți ușurează ziua</div><div class="cat-desc">Instrumente pentru organizare, automatizare și productivitate zilnică.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
-        <div class="cat-card" style="--c-color:var(--purple);--c-glow:rgba(139,111,212,0.06);--c-bg:rgba(139,111,212,0.07);--c-border:rgba(139,111,212,0.15)"><div class="cat-icon">🛡️</div><div class="cat-body"><div class="cat-tag">Siguranță</div><div class="cat-name">Proiecte gândite pentru liniștea ta</div><div class="cat-desc">Protecție financiară, monitorizare și soluții pentru riscurile de zi cu zi.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
-        <div class="cat-card" style="--c-color:var(--gold);--c-glow:rgba(201,168,76,0.06);--c-bg:rgba(201,168,76,0.07);--c-border:rgba(201,168,76,0.15)"><div class="cat-icon">📈</div><div class="cat-body"><div class="cat-tag">Business</div><div class="cat-name">Proiecte pentru afaceri în creștere</div><div class="cat-desc">CRM-uri, automatizări de vânzări, facturare și analytics pentru antreprenori.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" data-cat="venit" onclick="openCategory(&#39;venit&#39;)" style="cursor: pointer; --c-color: var(--green); --c-glow: rgba(0,214,143,0.06); --c-bg: rgba(0,214,143,0.07); --c-border: rgba(0,214,143,0.15); opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.24s, transform 0.5s 0.24s;"><div class="cat-icon">💰</div><div class="cat-body"><div class="cat-tag">Venit</div><div class="cat-name">Proiecte care generează câștig</div><div class="cat-desc">Platforme cu abonament, venit pasiv din infrastructură sau servicii pay-per-use.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" data-cat="utilitate" onclick="openCategory(&#39;utilitate&#39;)" style="cursor: pointer; --c-color: var(--accent); --c-glow: rgba(95,179,212,0.06); --c-bg: rgba(95,179,212,0.07); --c-border: rgba(95,179,212,0.15); opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;"><div class="cat-icon">⚡</div><div class="cat-body"><div class="cat-tag">Utilitate</div><div class="cat-name">Proiecte care îți ușurează ziua</div><div class="cat-desc">Instrumente pentru organizare, automatizare și productivitate zilnică.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" data-cat="siguranta" onclick="openCategory(&#39;siguranta&#39;)" style="cursor: pointer; --c-color: var(--purple); --c-glow: rgba(139,111,212,0.06); --c-bg: rgba(139,111,212,0.07); --c-border: rgba(139,111,212,0.15); opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.36s, transform 0.5s 0.36s;"><div class="cat-icon">🛡️</div><div class="cat-body"><div class="cat-tag">Siguranță</div><div class="cat-name">Proiecte gândite pentru liniștea ta</div><div class="cat-desc">Protecție financiară, monitorizare și soluții pentru riscurile de zi cu zi.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" data-cat="business" onclick="openCategory(&#39;business&#39;)" style="cursor: pointer; --c-color: var(--gold); --c-glow: rgba(201,168,76,0.06); --c-bg: rgba(201,168,76,0.07); --c-border: rgba(201,168,76,0.15); opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.42s, transform 0.5s 0.42s;"><div class="cat-icon">📈</div><div class="cat-body"><div class="cat-tag">Business</div><div class="cat-name">Proiecte pentru afaceri în creștere</div><div class="cat-desc">CRM-uri, automatizări de vânzări, facturare și analytics pentru antreprenori.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
       </div>
     </section>
     <div class="divider"></div>
@@ -516,20 +641,20 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <div class="about-tags"><div class="about-tag">Subdomeniu dedicat</div><div class="about-tag">Model de venit definit</div><div class="about-tag">Lansare rapidă</div><div class="about-tag">Scalabil</div><div class="about-tag">Independent</div></div>
         </div>
         <div class="about-right">
-          <div class="about-row"><span class="about-row-label">Portofoliu</span><span class="about-row-val a">Crește constant</span></div>
-          <div class="about-row"><span class="about-row-label">Monetizare</span><span class="about-row-val g">Definită la start</span></div>
-          <div class="about-row"><span class="about-row-label">Structură</span><span class="about-row-val go">1 idee → 1 produs</span></div>
-          <div class="about-row"><span class="about-row-label">Tip proiecte</span><span class="about-row-val a">Apps · Web · SaaS</span></div>
-          <div class="about-row"><span class="about-row-label">Platformă</span><span class="about-row-val" style="color:var(--text)">tirea.ro</span></div>
+          <div class="about-row" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.48s, transform 0.5s 0.48s;"><span class="about-row-label">Portofoliu</span><span class="about-row-val a">Crește constant</span></div>
+          <div class="about-row" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.54s, transform 0.5s 0.54s;"><span class="about-row-label">Monetizare</span><span class="about-row-val g">Definită la start</span></div>
+          <div class="about-row" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.6s, transform 0.5s 0.6s;"><span class="about-row-label">Structură</span><span class="about-row-val go">1 idee → 1 produs</span></div>
+          <div class="about-row" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.66s, transform 0.5s 0.66s;"><span class="about-row-label">Tip proiecte</span><span class="about-row-val a">Apps · Web · SaaS</span></div>
+          <div class="about-row" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.72s, transform 0.5s 0.72s;"><span class="about-row-label">Platformă</span><span class="about-row-val" style="color:var(--text)">tirea.ro</span></div>
         </div>
       </div>
     </section>
     <div class="divider"></div>
     <section class="section">
       <div class="how-grid">
-        <div class="how-item"><div class="how-num">// 01</div><div class="how-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div><div class="how-title">Idee cu scop clar</div><div class="how-desc">Dacă nu există o nevoie concretă și un model de monetizare viabil, proiectul nu se construiește.</div></div>
-        <div class="how-item"><div class="how-num">// 02</div><div class="how-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="how-title">Subdomeniu propriu</div><div class="how-desc">Fiecare produs trăiește separat — identitate vizuală proprie, URL dedicat, libertate totală de evoluție.</div></div>
-        <div class="how-item"><div class="how-num">// 03</div><div class="how-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div><div class="how-title">Venit de la prima zi</div><div class="how-desc">Monetizarea e parte din arhitectură, nu o gândire de după.</div></div>
+        <div class="how-item" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.78s, transform 0.5s 0.78s;"><div class="how-num">// 01</div><div class="how-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div><div class="how-title">Idee cu scop clar</div><div class="how-desc">Dacă nu există o nevoie concretă și un model de monetizare viabil, proiectul nu se construiește.</div></div>
+        <div class="how-item" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.84s, transform 0.5s 0.84s;"><div class="how-num">// 02</div><div class="how-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="how-title">Subdomeniu propriu</div><div class="how-desc">Fiecare produs trăiește separat — identitate vizuală proprie, URL dedicat, libertate totală de evoluție.</div></div>
+        <div class="how-item" style="opacity: 0; transform: translateY(14px); transition: opacity 0.5s 0.9s, transform 0.5s 0.9s;"><div class="how-num">// 03</div><div class="how-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div><div class="how-title">Venit de la prima zi</div><div class="how-desc">Monetizarea e parte din arhitectură, nu o gândire de după.</div></div>
       </div>
     </section>
     <div class="divider"></div>
@@ -538,13 +663,16 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <div class="ct-eyebrow">Contact</div>
         <div class="ct-title">Ai un proiect<br>sau o propunere?</div>
         <p class="ct-sub">Colaborări, parteneriate și orice idee care se potrivește cu ce construim la tirea.ro.</p>
-        <a href="mailto:contact@tirea.ro" class="ct-email"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 7l10 7 10-7"></path></svg>contact@tirea.ro</a>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1">
+          <a href="mailto:tirea.nor@gmail.com" class="ct-email"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 7l10 7 10-7"></path></svg>tirea.nor@gmail.com</a>
+          <a href="tel:+40773875472" class="ct-email"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>0773 875 472</a>
+        </div>
       </div>
     </section>
   </div>
   <footer>
     <div class="footer-logo"><div class="nav-logo-icon" style="width:24px;height:24px;border-radius:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>tirea<span style="color:var(--dim)">.</span>ro</div>
-    <div class="footer-links"><a href="#">Confidențialitate</a><a href="#">Termeni</a><a href="#contact">Contact</a></div>
+    <div class="footer-links"><a href="file:///C:/Users/Acer/Downloads/index%20(16).html#">Confidențialitate</a><a href="file:///C:/Users/Acer/Downloads/index%20(16).html#">Termeni</a><a href="file:///C:/Users/Acer/Downloads/index%20(16).html#contact">Contact</a></div>
     <div class="footer-copy">© 2025 tirea.ro</div>
   </footer>
 </div>
@@ -554,19 +682,19 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
   <div class="fab-layout">
     <aside class="fab-sidebar">
       <span class="sb-label">Navigare</span>
-      <button class="sb-item active" onclick="showFab('dashboard',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>Dashboard</button>
-      <button class="sb-item" onclick="showFab('workflow',this)"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path></svg>Flux Desene Animate</button>
-      <button class="sb-item" onclick="showFab('flux-app',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path><path d="M7 8l3 3-3 3"></path><path d="M13 14h3"></path></svg>Flux App</button>
-      <button class="sb-item" onclick="showFab('proiecte',this)"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path></svg>Proiectele Mele</button>
-      <button class="sb-item" onclick="showFab('jurnal',this)"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>Jurnal AI</button>
-      <button class="sb-item" onclick="showFab('credite',this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path></svg>Credite & Plan</button>
+      <button class="sb-item active" onclick="showFab(&#39;dashboard&#39;,this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>Dashboard</button>
+      <button class="sb-item" onclick="showFab(&#39;workflow&#39;,this)"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path></svg>Flux Desene Animate</button>
+      <button class="sb-item" onclick="showFab(&#39;flux-app&#39;,this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path><path d="M7 8l3 3-3 3"></path><path d="M13 14h3"></path></svg>Flux App</button>
+      <button class="sb-item" onclick="showFab(&#39;proiecte&#39;,this)"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path></svg>Proiectele Mele</button>
+      <button class="sb-item" onclick="showFab(&#39;jurnal&#39;,this)"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>Jurnal AI</button>
+      <button class="sb-item" onclick="showFab(&#39;credite&#39;,this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path></svg>Credite &amp; Plan</button>
       <div class="sb-div"></div>
       <span class="sb-label">Unelte Rapide</span>
-      <a href="https://claude.ai" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--gold)"></div>Claude Pro</a>
-      <a href="https://genspark.ai" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--accent)"></div>Genspark Plus</a>
-      <a href="https://elevenlabs.io" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--purple)"></div>ElevenLabs</a>
-      <a href="https://cursor.com" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--green)"></div>Cursor AI</a>
-      <a href="https://suno.com" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--orange)"></div>Suno AI</a>
+      <a href="https://claude.ai/" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--gold)"></div>Claude Pro</a>
+      <a href="https://genspark.ai/" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--accent)"></div>Genspark Plus</a>
+      <a href="https://elevenlabs.io/" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--purple)"></div>ElevenLabs</a>
+      <a href="https://cursor.com/" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--green)"></div>Cursor AI</a>
+      <a href="https://suno.com/" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--orange)"></div>Suno AI</a>
     </aside>
     <main class="fab-main">
 
@@ -586,11 +714,11 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path></svg>Acces Rapid Unelte</div></div>
           <div class="ws-body">
             <div class="tools-grid">
-              <a href="https://claude.ai" target="_blank" class="tool-card" style="border-color:rgba(201,168,76,0.15)"><div class="tc-icon" style="background:rgba(201,168,76,0.1)">🤖</div><div class="tc-name">Claude Pro</div><div class="tc-desc">Scenarii & cod</div><div class="tc-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2)">20€/lună</div><div class="tc-open" style="background:rgba(201,168,76,0.08);color:var(--gold);border-color:rgba(201,168,76,0.2)">Deschide →</div></a>
-              <a href="https://genspark.ai" target="_blank" class="tool-card" style="border-color:rgba(95,179,212,0.15)"><div class="tc-icon" style="background:rgba(95,179,212,0.1)">🎬</div><div class="tc-name">Genspark Plus</div><div class="tc-desc">Video & site-uri</div><div class="tc-badge" style="background:rgba(95,179,212,0.1);color:var(--accent);border:1px solid rgba(95,179,212,0.2)">29€/lună</div><div class="tc-open" style="background:rgba(95,179,212,0.08);color:var(--accent);border-color:rgba(95,179,212,0.2)">Deschide →</div></a>
-              <a href="https://elevenlabs.io" target="_blank" class="tool-card" style="border-color:rgba(139,111,212,0.15)"><div class="tc-icon" style="background:rgba(139,111,212,0.1)">🎙️</div><div class="tc-name">ElevenLabs</div><div class="tc-desc">Voce & clonare</div><div class="tc-badge" style="background:rgba(139,111,212,0.1);color:var(--purple);border:1px solid rgba(139,111,212,0.2)">22€/lună</div><div class="tc-open" style="background:rgba(139,111,212,0.08);color:var(--purple);border-color:rgba(139,111,212,0.2)">Deschide →</div></a>
-              <a href="https://cursor.com" target="_blank" class="tool-card" style="border-color:rgba(0,214,143,0.15)"><div class="tc-icon" style="background:rgba(0,214,143,0.1)">⌨️</div><div class="tc-name">Cursor AI</div><div class="tc-desc">Asamblare cod</div><div class="tc-badge" style="background:rgba(0,214,143,0.1);color:var(--green);border:1px solid rgba(0,214,143,0.2)">20€/lună</div><div class="tc-open" style="background:rgba(0,214,143,0.08);color:var(--green);border-color:rgba(0,214,143,0.2)">Deschide →</div></a>
-              <a href="https://suno.com" target="_blank" class="tool-card" style="border-color:rgba(224,122,53,0.15)"><div class="tc-icon" style="background:rgba(224,122,53,0.1)">🎵</div><div class="tc-name">Suno AI</div><div class="tc-desc">Muzică AI</div><div class="tc-badge" style="background:rgba(224,122,53,0.1);color:var(--orange);border:1px solid rgba(224,122,53,0.2)">9€/lună</div><div class="tc-open" style="background:rgba(224,122,53,0.08);color:var(--orange);border-color:rgba(224,122,53,0.2)">Deschide →</div></a>
+              <a href="https://claude.ai/" target="_blank" class="tool-card" style="border-color:rgba(201,168,76,0.15)"><div class="tc-icon" style="background:rgba(201,168,76,0.1)">🤖</div><div class="tc-name">Claude Pro</div><div class="tc-desc">Scenarii &amp; cod</div><div class="tc-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2)">20€/lună</div><div class="tc-open" style="background:rgba(201,168,76,0.08);color:var(--gold);border-color:rgba(201,168,76,0.2)">Deschide →</div></a>
+              <a href="https://genspark.ai/" target="_blank" class="tool-card" style="border-color:rgba(95,179,212,0.15)"><div class="tc-icon" style="background:rgba(95,179,212,0.1)">🎬</div><div class="tc-name">Genspark Plus</div><div class="tc-desc">Video &amp; site-uri</div><div class="tc-badge" style="background:rgba(95,179,212,0.1);color:var(--accent);border:1px solid rgba(95,179,212,0.2)">29€/lună</div><div class="tc-open" style="background:rgba(95,179,212,0.08);color:var(--accent);border-color:rgba(95,179,212,0.2)">Deschide →</div></a>
+              <a href="https://elevenlabs.io/" target="_blank" class="tool-card" style="border-color:rgba(139,111,212,0.15)"><div class="tc-icon" style="background:rgba(139,111,212,0.1)">🎙️</div><div class="tc-name">ElevenLabs</div><div class="tc-desc">Voce &amp; clonare</div><div class="tc-badge" style="background:rgba(139,111,212,0.1);color:var(--purple);border:1px solid rgba(139,111,212,0.2)">22€/lună</div><div class="tc-open" style="background:rgba(139,111,212,0.08);color:var(--purple);border-color:rgba(139,111,212,0.2)">Deschide →</div></a>
+              <a href="https://cursor.com/" target="_blank" class="tool-card" style="border-color:rgba(0,214,143,0.15)"><div class="tc-icon" style="background:rgba(0,214,143,0.1)">⌨️</div><div class="tc-name">Cursor AI</div><div class="tc-desc">Asamblare cod</div><div class="tc-badge" style="background:rgba(0,214,143,0.1);color:var(--green);border:1px solid rgba(0,214,143,0.2)">20€/lună</div><div class="tc-open" style="background:rgba(0,214,143,0.08);color:var(--green);border-color:rgba(0,214,143,0.2)">Deschide →</div></a>
+              <a href="https://suno.com/" target="_blank" class="tool-card" style="border-color:rgba(224,122,53,0.15)"><div class="tc-icon" style="background:rgba(224,122,53,0.1)">🎵</div><div class="tc-name">Suno AI</div><div class="tc-desc">Muzică AI</div><div class="tc-badge" style="background:rgba(224,122,53,0.1);color:var(--orange);border:1px solid rgba(224,122,53,0.2)">9€/lună</div><div class="tc-open" style="background:rgba(224,122,53,0.08);color:var(--orange);border-color:rgba(224,122,53,0.2)">Deschide →</div></a>
             </div>
           </div>
         </div>
@@ -618,7 +746,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         </div>
         <!-- Pasul 1 -->
         <div class="ws" id="ws1">
-          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>Pasul 1 — Scenariu / Text</div><div class="ws-acts"><button class="wb sec" onclick="document.getElementById('wt1').value='';showToast('Text șters','warning')"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Șterge</button></div></div>
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>Pasul 1 — Scenariu / Text</div><div class="ws-acts"><button class="wb sec" onclick="document.getElementById(&#39;wt1&#39;).value=&#39;&#39;;showToast(&#39;Text șters&#39;,&#39;warning&#39;)"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Șterge</button></div></div>
           <div class="ws-body">
             <textarea class="ws-ta" id="wt1" placeholder="Scrie sau lipește scenariul tău aici..."></textarea>
             <div class="val-zone"><p>Citește cu atenție. Dacă ești mulțumit apasă <strong style="color:var(--green)">OK → Trimite la Voce</strong>.<br>ElevenLabs primește textul DOAR după această confirmare.</p><button class="btn-val" onclick="wfValidate(1)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Trimite la Voce (ElevenLabs)</button></div>
@@ -626,7 +754,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         </div>
         <!-- Pasul 2 -->
         <div class="ws" id="ws2" style="opacity:.35;pointer-events:none">
-          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path><path d="M19 10v2a7 7 0 01-14 0v-2"></path></svg>Pasul 2 — Voce (ElevenLabs)</div><div class="ws-acts"><a href="https://elevenlabs.io" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Deschide ElevenLabs</a></div></div>
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path><path d="M19 10v2a7 7 0 01-14 0v-2"></path></svg>Pasul 2 — Voce (ElevenLabs)</div><div class="ws-acts"><a href="https://elevenlabs.io/" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Deschide ElevenLabs</a></div></div>
           <div class="ws-body">
             <textarea class="ws-ta" id="wt2" placeholder="Note despre vocea generată... e OK? Pronunție corectă?" style="min-height:90px"></textarea>
             <div class="val-zone"><p>Ascultă fișierul audio. Dacă vocea e perfectă apasă <strong style="color:var(--green)">OK → Trimite la Video</strong>.<br>Genspark primește fișierul DOAR după această confirmare.</p><button class="btn-val" onclick="wfValidate(2)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Trimite la Video (Genspark)</button></div>
@@ -634,7 +762,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         </div>
         <!-- Pasul 3 -->
         <div class="ws" id="ws3" style="opacity:.35;pointer-events:none">
-          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>Pasul 3 — Video (Genspark)</div><div class="ws-acts"><a href="https://genspark.ai" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Deschide Genspark</a></div></div>
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>Pasul 3 — Video (Genspark)</div><div class="ws-acts"><a href="https://genspark.ai/" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Deschide Genspark</a></div></div>
           <div class="ws-body">
             <textarea class="ws-ta" id="wt3" placeholder="Link video generat, observații finale..." style="min-height:90px"></textarea>
             <div class="val-zone"><p>Verifică videoul final. Dacă e perfect, marchează producția ca finalizată.</p><button class="btn-val" onclick="wfValidate(3)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>✓ Producție Finalizată!</button></div>
@@ -663,11 +791,11 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>Status Flux App</div><div class="ws-acts"><button class="wb sec" onclick="appReset()"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Reset</button></div></div>
           <div class="ws-body">
             <div style="display:grid;grid-template-columns:repeat(6,1fr) auto;gap:0;align-items:center">
-              <div class="pipe-step" id="ap1" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04)"><div class="ps-icon">💡</div><div class="ps-name" style="font-size:11px">Idee & Spec</div><div class="ps-status" id="ap1-s" style="color:var(--gold)">Activ</div><div class="ps-bar"><div class="ps-bar-fill" id="apb1" style="background:var(--gold);width:100%"></div></div></div>
+              <div class="pipe-step" id="ap1" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04)"><div class="ps-icon">💡</div><div class="ps-name" style="font-size:11px">Idee &amp; Spec</div><div class="ps-status" id="ap1-s" style="color:var(--gold)">Activ</div><div class="ps-bar"><div class="ps-bar-fill" id="apb1" style="background:var(--gold);width:100%"></div></div></div>
               <div class="pipe-arr">→</div>
               <div class="pipe-step" id="ap2"><div class="ps-icon">🎨</div><div class="ps-name" style="font-size:11px">UI / Design</div><div class="ps-status" id="ap2-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb2" style="background:var(--accent);width:0%"></div></div></div>
               <div class="pipe-arr">→</div>
-              <div class="pipe-step" id="ap3"><div class="ps-icon">⌨️</div><div class="ps-name" style="font-size:11px">Cod & Build</div><div class="ps-status" id="ap3-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb3" style="background:var(--green);width:0%"></div></div></div>
+              <div class="pipe-step" id="ap3"><div class="ps-icon">⌨️</div><div class="ps-name" style="font-size:11px">Cod &amp; Build</div><div class="ps-status" id="ap3-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb3" style="background:var(--green);width:0%"></div></div></div>
               <div class="pipe-arr">→</div>
               <div class="pipe-step" id="ap4"><div class="ps-icon">🧪</div><div class="ps-name" style="font-size:11px">Testare</div><div class="ps-status" id="ap4-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb4" style="background:var(--purple);width:0%"></div></div></div>
               <div class="pipe-arr">→</div>
@@ -679,9 +807,9 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <!-- PASUL 1 — Idee & Specificații -->
         <div class="ws" id="aws1">
           <div class="ws-head">
-            <div class="ws-head-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>Pasul 1 — Idee & Specificații</div>
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>Pasul 1 — Idee &amp; Specificații</div>
             <div class="ws-acts">
-              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
+              <a href="https://claude.ai/" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
             </div>
           </div>
           <div class="ws-body">
@@ -700,7 +828,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
                 </select>
               </div>
             </div>
-            <div class="cp-lbl" style="margin-bottom:6px">Descriere & funcționalități principale</div>
+            <div class="cp-lbl" style="margin-bottom:6px">Descriere &amp; funcționalități principale</div>
             <textarea class="ws-ta" id="app-spec" placeholder="Descrie ce face aplicația, pentru cine e, ce funcționalități are... Cu cât mai detaliat, cu atât Claude generează mai bine." style="min-height:120px;margin-bottom:10px"></textarea>
             <div class="cp-lbl" style="margin-bottom:6px">Model de monetizare</div>
             <select class="add-sel" id="app-mono" style="width:100%;margin-bottom:12px">
@@ -722,8 +850,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <div class="ws-head">
             <div class="ws-head-title"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg>Pasul 2 — UI / Design (Claude + Genspark)</div>
             <div class="ws-acts">
-              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
-              <a href="https://genspark.ai" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Genspark</a>
+              <a href="https://claude.ai/" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
+              <a href="https://genspark.ai/" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Genspark</a>
             </div>
           </div>
           <div class="ws-body">
@@ -743,7 +871,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
                   <div style="width:10px;height:10px;border-radius:50%;background:#e05555"></div>
                   <div style="width:10px;height:10px;border-radius:50%;background:var(--gold)"></div>
                   <div style="width:10px;height:10px;border-radius:50%;background:var(--green)"></div>
-                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-left:6px">preview.html — Live Editor</span>
+                  <span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10px;color:var(--dim);margin-left:6px">preview.html — Live Editor</span>
                 </div>
                 <div style="display:flex;gap:6px">
                   <button class="wb sec" onclick="runPreview()" style="font-size:11px;padding:5px 10px"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>Run</button>
@@ -752,16 +880,21 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
                 <div style="border-right:1px solid rgba(20,30,50,0.8)">
-                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">EDITOR HTML</div>
-                  <textarea id="html-editor" style="width:100%;height:320px;background:rgba(5,8,15,0.9);border:none;color:#e8edf5;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;padding:12px;resize:none;outline:none" placeholder="Lipește HTML-ul generat de Claude aici...&#10;&#10;<!-- Exemplu: -->&#10;&lt;div style=&quot;background:#1a1a2e;color:white;padding:20px&quot;&gt;&#10;  &lt;h1&gt;Aplicația mea&lt;/h1&gt;&#10;&lt;/div&gt;" oninput="livePreview()"></textarea>
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9px;color:var(--dim);letter-spacing:1px">EDITOR HTML</div>
+                  <textarea id="html-editor" style="width:100%;height:320px;background:rgba(5,8,15,0.9);border:none;color:#e8edf5;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;line-height:1.6;padding:12px;resize:none;outline:none" placeholder="Lipește HTML-ul generat de Claude aici...
+
+&lt;!-- Exemplu: --&gt;
+&lt;div style=&quot;background:#1a1a2e;color:white;padding:20px&quot;&gt;
+  &lt;h1&gt;Aplicația mea&lt;/h1&gt;
+&lt;/div&gt;" oninput="livePreview()"></textarea>
                 </div>
                 <div>
-                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">PREVIEW LIVE</div>
-                  <iframe id="preview-frame" style="width:100%;height:320px;border:none;background:white" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9px;color:var(--dim);letter-spacing:1px">PREVIEW LIVE</div>
+                  <iframe id="preview-frame" style="width:100%;height:320px;border:none;background:white" sandbox="allow-scripts allow-same-origin" src="./index (1)_files/saved_resource.html"></iframe>
                 </div>
               </div>
               <div style="padding:8px 14px;border-top:1px solid rgba(20,30,50,0.8);display:flex;gap:8px;align-items:center">
-                <input id="app-cmd" class="add-inp" placeholder="Comandă rapidă: ex 'schimbă fundalul în negru', 'adaugă un buton verde'..." style="flex:1;font-size:12px">
+                <input id="app-cmd" class="add-inp" placeholder="Comandă rapidă: ex &#39;schimbă fundalul în negru&#39;, &#39;adaugă un buton verde&#39;..." style="flex:1;font-size:12px">
                 <button class="wb gld" onclick="applyCmd()" style="font-size:11px;padding:6px 12px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Aplică</button>
               </div>
             </div>
@@ -775,10 +908,10 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <!-- PASUL 3 — Cod & Build -->
         <div class="ws" id="aws3" style="opacity:.35;pointer-events:none">
           <div class="ws-head">
-            <div class="ws-head-title"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Pasul 3 — Cod & Build (Claude + Cursor)</div>
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Pasul 3 — Cod &amp; Build (Claude + Cursor)</div>
             <div class="ws-acts">
-              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
-              <a href="https://cursor.com" target="_blank" class="wb grn"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Cursor</a>
+              <a href="https://claude.ai/" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
+              <a href="https://cursor.com/" target="_blank" class="wb grn"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Cursor</a>
             </div>
           </div>
           <div class="ws-body">
@@ -803,23 +936,23 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
             <!-- Preview cod în timpul build -->
             <div style="background:rgba(10,16,32,0.8);border:1px solid rgba(0,214,143,0.15);border-radius:11px;overflow:hidden;margin-bottom:12px">
               <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(20,30,50,0.8)">
-                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)">app-preview.html — Testare funcționalități</span>
+                <span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10px;color:var(--dim)">app-preview.html — Testare funcționalități</span>
                 <div style="display:flex;gap:6px">
                   <button class="wb sec" onclick="runPreview2()" style="font-size:11px;padding:5px 10px"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>Run</button>
                 </div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
                 <div style="border-right:1px solid rgba(20,30,50,0.8)">
-                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">COD BUILD</div>
-                  <textarea id="html-editor2" style="width:100%;height:280px;background:rgba(5,8,15,0.9);border:none;color:#e8edf5;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;padding:12px;resize:none;outline:none" placeholder="Lipește versiunea finală a aplicației pentru testare..." oninput="livePreview2()"></textarea>
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9px;color:var(--dim);letter-spacing:1px">COD BUILD</div>
+                  <textarea id="html-editor2" style="width:100%;height:280px;background:rgba(5,8,15,0.9);border:none;color:#e8edf5;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;line-height:1.6;padding:12px;resize:none;outline:none" placeholder="Lipește versiunea finală a aplicației pentru testare..." oninput="livePreview2()"></textarea>
                 </div>
                 <div>
-                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">PREVIEW FUNCȚIONAL</div>
-                  <iframe id="preview-frame2" style="width:100%;height:280px;border:none;background:white" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9px;color:var(--dim);letter-spacing:1px">PREVIEW FUNCȚIONAL</div>
+                  <iframe id="preview-frame2" style="width:100%;height:280px;border:none;background:white" sandbox="allow-scripts allow-same-origin" src="./index (1)_files/saved_resource(1).html"></iframe>
                 </div>
               </div>
               <div style="padding:8px 14px;border-top:1px solid rgba(20,30,50,0.8);display:flex;gap:8px;align-items:center">
-                <input id="app-cmd2" class="add-inp" placeholder="Comandă: ex 'adaugă localStorage pentru salvare date', 'fă butonul să deschidă un modal'..." style="flex:1;font-size:12px">
+                <input id="app-cmd2" class="add-inp" placeholder="Comandă: ex &#39;adaugă localStorage pentru salvare date&#39;, &#39;fă butonul să deschidă un modal&#39;..." style="flex:1;font-size:12px">
                 <button class="wb grn" onclick="applyCmd2()" style="font-size:11px;padding:6px 12px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Aplică</button>
               </div>
             </div>
@@ -835,9 +968,9 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <!-- PASUL 4 — Testare -->
         <div class="ws" id="aws4" style="opacity:.35;pointer-events:none">
           <div class="ws-head">
-            <div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Pasul 4 — Testare & QA</div>
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Pasul 4 — Testare &amp; QA</div>
             <div class="ws-acts">
-              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude QA</a>
+              <a href="https://claude.ai/" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude QA</a>
             </div>
           </div>
           <div class="ws-body">
@@ -870,7 +1003,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
             <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px;margin-bottom:12px">
               <span style="font-size:12px;color:var(--sub)">Checklist complet:</span>
               <div style="flex:1;height:6px;background:rgba(20,30,50,0.8);border-radius:3px"><div id="qa-progress" style="height:100%;background:var(--green);border-radius:3px;transition:width .4s;width:0%"></div></div>
-              <span id="qa-count" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green)">0/6</span>
+              <span id="qa-count" style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:11px;color:var(--green)">0/6</span>
             </div>
             <textarea class="ws-ta" id="app-qa-notes" placeholder="Bug-uri găsite, ajustări făcute, observații finale..." style="min-height:70px;margin-bottom:12px"></textarea>
             <div class="val-zone">
@@ -885,8 +1018,8 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <div class="ws-head">
             <div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2z"></path></svg>Pasul 5 — Deploy pe Vercel</div>
             <div class="ws-acts">
-              <a href="https://vercel.com" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Vercel</a>
-              <a href="https://github.com" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>GitHub</a>
+              <a href="https://vercel.com/" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Vercel</a>
+              <a href="https://github.com/" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>GitHub</a>
             </div>
           </div>
           <div class="ws-body">
@@ -939,7 +1072,7 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
               <div style="font-size:40px;margin-bottom:12px">🚀</div>
               <div style="font-size:18px;font-weight:700;margin-bottom:6px">Aplicație lansată!</div>
               <p style="font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:300">De la idee la live — complet.</p>
-              <div id="app-final-url" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);padding:8px 16px;background:rgba(95,179,212,0.06);border:1px solid rgba(95,179,212,0.15);border-radius:8px;display:inline-block;margin-bottom:18px"></div>
+              <div id="app-final-url" style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:13px;color:var(--accent);padding:8px 16px;background:rgba(95,179,212,0.06);border:1px solid rgba(95,179,212,0.15);border-radius:8px;display:inline-block;margin-bottom:18px"></div>
               <br>
               <button class="wb grn" onclick="appReset()" style="margin:0 auto;display:inline-flex"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Flux nou</button>
             </div>
@@ -952,17 +1085,50 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
         <div class="pg-eyebrow">// Portofoliu Privat</div>
         <div class="pg-title">Proiectele Mele</div>
         <p class="pg-sub">Click pe nume sau descriere pentru a edita direct.</p>
-        <div class="proj-grid" id="proj-grid"></div>
+        <div class="proj-grid" id="proj-grid">
+    <div class="proj-card">
+      <div class="pc-top"><div class="pc-icon" style="background:rgba(201,168,76,0.1)">📁</div><div class="pc-dot" style="background:var(--accent)"></div></div>
+      <div class="pc-name" contenteditable="true" onblur="updProj(1,&#39;name&#39;,this.textContent)">Proiect Alpha</div>
+      <div class="pc-desc" contenteditable="true" onblur="updProj(1,&#39;desc&#39;,this.textContent)">Descrie primul tău proiect privat.</div>
+      <div class="pc-foot">
+        <select class="pc-sel" onchange="updProj(1,&#39;status&#39;,this.value)" style="color:var(--accent)">
+          <option value="activ" selected="">Activ</option><option value="lansare">Lansare curând</option><option value="idee">Idee validată</option><option value="pauza">Pauză</option>
+        </select>
+        <button class="pc-del" onclick="delProj(1)">Șterge</button>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="pc-top"><div class="pc-icon" style="background:rgba(201,168,76,0.1)">📁</div><div class="pc-dot" style="background:var(--green)"></div></div>
+      <div class="pc-name" contenteditable="true" onblur="updProj(2,&#39;name&#39;,this.textContent)">Proiect Beta</div>
+      <div class="pc-desc" contenteditable="true" onblur="updProj(2,&#39;desc&#39;,this.textContent)">Al doilea proiect, aproape gata.</div>
+      <div class="pc-foot">
+        <select class="pc-sel" onchange="updProj(2,&#39;status&#39;,this.value)" style="color:var(--green)">
+          <option value="activ">Activ</option><option value="lansare" selected="">Lansare curând</option><option value="idee">Idee validată</option><option value="pauza">Pauză</option>
+        </select>
+        <button class="pc-del" onclick="delProj(2)">Șterge</button>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="pc-top"><div class="pc-icon" style="background:rgba(201,168,76,0.1)">📁</div><div class="pc-dot" style="background:var(--gold)"></div></div>
+      <div class="pc-name" contenteditable="true" onblur="updProj(3,&#39;name&#39;,this.textContent)">Proiect Gamma</div>
+      <div class="pc-desc" contenteditable="true" onblur="updProj(3,&#39;desc&#39;,this.textContent)">Idee validată, urmează construcție.</div>
+      <div class="pc-foot">
+        <select class="pc-sel" onchange="updProj(3,&#39;status&#39;,this.value)" style="color:var(--gold)">
+          <option value="activ">Activ</option><option value="lansare">Lansare curând</option><option value="idee" selected="">Idee validată</option><option value="pauza">Pauză</option>
+        </select>
+        <button class="pc-del" onclick="delProj(3)">Șterge</button>
+      </div>
+    </div></div>
         <button class="wb gld" onclick="addProj()" style="margin-top:14px"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Adaugă proiect nou</button>
       </div>
 
       <!-- JURNAL -->
       <div class="fab-view" id="fv-jurnal">
         <div class="pg-eyebrow">// AI Feedback Loop</div>
-        <div class="pg-title">Jurnal de Erori & Lecții</div>
+        <div class="pg-title">Jurnal de Erori &amp; Lecții</div>
         <p class="pg-sub">Documentează ce nu a mers. Claude citește acest jurnal și nu repetă greșelile.</p>
         <div class="add-form">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">+ Intrare nouă</div>
+          <div style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">+ Intrare nouă</div>
           <div class="add-row2">
             <select class="add-sel" id="j-tool"><option>Claude</option><option>ElevenLabs</option><option>Genspark</option><option>Cursor</option><option>Suno</option></select>
             <input class="add-inp" id="j-date" type="date">
@@ -971,23 +1137,166 @@ footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-i
           <textarea class="ws-ta" id="j-les" placeholder="Lecția învățată / cum evit data viitoare?" style="min-height:60px;margin-bottom:10px"></textarea>
           <button class="wb gld" onclick="addJournalEntry()"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline></svg>Salvează în Jurnal</button>
         </div>
-        <div class="jrn-list" id="jrn-list"></div>
+        <div class="jrn-list" id="jrn-list"><div class="jrn-entry"><div class="je-head"><span class="je-tool-badge" style="color:var(--accent)">Genspark</span><span class="je-date">2025-06-01</span></div><div class="je-txt">Videoul a ieșit neclar cu scenarii prea lungi.</div><div class="je-lesson">Împarte scenariile în fragmente de max 200 cuvinte.</div></div></div>
       </div>
 
       <!-- CREDITE -->
       <div class="fab-view" id="fv-credite">
-        <div class="pg-eyebrow">// Plan & Buget</div>
-        <div class="pg-title">Credite & Abonamente</div>
+        <div class="pg-eyebrow">// Plan &amp; Buget</div>
+        <div class="pg-title">Credite &amp; Abonamente</div>
         <p class="pg-sub">100€/lună · 5 abonamente · Trage barele pentru a actualiza utilizarea.</p>
-        <div class="cred-grid" id="cred-grid"></div>
-        <div class="ws"><div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Actualizează utilizarea</div></div><div class="ws-body"><div style="display:flex;flex-direction:column;gap:12px" id="cred-sliders"></div></div></div>
+        <div class="cred-grid" id="cred-grid"><div class="cred-card"><div class="cc-top"><div class="cc-icon" style="background:rgba(0,0,0,0.2)">🤖</div><div><div class="cc-name">Claude Pro</div><div class="cc-sub">20€/lună</div></div></div><div class="cc-bar-wrap"><div class="cc-bar" id="cb-0" style="background:var(--gold);width:70%"></div></div><div class="cc-nums"><span id="cn-0">70% utilizat</span><span>20€</span></div></div><div class="cred-card"><div class="cc-top"><div class="cc-icon" style="background:rgba(0,0,0,0.2)">🎬</div><div><div class="cc-name">Genspark Plus</div><div class="cc-sub">29€/lună</div></div></div><div class="cc-bar-wrap"><div class="cc-bar" id="cb-1" style="background:var(--accent);width:40%"></div></div><div class="cc-nums"><span id="cn-1">40% utilizat</span><span>29€</span></div></div><div class="cred-card"><div class="cc-top"><div class="cc-icon" style="background:rgba(0,0,0,0.2)">🎙️</div><div><div class="cc-name">ElevenLabs</div><div class="cc-sub">22€/lună</div></div></div><div class="cc-bar-wrap"><div class="cc-bar" id="cb-2" style="background:var(--purple);width:55%"></div></div><div class="cc-nums"><span id="cn-2">55% utilizat</span><span>22€</span></div></div><div class="cred-card"><div class="cc-top"><div class="cc-icon" style="background:rgba(0,0,0,0.2)">⌨️</div><div><div class="cc-name">Cursor AI</div><div class="cc-sub">20€/lună</div></div></div><div class="cc-bar-wrap"><div class="cc-bar" id="cb-3" style="background:var(--green);width:30%"></div></div><div class="cc-nums"><span id="cn-3">30% utilizat</span><span>20€</span></div></div><div class="cred-card"><div class="cc-top"><div class="cc-icon" style="background:rgba(0,0,0,0.2)">🎵</div><div><div class="cc-name">Suno AI</div><div class="cc-sub">9€/lună</div></div></div><div class="cc-bar-wrap"><div class="cc-bar" id="cb-4" style="background:var(--orange);width:20%"></div></div><div class="cc-nums"><span id="cn-4">20% utilizat</span><span>9€</span></div></div></div>
+        <div class="ws"><div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Actualizează utilizarea</div></div><div class="ws-body"><div style="display:flex;flex-direction:column;gap:12px" id="cred-sliders"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:var(--sub);width:130px;flex-shrink:0">Claude Pro</span><input type="range" min="0" max="100" value="70" oninput="updCred(0,this.value)" style="flex:1"><span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:11px;color:var(--gold);width:36px;text-align:right" id="cv-0">70%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:var(--sub);width:130px;flex-shrink:0">Genspark Plus</span><input type="range" min="0" max="100" value="40" oninput="updCred(1,this.value)" style="flex:1"><span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:11px;color:var(--accent);width:36px;text-align:right" id="cv-1">40%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:var(--sub);width:130px;flex-shrink:0">ElevenLabs</span><input type="range" min="0" max="100" value="55" oninput="updCred(2,this.value)" style="flex:1"><span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:11px;color:var(--purple);width:36px;text-align:right" id="cv-2">55%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:var(--sub);width:130px;flex-shrink:0">Cursor AI</span><input type="range" min="0" max="100" value="30" oninput="updCred(3,this.value)" style="flex:1"><span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:11px;color:var(--green);width:36px;text-align:right" id="cv-3">30%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:var(--sub);width:130px;flex-shrink:0">Suno AI</span><input type="range" min="0" max="100" value="20" oninput="updCred(4,this.value)" style="flex:1"><span style="font-family:&#39;JetBrains Mono&#39;,monospace;font-size:11px;color:var(--orange);width:36px;text-align:right" id="cv-4">20%</span></div></div></div></div>
       </div>
 
     </main>
   </div>
 </div>
 
+<!-- ══════════ PAGINA CATEGORIE ══════════ -->
+<div id="page-category">
+  <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
+    <button class="cat-back" onclick="goHome()"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Acasă</button>
+    <button class="cat-back" onclick="closeCategory()" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);color:var(--sub)"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Înapoi la categorii</button>
+  </div>
+  <div class="cat-page-head">
+    <div class="cat-page-head-left">
+      <div class="cat-page-eyebrow"><div class="dot"></div><div class="txt" id="cat-tag">—</div></div>
+      <h1 class="cat-page-title" id="cat-title">—</h1>
+      <p class="cat-page-sub" id="cat-desc">—</p>
+    </div>
+    <button class="cat-add-btn" onclick="requestPin(&#39;add&#39;)"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Adaugă proiect</button>
+  </div>
+  <div class="cat-proj-grid" id="cat-proj-grid"></div>
+</div>
+
+<!-- PIN MODAL -->
+<div id="pin-overlay">
+  <div class="pin-box">
+    <button class="cp-x" onclick="closePin()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    <div class="pin-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg></div>
+    <div class="pin-title">Acces protejat</div>
+    <p class="pin-sub">Introdu parola Fabricii pentru a edita proiectele.</p>
+    <div class="pin-iw">
+      <input type="password" id="pin-i" class="pin-i" placeholder="Parola..." onkeydown="if(event.key===&#39;Enter&#39;)verifyPin()">
+      <button class="pin-eye" onclick="tvis(&#39;pin-i&#39;,this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+    </div>
+    <button class="pin-btn" onclick="verifyPin()">Confirmă →</button>
+    <div class="pin-err" id="pin-e"></div>
+  </div>
+</div>
+
+<!-- PROIECT MODAL -->
+<div id="proj-overlay">
+  <div class="proj-box">
+    <button class="cp-x" onclick="closeProjModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    <div class="proj-h" id="proj-modal-h">Adaugă proiect nou</div>
+    <p class="proj-p" id="proj-modal-p">Completează detaliile. Schimbările se salvează local.</p>
+
+    <div class="proj-fg">
+      <label class="proj-lbl">Imagine proiect</label>
+      <div class="proj-img-wrap" id="proj-img-wrap" onclick="document.getElementById(&#39;proj-img-input&#39;).click()">
+        <div class="proj-img-placeholder" id="proj-img-ph">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Click pentru a încărca o imagine
+        </div>
+        <div class="proj-img-preview" id="proj-img-preview" style="display:none"></div>
+        <button class="proj-img-rem" onclick="event.stopPropagation();removeProjImg()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+        <input type="file" id="proj-img-input" accept="image/*" style="display:none" onchange="handleImg(event)">
+      </div>
+    </div>
+
+    <div class="proj-fg">
+      <label class="proj-lbl">Nume proiect *</label>
+      <input type="text" id="proj-name" class="proj-inp" placeholder="ex: TaskFlow Pro">
+    </div>
+
+    <div class="proj-fg">
+      <label class="proj-lbl">Descriere</label>
+      <textarea id="proj-desc" class="proj-ta" placeholder="Pe scurt, ce face proiectul..."></textarea>
+    </div>
+
+    <div class="proj-row">
+      <div class="proj-fg" style="margin-bottom:0">
+        <label class="proj-lbl">Preț</label>
+        <input type="text" id="proj-price" class="proj-inp" placeholder="ex: 9€/lună, 49€, Gratuit">
+      </div>
+      <div class="proj-fg" style="margin-bottom:0">
+        <label class="proj-lbl">Status</label>
+        <select id="proj-status" class="proj-sel">
+          <option value="live">🟢 Live</option>
+          <option value="beta">🟡 Beta</option>
+          <option value="dezvoltare">🔵 În dezvoltare</option>
+          <option value="idee">⚪ Idee</option>
+          <option value="pauza">⏸ Pauză</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="proj-fg" style="margin-top:12px">
+      <label class="proj-lbl">Link / URL</label>
+      <input type="text" id="proj-link" class="proj-inp" placeholder="https://...">
+    </div>
+
+    <div class="proj-btns">
+      <button class="proj-btn cancel" onclick="closeProjModal()">Anulează</button>
+      <button class="proj-btn save" onclick="saveProjCat()">Salvează</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// ── FLOATING TIREA.RO WORDS ──
+function initFloatingWords(){
+  const container=document.getElementById('floating-words');
+  if(!container)return;
+  container.innerHTML='';
+  // densitate: ~80 cuvinte pe viewport mare, mai putine pe mobil
+  const isMobile=window.innerWidth<700;
+  const count=isMobile?45:110;
+  const sizes=[10,11,12,13,14,15,16,18,20,22];
+  const rotations=[-15,-10,-5,0,0,0,5,10,15,-25,25];
+
+  for(let i=0;i<count;i++){
+    const w=document.createElement('div');
+    w.className='fw';
+    const size=sizes[Math.floor(Math.random()*sizes.length)];
+    const rot=rotations[Math.floor(Math.random()*rotations.length)];
+    const top=Math.random()*110-5; // -5% la 105%
+    const left=Math.random()*110-5;
+    const dur=10+Math.random()*18; // 10-28s (mai rapid)
+    const delay=-Math.random()*dur; // start in diferite faze
+    const dx1=(Math.random()-0.5)*140;
+    const dy1=(Math.random()-0.5)*140;
+    const dx2=(Math.random()-0.5)*140;
+    const dy2=(Math.random()-0.5)*140;
+    const dx3=(Math.random()-0.5)*140;
+    const dy3=(Math.random()-0.5)*140;
+    const opacity=0.6+Math.random()*0.4;
+    const pulseDur=4+Math.random()*6;
+    const pulseDelay=-Math.random()*pulseDur;
+
+    w.style.cssText=`
+      top:${top}%;
+      left:${left}%;
+      font-size:${size}px;
+      --r:${rot}deg;
+      --dx1:${dx1}px;--dy1:${dy1}px;
+      --dx2:${dx2}px;--dy2:${dy2}px;
+      --dx3:${dx3}px;--dy3:${dy3}px;
+      opacity:${opacity};
+      animation:floatDrift ${dur}s ease-in-out ${delay}s infinite, fadePulse ${pulseDur}s ease-in-out ${pulseDelay}s infinite;
+      transform:rotate(${rot}deg);
+    `;
+    w.innerHTML='tirea<span>.</span>ro';
+    container.appendChild(w);
+  }
+}
+initFloatingWords();
+// regenereaza la resize semnificativ
+let rsTimer;
+window.addEventListener('resize',()=>{clearTimeout(rsTimer);rsTimer=setTimeout(initFloatingWords,300);});
+
 // ── PAROLA ──
 const PW_KEY='tirea_pw';
 function getHash(){return localStorage.getItem(PW_KEY)||hp('tirea2025')}
@@ -996,6 +1305,11 @@ function hp(pw){let h=5381;for(let i=0;i<pw.length;i++){h=((h<<5)+h)+pw.charCode
 // ── POPUP ──
 function togglePopup(e){
   e.stopPropagation();
+  // Daca suntem pe pagina de categorie, logo-ul duce acasa
+  if(document.getElementById('page-category').style.display==='block'){
+    goHome();
+    return;
+  }
   const p=document.getElementById('login-popup');
   if(p.classList.contains('open')){closePopup()}
   else{p.classList.add('open');setTimeout(()=>document.getElementById('lp-i').focus(),50)}
@@ -1025,6 +1339,7 @@ function switchToFabrica(){
   document.getElementById('bg-pub-glow').style.display='none';
   document.getElementById('bg-fab').style.display='block';
   document.getElementById('bg-fab-grid').style.display='block';
+  document.body.classList.add('fabrica-active');
   document.getElementById('pub-links').style.display='none';
   document.getElementById('pub-live').style.display='none';
   document.getElementById('pub-cta').style.display='none';
@@ -1044,6 +1359,7 @@ function doLogout(){
   document.getElementById('bg-pub-glow').style.display='block';
   document.getElementById('bg-fab').style.display='none';
   document.getElementById('bg-fab-grid').style.display='none';
+  document.body.classList.remove('fabrica-active');
   document.getElementById('pub-links').style.display='flex';
   document.getElementById('pub-live').style.display='flex';
   document.getElementById('pub-cta').style.display='inline-flex';
@@ -1376,6 +1692,251 @@ function toggleTech(btn){
   btn.style.borderColor=active?'':'rgba(0,214,143,0.4)';
   btn.style.background=active?'':'rgba(0,214,143,0.07)';
 }
+
+// ══════════════════════════════
+// PAGINA CATEGORIE + PROIECTE
+// ══════════════════════════════
+const CAT_META={
+  venit:{tag:'Venit',title:'Proiecte care generează câștig',desc:'Platforme cu abonament, venit pasiv și servicii pay-per-use — fiecare proiect gândit cu un model clar de monetizare.',color:'#00d68f',bgS:'rgba(0,214,143,0.08)',bgH:'rgba(0,214,143,0.15)',bd:'rgba(0,214,143,0.25)'},
+  utilitate:{tag:'Utilitate',title:'Proiecte care îți ușurează ziua',desc:'Instrumente pentru organizare, automatizare și productivitate — aplicații mici, precise, care rezolvă o problemă concretă.',color:'#5fb3d4',bgS:'rgba(95,179,212,0.08)',bgH:'rgba(95,179,212,0.15)',bd:'rgba(95,179,212,0.25)'},
+  siguranta:{tag:'Siguranță',title:'Proiecte pentru liniștea ta',desc:'Protecție financiară, monitorizare și soluții pentru riscurile de zi cu zi — construite să îți dea control și claritate.',color:'#8b6fd4',bgS:'rgba(139,111,212,0.08)',bgH:'rgba(139,111,212,0.15)',bd:'rgba(139,111,212,0.25)'},
+  business:{tag:'Business',title:'Proiecte pentru afaceri în creștere',desc:'CRM-uri, automatizări de vânzări, facturare și analytics — instrumente B2B pentru antreprenori care vor să scaleze.',color:'#c9a84c',bgS:'rgba(201,168,76,0.08)',bgH:'rgba(201,168,76,0.15)',bd:'rgba(201,168,76,0.25)'}
+};
+const STATUS_META={
+  live:{l:'Live',c:'#00d68f',bg:'rgba(0,214,143,0.12)',bd:'rgba(0,214,143,0.25)'},
+  beta:{l:'Beta',c:'#c9a84c',bg:'rgba(201,168,76,0.12)',bd:'rgba(201,168,76,0.25)'},
+  dezvoltare:{l:'În dezvoltare',c:'#5fb3d4',bg:'rgba(95,179,212,0.12)',bd:'rgba(95,179,212,0.25)'},
+  idee:{l:'Idee',c:'#7a95b0',bg:'rgba(122,149,176,0.12)',bd:'rgba(122,149,176,0.25)'},
+  pauza:{l:'Pauză',c:'#e07a35',bg:'rgba(224,122,53,0.12)',bd:'rgba(224,122,53,0.25)'}
+};
+const CAT_KEY='tirea_cat_projects';
+let catProjects=JSON.parse(localStorage.getItem(CAT_KEY)||'{}');
+['venit','utilitate','siguranta','business'].forEach(k=>{if(!catProjects[k])catProjects[k]=[];});
+let currentCat=null;
+let adminUnlocked=false;
+let pinAction=null; // 'add' | {type:'edit',id} | {type:'del',id}
+let editingId=null;
+let currentImg=null; // base64
+
+function saveCatProjects(){localStorage.setItem(CAT_KEY,JSON.stringify(catProjects));}
+
+function openCategory(cat){
+  currentCat=cat;
+  const m=CAT_META[cat];
+  document.getElementById('page-public').style.display='none';
+  document.getElementById('page-category').style.display='block';
+  document.getElementById('cat-tag').textContent=m.tag;
+  document.getElementById('cat-title').innerHTML=m.title;
+  document.getElementById('cat-desc').textContent=m.desc;
+  // seteaza variabilele CSS de culoare pe pagina
+  const page=document.getElementById('page-category');
+  page.style.setProperty('--cat-c',m.color);
+  page.style.setProperty('--cat-bg-s',m.bgS);
+  page.style.setProperty('--cat-bg-h',m.bgH);
+  page.style.setProperty('--cat-border-s',m.bd);
+  renderCatProjects();
+  window.scrollTo(0,0);
+}
+function closeCategory(){
+  document.getElementById('page-category').style.display='none';
+  document.getElementById('page-public').style.display='block';
+  currentCat=null;
+  // scroll la sectiunea categorii
+  setTimeout(()=>{const el=document.getElementById('categorii');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+function goHome(){
+  document.getElementById('page-category').style.display='none';
+  document.getElementById('page-public').style.display='block';
+  currentCat=null;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderCatProjects(){
+  const grid=document.getElementById('cat-proj-grid');
+  const list=catProjects[currentCat]||[];
+  if(!list.length){
+    grid.innerHTML=`<div class="cat-empty">
+      <div class="cat-empty-ic">📭</div>
+      <div class="cat-empty-tt">Niciun proiect încă</div>
+      <div class="cat-empty-sb">Apasă "Adaugă proiect" pentru a începe.</div>
+    </div>`;
+    return;
+  }
+  grid.innerHTML=list.map(p=>{
+    const st=STATUS_META[p.status]||STATUS_META.idee;
+    const imgHtml=p.img
+      ? `<div class="cat-proj-img" style="background-image:url('${p.img}')"></div>`
+      : `<div class="cat-proj-img empty">📁</div>`;
+    const linkHtml=p.link
+      ? `<a href="${escAttr(p.link)}" target="_blank" class="cat-proj-link" onclick="event.stopPropagation()">Vizitează <svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></a>`
+      : `<span style="font-size:11px;color:var(--dim);font-family:'JetBrains Mono',monospace">fără link</span>`;
+    const priceHtml=p.price?`<div class="cat-proj-price">${escHtml(p.price)}</div>`:'<div></div>';
+    return `<div class="cat-proj ${adminUnlocked?'admin-mode':''}">
+      <div class="cat-proj-admin">
+        <button class="cpa-btn edit" title="Editează" onclick="editProj('${p.id}')"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
+        <button class="cpa-btn del" title="Șterge" onclick="delProjCat('${p.id}')"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-2 14a2 2 0 01-2 2H9a2 2 0 01-2-2L5 6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg></button>
+      </div>
+      ${imgHtml}
+      <div class="cat-proj-badge" style="color:${st.c};background:${st.bg};border:1px solid ${st.bd}">${st.l}</div>
+      <div class="cat-proj-body">
+        <div class="cat-proj-name">${escHtml(p.name)}</div>
+        <div class="cat-proj-desc">${escHtml(p.desc||'—')}</div>
+        <div class="cat-proj-foot">
+          ${priceHtml}
+          ${linkHtml}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function escHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function escAttr(s){return escHtml(s);}
+
+// ── PIN FLOW ──
+function requestPin(action){
+  pinAction=action;
+  if(adminUnlocked){executePinAction();return;}
+  document.getElementById('pin-overlay').classList.add('open');
+  document.getElementById('pin-e').textContent='';
+  document.getElementById('pin-i').value='';
+  setTimeout(()=>document.getElementById('pin-i').focus(),80);
+}
+function closePin(){
+  document.getElementById('pin-overlay').classList.remove('open');
+  document.getElementById('pin-i').value='';
+  document.getElementById('pin-e').textContent='';
+  pinAction=null;
+}
+function verifyPin(){
+  const v=document.getElementById('pin-i').value;
+  const err=document.getElementById('pin-e');
+  if(!v){err.textContent='Introdu parola.';return;}
+  if(hp(v)===getHash()){
+    adminUnlocked=true;
+    closePin();
+    showToast('✓ Acces admin activat','success');
+    renderCatProjects();
+    executePinAction();
+  } else {
+    err.textContent='Parolă incorectă.';
+    const i=document.getElementById('pin-i');i.classList.add('err');
+    setTimeout(()=>i.classList.remove('err'),400);
+  }
+}
+function executePinAction(){
+  if(!pinAction)return;
+  if(pinAction==='add'){openProjModal(null);}
+  else if(pinAction.type==='edit'){openProjModal(pinAction.id);}
+  else if(pinAction.type==='del'){confirmDelProj(pinAction.id);}
+  pinAction=null;
+}
+
+function editProj(id){
+  if(!adminUnlocked){requestPin({type:'edit',id});return;}
+  openProjModal(id);
+}
+function delProjCat(id){
+  if(!adminUnlocked){requestPin({type:'del',id});return;}
+  confirmDelProj(id);
+}
+function confirmDelProj(id){
+  if(!confirm('Ștergi proiectul? Acțiunea nu poate fi anulată.'))return;
+  catProjects[currentCat]=catProjects[currentCat].filter(p=>p.id!==id);
+  saveCatProjects();
+  renderCatProjects();
+  showToast('Proiect șters','warning');
+}
+
+// ── PROIECT MODAL ──
+function openProjModal(id){
+  editingId=id;
+  currentImg=null;
+  document.getElementById('proj-overlay').classList.add('open');
+  if(id){
+    const p=catProjects[currentCat].find(x=>x.id===id);
+    if(!p)return;
+    document.getElementById('proj-modal-h').textContent='Editează proiect';
+    document.getElementById('proj-modal-p').textContent='Modifică detaliile și salvează.';
+    document.getElementById('proj-name').value=p.name||'';
+    document.getElementById('proj-desc').value=p.desc||'';
+    document.getElementById('proj-price').value=p.price||'';
+    document.getElementById('proj-link').value=p.link||'';
+    document.getElementById('proj-status').value=p.status||'idee';
+    if(p.img){currentImg=p.img;showProjImg(p.img);} else {hideProjImg();}
+  } else {
+    document.getElementById('proj-modal-h').textContent='Adaugă proiect nou';
+    document.getElementById('proj-modal-p').textContent='Completează detaliile. Schimbările se salvează local.';
+    ['proj-name','proj-desc','proj-price','proj-link'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('proj-status').value='idee';
+    hideProjImg();
+  }
+  setTimeout(()=>document.getElementById('proj-name').focus(),80);
+}
+function closeProjModal(){
+  document.getElementById('proj-overlay').classList.remove('open');
+  editingId=null;currentImg=null;
+}
+function saveProjCat(){
+  const name=document.getElementById('proj-name').value.trim();
+  if(!name){showToast('Numele e obligatoriu!','warning');return;}
+  const data={
+    name,
+    desc:document.getElementById('proj-desc').value.trim(),
+    price:document.getElementById('proj-price').value.trim(),
+    link:document.getElementById('proj-link').value.trim(),
+    status:document.getElementById('proj-status').value,
+    img:currentImg
+  };
+  if(editingId){
+    const idx=catProjects[currentCat].findIndex(p=>p.id===editingId);
+    if(idx>-1){catProjects[currentCat][idx]={...catProjects[currentCat][idx],...data};}
+    showToast('✓ Proiect actualizat');
+  } else {
+    catProjects[currentCat].push({id:'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),...data});
+    showToast('✓ Proiect adăugat');
+  }
+  saveCatProjects();
+  renderCatProjects();
+  closeProjModal();
+}
+
+// ── IMG UPLOAD ──
+function handleImg(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  if(file.size>3*1024*1024){showToast('Imagine prea mare (max 3MB)','warning');return;}
+  const reader=new FileReader();
+  reader.onload=(ev)=>{currentImg=ev.target.result;showProjImg(currentImg);};
+  reader.readAsDataURL(file);
+}
+function showProjImg(src){
+  const w=document.getElementById('proj-img-wrap');
+  const ph=document.getElementById('proj-img-ph');
+  const pv=document.getElementById('proj-img-preview');
+  w.classList.add('has-img');
+  ph.style.display='none';
+  pv.style.display='block';
+  pv.style.backgroundImage=`url('${src}')`;
+}
+function hideProjImg(){
+  const w=document.getElementById('proj-img-wrap');
+  w.classList.remove('has-img');
+  document.getElementById('proj-img-ph').style.display='block';
+  document.getElementById('proj-img-preview').style.display='none';
+  document.getElementById('proj-img-input').value='';
+  currentImg=null;
+}
+function removeProjImg(){hideProjImg();}
+
+// Resetez adminUnlocked la logout Fabrica
+const origLogout=doLogout;
+doLogout=function(){origLogout();adminUnlocked=false;};
+
+// Click pe overlay inchide modalul (dar nu click in cutie)
+document.getElementById('pin-overlay').addEventListener('click',e=>{if(e.target.id==='pin-overlay')closePin();});
+document.getElementById('proj-overlay').addEventListener('click',e=>{if(e.target.id==='proj-overlay')closeProjModal();});
 </script>
-</body>
-</html>
+
+
+</body></html>
