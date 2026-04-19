@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tirea.ro — Hub de proiecte digitale</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;--panel:#0f1628;--panel2:#111e35;
+  --border:#1a2540;--border2:#1f2d4a;
+  --text:#e8edf5;--sub:#7a95b0;--dim:#3a4d65;
+  --accent:#5fb3d4;--green:#00d68f;--gold:#c9a84c;
+  --purple:#8b6fd4;--red:#e05555;--orange:#e07a35;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
+
+/* ── BG PUBLIC ── */
+.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,#0a0e1a 0%,#0d1a2e 35%,#112438 60%,#162e4a 80%,#1a3856 100%);}
+.page-bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(95,179,212,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(95,179,212,0.025) 1px,transparent 1px);background-size:72px 72px;}
+.page-bg-glow{position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(95,179,212,0.07) 0%,transparent 65%);pointer-events:none;z-index:0;}
+/* ── BG FABRICA ── */
+.fab-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 120% 80% at 50% -10%,rgba(201,168,76,0.07) 0%,transparent 60%),linear-gradient(180deg,#060910 0%,#080d1a 100%);display:none;}
+.fab-bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(201,168,76,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.02) 1px,transparent 1px);background-size:60px 60px;display:none;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(10,14,26,0.55);backdrop-filter:blur(24px);border-bottom:1px solid rgba(95,179,212,0.1);}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;border:none;background:none;font-family:'Space Grotesk',sans-serif;color:var(--text);padding:0;transition:opacity .15s;}
+.nav-logo:hover{opacity:.8}
+.nav-logo-icon{width:30px;height:30px;background:rgba(95,179,212,0.1);border:1px solid rgba(95,179,212,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-icon svg{width:15px;height:15px;stroke:var(--accent);fill:none;stroke-width:2}
+.nav-logo-text{font-size:16px;font-weight:700;letter-spacing:-.4px}
+.nav-logo-text span{color:rgba(95,179,212,0.4)}
+.nav-links{display:flex;gap:2px}
+.nl{padding:7px 15px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:6px;transition:all .15s;border:1px solid transparent}
+.nl:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.05)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-live{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:rgba(0,214,143,0.06);border:1px solid rgba(0,214,143,0.12);padding:5px 12px;border-radius:100px;letter-spacing:.5px;}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-cta{padding:8px 18px;border:1px solid rgba(95,179,212,0.25);border-radius:7px;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;transition:all .15s;}
+.nav-cta:hover{background:rgba(95,179,212,0.1);border-color:rgba(95,179,212,0.4)}
+.nav-fab-badge{display:none;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.18);padding:5px 12px;border-radius:100px;}
+.nav-fab-badge-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
+.nav-out{display:none;align-items:center;gap:6px;padding:7px 14px;border:1px solid rgba(224,85,85,0.2);border-radius:7px;font-size:12px;font-weight:600;color:rgba(224,85,85,0.6);cursor:pointer;background:none;font-family:'Space Grotesk',sans-serif;transition:all .2s;}
+.nav-out:hover{background:rgba(224,85,85,0.08);color:var(--red)}
+.nav-out svg,.nav-fab-badge svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.nav-clock{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);display:none}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger svg{width:20px;height:20px;stroke:rgba(255,255,255,0.5);fill:none;stroke-width:2}
+
+/* ── LOGIN POPUP ── */
+#login-popup{display:none;position:fixed;top:72px;left:48px;z-index:500;width:290px;background:rgba(8,12,24,0.99);border:1px solid rgba(95,179,212,0.22);border-radius:14px;padding:22px;backdrop-filter:blur(32px);box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+#login-popup.open{display:block;animation:popIn .16s ease}
+@keyframes popIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.lp-tip{position:absolute;top:-6px;left:18px;width:11px;height:11px;background:rgba(8,12,24,0.99);border-top:1px solid rgba(95,179,212,0.22);border-left:1px solid rgba(95,179,212,0.22);transform:rotate(45deg);}
+.lp-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.lp-sub{font-size:11px;color:var(--sub);margin-bottom:16px;font-weight:300}
+.lp-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.lp-iw{position:relative;margin-bottom:11px}
+.lp-i{width:100%;padding:10px 36px 10px 12px;background:rgba(5,8,18,0.9);border:1px solid rgba(95,179,212,0.15);border-radius:8px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+.lp-i:focus{border-color:rgba(95,179,212,0.45)}
+.lp-i.err{border-color:rgba(224,85,85,0.5);animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.lp-eye{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:3px;color:var(--dim);}
+.lp-eye svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.lp-btn{width:100%;padding:10px;background:rgba(95,179,212,0.1);border:1px solid rgba(95,179,212,0.2);border-radius:8px;color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.lp-btn:hover{background:rgba(95,179,212,0.18);border-color:rgba(95,179,212,0.4)}
+.lp-err{font-size:11px;color:var(--red);min-height:14px;margin-top:7px;font-family:'JetBrains Mono',monospace}
+.lp-foot{margin-top:13px;padding-top:11px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:flex-end;}
+.lp-cpw{background:none;border:none;font-size:11px;color:var(--dim);cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:color .15s;padding:0;}
+.lp-cpw:hover{color:var(--accent)}
+
+/* ── CHANGE PW MODAL ── */
+#cp-overlay{position:fixed;inset:0;z-index:600;display:none;align-items:center;justify-content:center;background:rgba(5,8,18,0.88);backdrop-filter:blur(20px);}
+#cp-overlay.open{display:flex}
+.cp-box{width:100%;max-width:390px;background:rgba(8,12,24,0.99);border:1px solid rgba(95,179,212,0.15);border-radius:18px;padding:32px;position:relative;}
+.cp-x{position:absolute;top:13px;right:13px;background:none;border:none;cursor:pointer;color:var(--dim);padding:4px;}
+.cp-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.cp-h{font-size:17px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+.cp-p{font-size:12px;color:var(--sub);font-weight:300;margin-bottom:20px;line-height:1.6}
+.cp-step{display:none}.cp-step.on{display:block}
+.cp-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.cp-iw{position:relative;margin-bottom:10px}
+.cp-i{width:100%;padding:10px 36px 10px 12px;background:rgba(5,8,18,0.9);border:1px solid rgba(95,179,212,0.15);border-radius:8px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+.cp-i:focus{border-color:rgba(95,179,212,0.4)}
+.cp-eye{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:3px;color:var(--dim);}
+.cp-eye svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.cp-btn{width:100%;padding:11px;background:rgba(95,179,212,0.1);border:1px solid rgba(95,179,212,0.2);border-radius:8px;color:var(--accent);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:4px;}
+.cp-btn:hover{background:rgba(95,179,212,0.18)}
+.cp-e{font-size:11px;color:var(--red);min-height:14px;margin-top:5px;font-family:'JetBrains Mono',monospace}
+.cp-note{font-size:11px;color:var(--sub);margin-top:6px;font-weight:300;line-height:1.6}
+.code-row{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+.cd{width:40px;height:48px;text-align:center;background:rgba(5,8,18,0.9);border:1px solid rgba(95,179,212,0.15);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;outline:none;transition:border-color .2s;}
+.cd:focus{border-color:rgba(95,179,212,0.5)}
+.str-bar{height:3px;border-radius:2px;background:var(--border);margin-bottom:3px}
+.str-fill{height:100%;border-radius:2px;transition:all .3s;width:0}
+.str-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-bottom:8px}
+.cp-emc{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:rgba(95,179,212,0.06);border:1px solid rgba(95,179,212,0.15);padding:4px 10px;border-radius:100px;margin:4px 0 12px;}
+.cp-ok{text-align:center;padding:12px 0}
+.cp-ok-ic{width:48px;height:48px;border-radius:50%;background:rgba(0,214,143,0.1);border:1px solid rgba(0,214,143,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.cp-ok-ic svg{width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:2}
+
+/* ══════════════════════════════
+   PAGINA PUBLICA
+══════════════════════════════ */
+#page-public{display:block}
+
+.ticker-wrap{position:relative;z-index:1;margin-top:62px;overflow:hidden;padding:9px 0;background:rgba(22,46,74,0.45);border-bottom:1px solid rgba(95,179,212,0.08);}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,rgba(10,14,26,.9),transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,rgba(10,14,26,.9),transparent)}
+.ticker{display:flex;animation:tick 32s linear infinite;width:max-content}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{display:flex;align-items:center;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:10.5px}
+.ti-sep{padding:0 18px;color:rgba(95,179,212,0.15)}
+.ti-lbl{color:rgba(255,255,255,0.2)}
+.ti-val{color:rgba(255,255,255,0.6);font-weight:600;margin-left:5px}
+.ti.g .ti-val{color:var(--green)}.ti.a .ti-val{color:var(--accent)}.ti.go .ti-val{color:var(--gold)}
+
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 48px 80px;}
+.hero-inner{position:relative;z-index:2;max-width:800px}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);padding:6px 16px;border-radius:100px;margin-bottom:36px;}
+.hero-chip::before{content:'';width:5px;height:5px;background:rgba(255,255,255,0.7);border-radius:50%}
+.hero-title{font-size:clamp(52px,7.5vw,96px);font-weight:700;line-height:.9;letter-spacing:-4px;color:#fff;margin-bottom:28px;}
+.hero-title .l1,.hero-title .l2{display:block}
+.hero-title .l3{display:block;color:rgba(255,255,255,0.25);font-weight:300;font-style:italic;}
+.hero-desc{font-size:16px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.8;max-width:480px;margin:0 auto 48px;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+.btn-main{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:#fff;color:#0a0e1a;font-size:14px;font-weight:700;border-radius:8px;text-decoration:none;transition:all .2s;}
+.btn-main:hover{background:#e8f4f9;transform:translateY(-2px)}
+.btn-main svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.4);color:#fff;background:rgba(255,255,255,0.05)}
+.hero-metrics{display:flex;background:rgba(10,14,26,0.5);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;backdrop-filter:blur(12px);}
+.hm{flex:1;padding:18px 28px;border-right:1px solid rgba(255,255,255,0.06);text-align:center}
+.hm:last-child{border-right:none}
+.hm-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px}
+.hm-label{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:.3px}
+
+.body-section{position:relative;z-index:1}
+.section{padding:80px 48px}
+.sec-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-eyebrow-line{width:28px;height:1px;background:var(--accent)}
+.sec-eyebrow-text{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent)}
+.sec-title{font-size:clamp(28px,3.5vw,46px);font-weight:700;letter-spacing:-2px;line-height:1.05;margin-bottom:10px}
+.sec-sub{font-size:14px;color:var(--sub);line-height:1.8;max-width:480px;margin-bottom:48px;font-weight:300}
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cat-card{background:rgba(15,22,40,0.75);border:1px solid var(--border);border-radius:14px;padding:22px 26px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;text-decoration:none;color:var(--text);backdrop-filter:blur(8px);}
+.cat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c-color);opacity:0;transition:opacity .2s;}
+.cat-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.cat-card:hover::before{opacity:1}
+.cat-card::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,var(--c-glow),transparent 70%);pointer-events:none;}
+.cat-icon{width:44px;height:44px;border-radius:11px;background:var(--c-bg);border:1px solid var(--c-border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.cat-body{flex:1;min-width:0}
+.cat-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-color);margin-bottom:4px}
+.cat-name{font-size:15px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px;line-height:1.2}
+.cat-desc{font-size:12px;color:var(--sub);line-height:1.55;font-weight:300}
+.cat-arr{flex-shrink:0;width:30px;height:30px;border:1px solid var(--border2);border-radius:7px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.cat-card:hover .cat-arr{border-color:var(--c-color);background:var(--c-bg)}
+.cat-arr svg{width:13px;height:13px;stroke:var(--dim);fill:none;stroke-width:2;transition:stroke .2s}
+.cat-card:hover .cat-arr svg{stroke:var(--c-color)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-title{font-size:clamp(26px,3vw,40px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:16px}
+.about-title em{font-style:italic;color:var(--accent);font-weight:300}
+.about-body{font-size:14px;color:var(--sub);line-height:1.85;font-weight:300;margin-bottom:28px}
+.about-tags{display:flex;flex-wrap:wrap;gap:7px}
+.about-tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 11px;border-radius:100px;border:1px solid var(--border2);color:var(--dim);letter-spacing:.3px}
+.about-right{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.about-row{background:rgba(15,22,40,0.75);padding:18px 22px;display:flex;justify-content:space-between;align-items:center;transition:background .15s;}
+.about-row:hover{background:rgba(17,30,53,0.8)}
+.about-row-label{font-size:13px;color:var(--sub)}
+.about-row-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600}
+.about-row-val.a{color:var(--accent)}.about-row-val.g{color:var(--green)}.about-row-val.go{color:var(--gold)}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.how-item{background:rgba(15,22,40,0.75);padding:32px 26px;transition:background .2s;}
+.how-item:hover{background:rgba(17,30,53,0.8)}
+.how-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;margin-bottom:18px}
+.how-icon{width:38px;height:38px;border:1px solid var(--border2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.how-icon svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:1.8}
+.how-title{font-size:15px;font-weight:600;letter-spacing:-.2px;margin-bottom:7px}
+.how-desc{font-size:13px;color:var(--sub);line-height:1.68;font-weight:300}
+.contact-box{background:rgba(15,22,40,0.75);border:1px solid var(--border);border-radius:16px;padding:60px;text-align:center;position:relative;overflow:hidden;backdrop-filter:blur(12px);}
+.contact-box::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:500px;height:280px;background:radial-gradient(ellipse,rgba(95,179,212,0.08) 0%,transparent 65%);pointer-events:none;}
+.contact-box::after{content:'TIREA.RO';position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:100px;font-weight:700;color:rgba(255,255,255,0.015);letter-spacing:-5px;white-space:nowrap;pointer-events:none;}
+.ct-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:10px}
+.ct-eyebrow::before,.ct-eyebrow::after{content:'';width:18px;height:1px;background:var(--accent)}
+.ct-title{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:14px}
+.ct-sub{font-size:14px;color:var(--sub);line-height:1.7;font-weight:300;max-width:360px;margin:0 auto 36px}
+.ct-email{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--accent);padding:15px 32px;border:1px solid rgba(95,179,212,0.2);border-radius:10px;background:rgba(95,179,212,0.05);text-decoration:none;transition:all .2s;position:relative;z-index:1;}
+.ct-email:hover{background:rgba(95,179,212,0.12);transform:translateY(-2px)}
+.ct-email svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;position:relative;z-index:1;background:rgba(10,14,26,0.4);backdrop-filter:blur(12px);}
+.footer-logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:-.3px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:var(--dim);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--sub)}
+.footer-copy{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.3px}
+.divider{height:1px;background:rgba(26,37,64,0.7);margin:0 48px;position:relative;z-index:1;}
+
+/* ══════════════════════════════
+   FABRICA
+══════════════════════════════ */
+#page-fabrica{display:none;margin-top:62px;min-height:calc(100vh - 62px);position:relative;z-index:1;}
+
+.fab-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 62px);}
+.fab-sidebar{background:rgba(6,9,16,0.7);border-right:1px solid rgba(20,30,50,0.8);padding:20px 0;backdrop-filter:blur(8px);}
+.sb-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);padding:0 16px;margin-bottom:6px;display:block}
+.sb-item{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:13px;font-weight:500;color:var(--sub);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;border-left:2px solid transparent;}
+.sb-item svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+.sb-item:hover{color:var(--text);background:rgba(255,255,255,0.03)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,0.05)}
+.sb-div{height:1px;background:rgba(20,30,50,0.8);margin:12px 16px}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 16px;font-size:12px;font-weight:500;color:var(--sub);text-decoration:none;transition:all .15s;border-left:2px solid transparent;}
+.sb-tool:hover{color:var(--text);background:rgba(255,255,255,0.03);border-left-color:var(--accent)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+.fab-main{padding:28px 32px;overflow-y:auto}
+.fab-view{display:none}.fab-view.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.pg-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.pg-title{font-size:clamp(22px,2.5vw,32px);font-weight:700;letter-spacing:-1px;margin-bottom:6px}
+.pg-sub{font-size:13px;color:var(--sub);font-weight:300;line-height:1.6;margin-bottom:28px}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat-card{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:12px;padding:16px 18px;backdrop-filter:blur(8px);}
+.sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sc-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.sc-icon svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.sc-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:100px;}
+.sc-num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;line-height:1;margin-bottom:3px}
+.sc-lbl{font-size:11px;color:var(--sub);font-weight:300}
+
+.ws{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:14px;overflow:hidden;margin-bottom:16px;backdrop-filter:blur(8px);}
+.ws-head{padding:14px 18px;border-bottom:1px solid rgba(20,30,50,0.8);display:flex;align-items:center;justify-content:space-between}
+.ws-head-title{font-size:13px;font-weight:600;letter-spacing:-.2px;display:flex;align-items:center;gap:8px}
+.ws-head-title svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:2}
+.ws-acts{display:flex;gap:7px}
+.wb{padding:7px 13px;font-size:12px;font-weight:600;border-radius:7px;cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;display:inline-flex;align-items:center;gap:5px;border:1px solid transparent;}
+.wb svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.wb.sec{background:rgba(255,255,255,0.04);border-color:rgba(26,37,64,0.8);color:var(--sub)}.wb.sec:hover{background:rgba(255,255,255,0.07);color:var(--text)}
+.wb.gld{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.25);color:var(--gold)}.wb.gld:hover{background:rgba(201,168,76,0.18)}
+.wb.grn{background:rgba(0,214,143,0.1);border-color:rgba(0,214,143,0.25);color:var(--green)}.wb.grn:hover{background:rgba(0,214,143,0.18)}
+.ws-body{padding:18px}
+
+.ws-ta{width:100%;background:rgba(5,8,15,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:9px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:13px;line-height:1.7;padding:13px;resize:vertical;outline:none;transition:border-color .2s;min-height:140px;}
+.ws-ta:focus{border-color:rgba(201,168,76,0.3)}
+.ws-ta::placeholder{color:var(--dim)}
+
+.val-zone{background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:10px;padding:16px;text-align:center;margin-top:12px}
+.val-zone p{font-size:12px;color:var(--sub);margin-bottom:12px;font-weight:300;line-height:1.6}
+.btn-val{display:inline-flex;align-items:center;gap:9px;padding:13px 28px;background:rgba(0,214,143,0.12);border:1px solid rgba(0,214,143,0.28);border-radius:9px;color:var(--green);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-val:hover{background:rgba(0,214,143,0.2);transform:translateY(-1px)}
+.btn-val svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+.pipe-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-bottom:16px}
+.pipe-step{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:11px;padding:14px;text-align:center;}
+.pipe-step.ps-active{border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04)}
+.pipe-step.ps-done{border-color:rgba(0,214,143,0.2);background:rgba(0,214,143,0.03)}
+.pipe-arr{text-align:center;color:var(--dim);font-size:16px;padding:0 6px}
+.ps-icon{font-size:20px;margin-bottom:6px}
+.ps-name{font-size:12px;font-weight:600;margin-bottom:2px}
+.ps-status{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.5px}
+.ps-bar{height:2px;border-radius:1px;background:rgba(20,30,50,0.8);margin-top:8px}
+.ps-bar-fill{height:100%;border-radius:1px;transition:width .5s}
+
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.proj-card{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:13px;padding:18px;transition:border-color .2s,transform .2s;backdrop-filter:blur(8px);}
+.proj-card:hover{border-color:rgba(26,40,68,0.8);transform:translateY(-2px)}
+.pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pc-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.pc-dot{width:7px;height:7px;border-radius:50%}
+.pc-name{font-size:14px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px;outline:none;border-bottom:1px dashed transparent;transition:border-color .2s;}
+.pc-name:focus{border-color:rgba(201,168,76,0.3)}
+.pc-desc{font-size:12px;color:var(--sub);line-height:1.5;margin-bottom:12px;outline:none;border-bottom:1px dashed transparent;transition:border-color .2s;}
+.pc-desc:focus{border-color:rgba(201,168,76,0.3)}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.04)}
+.pc-sel{background:rgba(5,8,15,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:6px;font-size:10px;padding:3px 7px;font-family:'JetBrains Mono',monospace;cursor:pointer;outline:none}
+.pc-del{background:none;border:none;color:var(--dim);cursor:pointer;font-size:11px;transition:color .15s}
+.pc-del:hover{color:var(--red)}
+
+.tools-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.tool-card{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:13px;padding:18px 14px;text-align:center;text-decoration:none;color:var(--text);transition:all .2s;backdrop-filter:blur(8px);}
+.tool-card:hover{transform:translateY(-3px);border-color:rgba(26,40,68,0.8)}
+.tc-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px}
+.tc-name{font-size:13px;font-weight:700;letter-spacing:-.2px;margin-bottom:3px}
+.tc-desc{font-size:11px;color:var(--sub);line-height:1.5;font-weight:300;margin-bottom:10px}
+.tc-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:100px;display:inline-block;margin-bottom:10px}
+.tc-open{display:flex;align-items:center;justify-content:center;gap:4px;padding:7px;border-radius:7px;font-size:11px;font-weight:600;transition:all .2s;border:1px solid transparent;}
+
+.jrn-list{display:flex;flex-direction:column;gap:10px}
+.jrn-entry{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:11px;padding:14px;backdrop-filter:blur(8px);}
+.je-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.je-tool-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;letter-spacing:.5px;background:rgba(95,179,212,0.08);border:1px solid rgba(95,179,212,0.15)}
+.je-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)}
+.je-txt{font-size:13px;color:var(--sub);line-height:1.6;font-weight:300}
+.je-lesson{font-size:12px;color:var(--green);margin-top:6px;display:flex;align-items:flex-start;gap:5px}
+.je-lesson::before{content:'→';flex-shrink:0}
+
+.add-form{background:rgba(10,16,32,0.8);border:1px solid rgba(201,168,76,0.15);border-radius:11px;padding:16px;margin-bottom:14px}
+.add-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.add-sel,.add-inp{background:rgba(5,8,15,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:8px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:13px;padding:8px 11px;outline:none;transition:border-color .2s;width:100%;}
+.add-sel:focus,.add-inp:focus{border-color:rgba(201,168,76,0.3)}
+.add-sel option{background:#0a1020}
+
+.cred-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.cred-card{background:rgba(10,16,32,0.8);border:1px solid rgba(20,30,50,0.8);border-radius:12px;padding:15px;backdrop-filter:blur(8px);}
+.cc-top{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.cc-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.cc-name{font-size:13px;font-weight:600}
+.cc-sub{font-size:11px;color:var(--sub)}
+.cc-bar-wrap{height:5px;background:rgba(20,30,50,0.8);border-radius:3px;margin-bottom:5px}
+.cc-bar{height:100%;border-radius:3px;transition:width .5s}
+.cc-nums{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub)}
+
+.toast{position:fixed;bottom:24px;right:24px;z-index:1000;background:rgba(10,16,32,0.98);border:1px solid rgba(20,30,50,0.8);border-radius:11px;padding:13px 17px;display:flex;align-items:center;gap:9px;font-size:13px;box-shadow:0 8px 32px rgba(0,0,0,0.4);transform:translateY(80px);opacity:0;transition:all .3s;}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:rgba(0,214,143,0.3)}.toast.success .ti-icon{color:var(--green)}
+.toast.warning{border-color:rgba(201,168,76,0.3)}.toast.warning .ti-icon{color:var(--gold)}
+.ti-icon svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links .nl{display:none}
+  .hamburger{display:block}
+  #login-popup{left:16px;right:16px;width:auto;top:68px}
+  .hero,.section{padding-left:20px;padding-right:20px}
+  .divider{margin:0 20px}
+  .cat-grid,.about-grid{grid-template-columns:1fr}
+  .about-grid{gap:32px}
+  .how-grid,.tools-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-box{padding:36px 20px}
+  footer{flex-direction:column;align-items:flex-start;padding:24px 20px}
+  .hero-title{letter-spacing:-2.5px}
+  .hero-metrics{flex-wrap:wrap}
+  .hm{min-width:50%}
+  .fab-layout{grid-template-columns:1fr}
+  .fab-sidebar{display:none}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .pipe-row{grid-template-columns:1fr;gap:6px}
+  .pipe-arr{display:none}
+  .proj-grid{grid-template-columns:1fr}
+  .cred-grid{grid-template-columns:1fr}
+  .fab-main{padding:16px}
+  #aws2 .ws-body > div[style*="grid-template-columns:1fr 1fr"],
+  #aws3 .ws-body > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #preview-frame,#preview-frame2{height:220px!important}
+  #html-editor,#html-editor2{height:220px!important}
+}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUNDS -->
+<div class="page-bg" id="bg-pub"></div>
+<div class="page-bg-grid" id="bg-pub-grid"></div>
+<div class="page-bg-glow" id="bg-pub-glow"></div>
+<div class="fab-bg" id="bg-fab"></div>
+<div class="fab-bg-grid" id="bg-fab-grid"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="ti-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span id="toast-msg"></span></div>
+
+<!-- LOGIN POPUP -->
+<div id="login-popup">
+  <div class="lp-tip"></div>
+  <div class="lp-title">Acces Fabrică TIREA</div>
+  <p class="lp-sub">Zona privată de producție.</p>
+  <div class="lp-lbl">Parolă</div>
+  <div class="lp-iw">
+    <input type="password" id="lp-i" class="lp-i" placeholder="Parola ta..." onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="lp-eye" onclick="tvis('lp-i',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+  </div>
+  <button class="lp-btn" onclick="doLogin()">Intră în Fabrică →</button>
+  <div class="lp-err" id="lp-e"></div>
+  <div class="lp-foot"><button class="lp-cpw" onclick="closePopup();openCp()">Schimbă parola</button></div>
+</div>
+
+<!-- CHANGE PW MODAL -->
+<div id="cp-overlay">
+  <div class="cp-box">
+    <button class="cp-x" onclick="closeCp()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    <div class="cp-h">Schimbă parola</div>
+    <p class="cp-p">Confirmare în 3 pași prin email.</p>
+    <div class="cp-step on" id="cp1">
+      <div class="cp-lbl">Parola curentă</div>
+      <div class="cp-iw"><input type="password" id="cp-cur" class="cp-i" placeholder="Parola actuală..."><button class="cp-eye" onclick="tvis('cp-cur',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+      <div class="cp-lbl" style="margin-top:6px">Email confirmare</div>
+      <div class="cp-iw"><input type="email" id="cp-em" class="cp-i" placeholder="email@domeniu.ro"></div>
+      <div class="cp-e" id="cp-e1"></div>
+      <button class="cp-btn" onclick="cpS1()">Trimite cod →</button>
+      <p class="cp-note">Vei primi un cod de 6 cifre pe email.</p>
+    </div>
+    <div class="cp-step" id="cp2">
+      <p style="font-size:12px;color:var(--sub);margin-bottom:3px;font-weight:300">Cod trimis la:</p>
+      <div class="cp-emc"><span id="cp-es">—</span></div>
+      <div class="cp-lbl">Cod 6 cifre</div>
+      <div class="code-row">
+        <input type="text" maxlength="1" class="cd" oninput="cdi(this,0)" onkeydown="cdk(event,0)">
+        <input type="text" maxlength="1" class="cd" oninput="cdi(this,1)" onkeydown="cdk(event,1)">
+        <input type="text" maxlength="1" class="cd" oninput="cdi(this,2)" onkeydown="cdk(event,2)">
+        <input type="text" maxlength="1" class="cd" oninput="cdi(this,3)" onkeydown="cdk(event,3)">
+        <input type="text" maxlength="1" class="cd" oninput="cdi(this,4)" onkeydown="cdk(event,4)">
+        <input type="text" maxlength="1" class="cd" oninput="cdi(this,5)" onkeydown="cdk(event,5)">
+      </div>
+      <div class="cp-e" id="cp-e2"></div>
+      <button class="cp-btn" id="cp-vb" onclick="cpS2()">Verifică →</button>
+      <p class="cp-note"><button style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:11px;font-family:'Space Grotesk',sans-serif;padding:0" onclick="cpResend()">Retrimite codul</button></p>
+    </div>
+    <div class="cp-step" id="cp3">
+      <div class="cp-lbl">Parolă nouă</div>
+      <div class="cp-iw"><input type="password" id="cp-new" class="cp-i" placeholder="Minim 8 caractere..." oninput="chkStr(this.value)"><button class="cp-eye" onclick="tvis('cp-new',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+      <div class="str-bar"><div class="str-fill" id="sf"></div></div>
+      <div class="str-lbl" id="sl">—</div>
+      <div class="cp-lbl">Confirmă</div>
+      <div class="cp-iw"><input type="password" id="cp-cf" class="cp-i" placeholder="Repetă parola..."><button class="cp-eye" onclick="tvis('cp-cf',this)"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+      <div class="cp-e" id="cp-e3"></div>
+      <button class="cp-btn" onclick="cpS3()">Salvează parola →</button>
+    </div>
+    <div class="cp-step" id="cp4">
+      <div class="cp-ok"><div class="cp-ok-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:6px">Parolă actualizată!</div>
+      <p style="font-size:12px;color:var(--sub);font-weight:300;margin-bottom:18px">Schimbarea a fost salvată.</p>
+      <button class="cp-btn" onclick="closeCp()">Închide</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <button class="nav-logo" id="nav-logo-btn" onclick="togglePopup(event)" title="Click pentru acces Fabrică">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+    <span class="nav-logo-text">tirea<span>.</span>ro</span>
+  </button>
+  <div class="nav-links" id="pub-links">
+    <a href="#categorii" class="nl">Categorii</a>
+    <a href="#despre" class="nl">Despre</a>
+    <a href="#contact" class="nl">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-live" id="pub-live"><div class="live-dot"></div>platformă activă</div>
+    <span class="nav-clock" id="nav-clock"></span>
+    <div class="nav-fab-badge" id="fab-badge"><div class="nav-fab-badge-dot"></div>Fabrică Activă</div>
+    <a href="#contact" class="nav-cta" id="pub-cta">Colaborare →</a>
+    <button class="nav-out" id="fab-out" onclick="doLogout()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path></svg>Ieși</button>
+    <button class="hamburger" onclick="toggleMob()"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg></button>
+  </div>
+</nav>
+
+<div id="mob" style="display:none;position:fixed;top:62px;left:0;right:0;z-index:150;background:rgba(10,14,26,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 20px">
+  <a href="#categorii" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--border)">Categorii</a>
+  <a href="#despre" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--border)">Despre</a>
+  <a href="#contact" onclick="closeMob()" style="display:block;padding:11px 0;font-size:13px;color:var(--sub);text-decoration:none">Contact</a>
+</div>
+
+<!-- ══════════ PAGINA PUBLICA ══════════ -->
+<div id="page-public">
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ti g"><span class="ti-lbl">Platformă</span><span class="ti-val">ACTIVĂ</span><span class="ti-sep">/</span></div>
+      <div class="ti a"><span class="ti-lbl">Model</span><span class="ti-val">Venit real</span><span class="ti-sep">/</span></div>
+      <div class="ti go"><span class="ti-lbl">Structură</span><span class="ti-val">1 proiect = 1 subdomeniu</span><span class="ti-sep">/</span></div>
+      <div class="ti"><span class="ti-lbl">Categorii</span><span class="ti-val">4 direcții</span><span class="ti-sep">/</span></div>
+      <div class="ti a"><span class="ti-lbl">Tip</span><span class="ti-val">Apps · Web · SaaS</span><span class="ti-sep">/</span></div>
+      <div class="ti g"><span class="ti-lbl">Lansare</span><span class="ti-val">2025</span><span class="ti-sep">/</span></div>
+      <div class="ti go"><span class="ti-lbl">Scop</span><span class="ti-val">Comercial 100%</span><span class="ti-sep">/</span></div>
+      <div class="ti g"><span class="ti-lbl">Platformă</span><span class="ti-val">ACTIVĂ</span><span class="ti-sep">/</span></div>
+      <div class="ti a"><span class="ti-lbl">Model</span><span class="ti-val">Venit real</span><span class="ti-sep">/</span></div>
+      <div class="ti go"><span class="ti-lbl">Structură</span><span class="ti-val">1 proiect = 1 subdomeniu</span><span class="ti-sep">/</span></div>
+      <div class="ti"><span class="ti-lbl">Categorii</span><span class="ti-val">4 direcții</span><span class="ti-sep">/</span></div>
+      <div class="ti a"><span class="ti-lbl">Tip</span><span class="ti-val">Apps · Web · SaaS</span><span class="ti-sep">/</span></div>
+      <div class="ti g"><span class="ti-lbl">Lansare</span><span class="ti-val">2025</span><span class="ti-sep">/</span></div>
+      <div class="ti go"><span class="ti-lbl">Scop</span><span class="ti-val">Comercial 100%</span><span class="ti-sep">/</span></div>
+    </div>
+  </div>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-chip">Hub de proiecte digitale</div>
+      <h1 class="hero-title"><span class="l1">Fiecare idee</span><span class="l2">devine un</span><span class="l3">produs real.</span></h1>
+      <p class="hero-desc">Platformă independentă de aplicații și servicii digitale — construite cu scop comercial clar, fiecare cu subdomeniu propriu și model de venit definit de la prima linie de cod.</p>
+      <div class="hero-btns">
+        <a href="#categorii" class="btn-main"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>Descoperă categoriile</a>
+        <a href="#contact" class="btn-ghost">Colaborare</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="hm"><div class="hm-num">4</div><div class="hm-label">Categorii</div></div>
+        <div class="hm"><div class="hm-num">100%</div><div class="hm-label">Scop comercial</div></div>
+        <div class="hm"><div class="hm-num">1:1</div><div class="hm-label">Proiect / subdomeniu</div></div>
+        <div class="hm"><div class="hm-num">2025</div><div class="hm-label">Lansare</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="body-section">
+    <section class="section" id="categorii">
+      <div class="sec-eyebrow"><div class="sec-eyebrow-line"></div><div class="sec-eyebrow-text">Ce construim</div></div>
+      <div class="sec-title">Patru direcții.<br>Un singur standard.</div>
+      <p class="sec-sub">Fiecare proiect se încadrează într-una din cele patru categorii — gândite să acopere nevoi reale cu model de monetizare clar.</p>
+      <div class="cat-grid">
+        <div class="cat-card" style="--c-color:var(--green);--c-glow:rgba(0,214,143,0.06);--c-bg:rgba(0,214,143,0.07);--c-border:rgba(0,214,143,0.15)"><div class="cat-icon">💰</div><div class="cat-body"><div class="cat-tag">Venit</div><div class="cat-name">Proiecte care generează câștig</div><div class="cat-desc">Platforme cu abonament, venit pasiv din infrastructură sau servicii pay-per-use.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" style="--c-color:var(--accent);--c-glow:rgba(95,179,212,0.06);--c-bg:rgba(95,179,212,0.07);--c-border:rgba(95,179,212,0.15)"><div class="cat-icon">⚡</div><div class="cat-body"><div class="cat-tag">Utilitate</div><div class="cat-name">Proiecte care îți ușurează ziua</div><div class="cat-desc">Instrumente pentru organizare, automatizare și productivitate zilnică.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" style="--c-color:var(--purple);--c-glow:rgba(139,111,212,0.06);--c-bg:rgba(139,111,212,0.07);--c-border:rgba(139,111,212,0.15)"><div class="cat-icon">🛡️</div><div class="cat-body"><div class="cat-tag">Siguranță</div><div class="cat-name">Proiecte gândite pentru liniștea ta</div><div class="cat-desc">Protecție financiară, monitorizare și soluții pentru riscurile de zi cu zi.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+        <div class="cat-card" style="--c-color:var(--gold);--c-glow:rgba(201,168,76,0.06);--c-bg:rgba(201,168,76,0.07);--c-border:rgba(201,168,76,0.15)"><div class="cat-icon">📈</div><div class="cat-body"><div class="cat-tag">Business</div><div class="cat-name">Proiecte pentru afaceri în creștere</div><div class="cat-desc">CRM-uri, automatizări de vânzări, facturare și analytics pentru antreprenori.</div></div><div class="cat-arr"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"></path></svg></div></div>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <section class="section" id="despre">
+      <div class="about-grid">
+        <div>
+          <div class="sec-eyebrow" style="margin-bottom:14px"><div class="sec-eyebrow-line"></div><div class="sec-eyebrow-text">Filosofia tirea.ro</div></div>
+          <div class="about-title">Nu construim<br>de dragul de <em>a construi.</em></div>
+          <p class="about-body">Fiecare proiect pornește de la o întrebare simplă: există cineva care ar plăti pentru asta? Dacă răspunsul e da, proiectul intră în construcție.<br><br>Structura e mereu aceeași — subdomeniu propriu, identitate separată, model de venit clar.</p>
+          <div class="about-tags"><div class="about-tag">Subdomeniu dedicat</div><div class="about-tag">Model de venit definit</div><div class="about-tag">Lansare rapidă</div><div class="about-tag">Scalabil</div><div class="about-tag">Independent</div></div>
+        </div>
+        <div class="about-right">
+          <div class="about-row"><span class="about-row-label">Portofoliu</span><span class="about-row-val a">Crește constant</span></div>
+          <div class="about-row"><span class="about-row-label">Monetizare</span><span class="about-row-val g">Definită la start</span></div>
+          <div class="about-row"><span class="about-row-label">Structură</span><span class="about-row-val go">1 idee → 1 produs</span></div>
+          <div class="about-row"><span class="about-row-label">Tip proiecte</span><span class="about-row-val a">Apps · Web · SaaS</span></div>
+          <div class="about-row"><span class="about-row-label">Platformă</span><span class="about-row-val" style="color:var(--text)">tirea.ro</span></div>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <section class="section">
+      <div class="how-grid">
+        <div class="how-item"><div class="how-num">// 01</div><div class="how-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div><div class="how-title">Idee cu scop clar</div><div class="how-desc">Dacă nu există o nevoie concretă și un model de monetizare viabil, proiectul nu se construiește.</div></div>
+        <div class="how-item"><div class="how-num">// 02</div><div class="how-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="how-title">Subdomeniu propriu</div><div class="how-desc">Fiecare produs trăiește separat — identitate vizuală proprie, URL dedicat, libertate totală de evoluție.</div></div>
+        <div class="how-item"><div class="how-num">// 03</div><div class="how-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div><div class="how-title">Venit de la prima zi</div><div class="how-desc">Monetizarea e parte din arhitectură, nu o gândire de după.</div></div>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <section class="section" id="contact">
+      <div class="contact-box">
+        <div class="ct-eyebrow">Contact</div>
+        <div class="ct-title">Ai un proiect<br>sau o propunere?</div>
+        <p class="ct-sub">Colaborări, parteneriate și orice idee care se potrivește cu ce construim la tirea.ro.</p>
+        <a href="mailto:contact@tirea.ro" class="ct-email"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 7l10 7 10-7"></path></svg>contact@tirea.ro</a>
+      </div>
+    </section>
+  </div>
+  <footer>
+    <div class="footer-logo"><div class="nav-logo-icon" style="width:24px;height:24px;border-radius:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>tirea<span style="color:var(--dim)">.</span>ro</div>
+    <div class="footer-links"><a href="#">Confidențialitate</a><a href="#">Termeni</a><a href="#contact">Contact</a></div>
+    <div class="footer-copy">© 2025 tirea.ro</div>
+  </footer>
+</div>
+
+<!-- ══════════ FABRICA ══════════ -->
+<div id="page-fabrica">
+  <div class="fab-layout">
+    <aside class="fab-sidebar">
+      <span class="sb-label">Navigare</span>
+      <button class="sb-item active" onclick="showFab('dashboard',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>Dashboard</button>
+      <button class="sb-item" onclick="showFab('workflow',this)"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path></svg>Flux Desene Animate</button>
+      <button class="sb-item" onclick="showFab('flux-app',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path><path d="M7 8l3 3-3 3"></path><path d="M13 14h3"></path></svg>Flux App</button>
+      <button class="sb-item" onclick="showFab('proiecte',this)"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path></svg>Proiectele Mele</button>
+      <button class="sb-item" onclick="showFab('jurnal',this)"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>Jurnal AI</button>
+      <button class="sb-item" onclick="showFab('credite',this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path></svg>Credite & Plan</button>
+      <div class="sb-div"></div>
+      <span class="sb-label">Unelte Rapide</span>
+      <a href="https://claude.ai" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--gold)"></div>Claude Pro</a>
+      <a href="https://genspark.ai" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--accent)"></div>Genspark Plus</a>
+      <a href="https://elevenlabs.io" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--purple)"></div>ElevenLabs</a>
+      <a href="https://cursor.com" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--green)"></div>Cursor AI</a>
+      <a href="https://suno.com" target="_blank" class="sb-tool"><div class="sb-dot" style="background:var(--orange)"></div>Suno AI</a>
+    </aside>
+    <main class="fab-main">
+
+      <!-- DASHBOARD -->
+      <div class="fab-view active" id="fv-dashboard">
+        <div class="pg-eyebrow">// Fabrică Tirea</div>
+        <div class="pg-title">Bun venit în Fabrică</div>
+        <p class="pg-sub">Centrul tău de comandă pentru producție AI. Buget lunar: 100€.</p>
+        <div class="stat-row">
+          <div class="stat-card"><div class="sc-top"><div class="sc-icon" style="background:rgba(201,168,76,0.1);color:var(--gold)"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path></svg></div><span class="sc-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2)">activ</span></div><div class="sc-num" style="color:var(--gold)" id="stat-proj">3</div><div class="sc-lbl">Proiecte active</div></div>
+          <div class="stat-card"><div class="sc-top"><div class="sc-icon" style="background:rgba(0,214,143,0.1);color:var(--green)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><span class="sc-badge" style="background:rgba(0,214,143,0.1);color:var(--green);border:1px solid rgba(0,214,143,0.2)">azi</span></div><div class="sc-num" style="color:var(--green)" id="stat-val">0</div><div class="sc-lbl">Validări astăzi</div></div>
+          <div class="stat-card"><div class="sc-top"><div class="sc-icon" style="background:rgba(95,179,212,0.1);color:var(--accent)"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path></svg></div><span class="sc-badge" style="background:rgba(95,179,212,0.1);color:var(--accent);border:1px solid rgba(95,179,212,0.2)">flux</span></div><div class="sc-num" style="color:var(--accent)">5</div><div class="sc-lbl">Unelte conectate</div></div>
+          <div class="stat-card"><div class="sc-top"><div class="sc-icon" style="background:rgba(224,85,85,0.1);color:var(--red)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path></svg></div><span class="sc-badge" style="background:rgba(224,85,85,0.1);color:var(--red);border:1px solid rgba(224,85,85,0.2)">lunar</span></div><div class="sc-num" style="color:var(--red)">100€</div><div class="sc-lbl">Buget total</div></div>
+        </div>
+        <!-- Tools quick access -->
+        <div class="ws">
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path></svg>Acces Rapid Unelte</div></div>
+          <div class="ws-body">
+            <div class="tools-grid">
+              <a href="https://claude.ai" target="_blank" class="tool-card" style="border-color:rgba(201,168,76,0.15)"><div class="tc-icon" style="background:rgba(201,168,76,0.1)">🤖</div><div class="tc-name">Claude Pro</div><div class="tc-desc">Scenarii & cod</div><div class="tc-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2)">20€/lună</div><div class="tc-open" style="background:rgba(201,168,76,0.08);color:var(--gold);border-color:rgba(201,168,76,0.2)">Deschide →</div></a>
+              <a href="https://genspark.ai" target="_blank" class="tool-card" style="border-color:rgba(95,179,212,0.15)"><div class="tc-icon" style="background:rgba(95,179,212,0.1)">🎬</div><div class="tc-name">Genspark Plus</div><div class="tc-desc">Video & site-uri</div><div class="tc-badge" style="background:rgba(95,179,212,0.1);color:var(--accent);border:1px solid rgba(95,179,212,0.2)">29€/lună</div><div class="tc-open" style="background:rgba(95,179,212,0.08);color:var(--accent);border-color:rgba(95,179,212,0.2)">Deschide →</div></a>
+              <a href="https://elevenlabs.io" target="_blank" class="tool-card" style="border-color:rgba(139,111,212,0.15)"><div class="tc-icon" style="background:rgba(139,111,212,0.1)">🎙️</div><div class="tc-name">ElevenLabs</div><div class="tc-desc">Voce & clonare</div><div class="tc-badge" style="background:rgba(139,111,212,0.1);color:var(--purple);border:1px solid rgba(139,111,212,0.2)">22€/lună</div><div class="tc-open" style="background:rgba(139,111,212,0.08);color:var(--purple);border-color:rgba(139,111,212,0.2)">Deschide →</div></a>
+              <a href="https://cursor.com" target="_blank" class="tool-card" style="border-color:rgba(0,214,143,0.15)"><div class="tc-icon" style="background:rgba(0,214,143,0.1)">⌨️</div><div class="tc-name">Cursor AI</div><div class="tc-desc">Asamblare cod</div><div class="tc-badge" style="background:rgba(0,214,143,0.1);color:var(--green);border:1px solid rgba(0,214,143,0.2)">20€/lună</div><div class="tc-open" style="background:rgba(0,214,143,0.08);color:var(--green);border-color:rgba(0,214,143,0.2)">Deschide →</div></a>
+              <a href="https://suno.com" target="_blank" class="tool-card" style="border-color:rgba(224,122,53,0.15)"><div class="tc-icon" style="background:rgba(224,122,53,0.1)">🎵</div><div class="tc-name">Suno AI</div><div class="tc-desc">Muzică AI</div><div class="tc-badge" style="background:rgba(224,122,53,0.1);color:var(--orange);border:1px solid rgba(224,122,53,0.2)">9€/lună</div><div class="tc-open" style="background:rgba(224,122,53,0.08);color:var(--orange);border-color:rgba(224,122,53,0.2)">Deschide →</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WORKFLOW DESENE ANIMATE -->
+      <div class="fab-view" id="fv-workflow">
+        <div class="pg-eyebrow">// Flux Desene Animate</div>
+        <div class="pg-title">Producție Desene Animate</div>
+        <p class="pg-sub">Flux validat pas cu pas: Scenariu → Voce → Video. Nicio unealtă nu primește fișierul fără OK-ul tău.</p>
+        <!-- Pipeline vizual -->
+        <div class="ws" style="margin-bottom:16px">
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>Status Flux</div></div>
+          <div class="ws-body">
+            <div class="pipe-row">
+              <div class="pipe-step ps-active" id="ps1"><div class="ps-icon">✍️</div><div class="ps-name">Scenariu</div><div class="ps-status" style="color:var(--gold)" id="ps1-s">În lucru</div><div class="ps-bar"><div class="ps-bar-fill" id="pb1" style="background:var(--gold);width:60%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ps2"><div class="ps-icon">🎙️</div><div class="ps-name">Voce</div><div class="ps-status" style="color:var(--dim)" id="ps2-s">Așteaptă OK</div><div class="ps-bar"><div class="ps-bar-fill" id="pb2" style="background:var(--purple);width:0%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ps3"><div class="ps-icon">🎬</div><div class="ps-name">Video</div><div class="ps-status" style="color:var(--dim)" id="ps3-s">Așteaptă OK</div><div class="ps-bar"><div class="ps-bar-fill" id="pb3" style="background:var(--accent);width:0%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ps4"><div class="ps-icon">✅</div><div class="ps-name">Finalizat</div><div class="ps-status" style="color:var(--dim)" id="ps4-s">—</div><div class="ps-bar"><div class="ps-bar-fill" id="pb4" style="background:var(--green);width:0%"></div></div></div>
+            </div>
+          </div>
+        </div>
+        <!-- Pasul 1 -->
+        <div class="ws" id="ws1">
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>Pasul 1 — Scenariu / Text</div><div class="ws-acts"><button class="wb sec" onclick="document.getElementById('wt1').value='';showToast('Text șters','warning')"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Șterge</button></div></div>
+          <div class="ws-body">
+            <textarea class="ws-ta" id="wt1" placeholder="Scrie sau lipește scenariul tău aici..."></textarea>
+            <div class="val-zone"><p>Citește cu atenție. Dacă ești mulțumit apasă <strong style="color:var(--green)">OK → Trimite la Voce</strong>.<br>ElevenLabs primește textul DOAR după această confirmare.</p><button class="btn-val" onclick="wfValidate(1)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Trimite la Voce (ElevenLabs)</button></div>
+          </div>
+        </div>
+        <!-- Pasul 2 -->
+        <div class="ws" id="ws2" style="opacity:.35;pointer-events:none">
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path><path d="M19 10v2a7 7 0 01-14 0v-2"></path></svg>Pasul 2 — Voce (ElevenLabs)</div><div class="ws-acts"><a href="https://elevenlabs.io" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Deschide ElevenLabs</a></div></div>
+          <div class="ws-body">
+            <textarea class="ws-ta" id="wt2" placeholder="Note despre vocea generată... e OK? Pronunție corectă?" style="min-height:90px"></textarea>
+            <div class="val-zone"><p>Ascultă fișierul audio. Dacă vocea e perfectă apasă <strong style="color:var(--green)">OK → Trimite la Video</strong>.<br>Genspark primește fișierul DOAR după această confirmare.</p><button class="btn-val" onclick="wfValidate(2)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Trimite la Video (Genspark)</button></div>
+          </div>
+        </div>
+        <!-- Pasul 3 -->
+        <div class="ws" id="ws3" style="opacity:.35;pointer-events:none">
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>Pasul 3 — Video (Genspark)</div><div class="ws-acts"><a href="https://genspark.ai" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Deschide Genspark</a></div></div>
+          <div class="ws-body">
+            <textarea class="ws-ta" id="wt3" placeholder="Link video generat, observații finale..." style="min-height:90px"></textarea>
+            <div class="val-zone"><p>Verifică videoul final. Dacă e perfect, marchează producția ca finalizată.</p><button class="btn-val" onclick="wfValidate(3)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>✓ Producție Finalizată!</button></div>
+          </div>
+        </div>
+        <div id="ws-done" style="display:none">
+          <div class="ws" style="border-color:rgba(0,214,143,0.3)">
+            <div class="ws-body" style="text-align:center;padding:28px">
+              <div style="font-size:36px;margin-bottom:10px">🎉</div>
+              <div style="font-size:17px;font-weight:700;margin-bottom:6px">Producție finalizată!</div>
+              <p style="font-size:13px;color:var(--sub);margin-bottom:18px;font-weight:300">Toate etapele validate. Credite folosite eficient.</p>
+              <button class="wb grn" onclick="wfReset()" style="margin:0 auto;display:inline-flex"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Proiect nou</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUX APP -->
+      <div class="fab-view" id="fv-flux-app">
+        <div class="pg-eyebrow">// Flux App Builder</div>
+        <div class="pg-title">Flux App — De la 0 la Live</div>
+        <p class="pg-sub">Construiești o aplicație web sau mobilă pas cu pas. Fiecare etapă are unelte dedicate și un preview HTML live în care poți testa și da comenzi direct.</p>
+
+        <!-- Pipeline App -->
+        <div class="ws" style="margin-bottom:16px">
+          <div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>Status Flux App</div><div class="ws-acts"><button class="wb sec" onclick="appReset()"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Reset</button></div></div>
+          <div class="ws-body">
+            <div style="display:grid;grid-template-columns:repeat(6,1fr) auto;gap:0;align-items:center">
+              <div class="pipe-step" id="ap1" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04)"><div class="ps-icon">💡</div><div class="ps-name" style="font-size:11px">Idee & Spec</div><div class="ps-status" id="ap1-s" style="color:var(--gold)">Activ</div><div class="ps-bar"><div class="ps-bar-fill" id="apb1" style="background:var(--gold);width:100%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ap2"><div class="ps-icon">🎨</div><div class="ps-name" style="font-size:11px">UI / Design</div><div class="ps-status" id="ap2-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb2" style="background:var(--accent);width:0%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ap3"><div class="ps-icon">⌨️</div><div class="ps-name" style="font-size:11px">Cod & Build</div><div class="ps-status" id="ap3-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb3" style="background:var(--green);width:0%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ap4"><div class="ps-icon">🧪</div><div class="ps-name" style="font-size:11px">Testare</div><div class="ps-status" id="ap4-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb4" style="background:var(--purple);width:0%"></div></div></div>
+              <div class="pipe-arr">→</div>
+              <div class="pipe-step" id="ap5"><div class="ps-icon">🚀</div><div class="ps-name" style="font-size:11px">Deploy</div><div class="ps-status" id="ap5-s" style="color:var(--dim)">Așteaptă</div><div class="ps-bar"><div class="ps-bar-fill" id="apb5" style="background:var(--accent);width:0%"></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASUL 1 — Idee & Specificații -->
+        <div class="ws" id="aws1">
+          <div class="ws-head">
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>Pasul 1 — Idee & Specificații</div>
+            <div class="ws-acts">
+              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
+            </div>
+          </div>
+          <div class="ws-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+              <div>
+                <div class="cp-lbl" style="margin-bottom:6px">Numele aplicației</div>
+                <input class="add-inp" id="app-name" placeholder="ex: TaskFlow, BudgetAI..." style="width:100%">
+              </div>
+              <div>
+                <div class="cp-lbl" style="margin-bottom:6px">Tip aplicație</div>
+                <select class="add-sel" id="app-type" style="width:100%">
+                  <option value="web">Web App (HTML/CSS/JS)</option>
+                  <option value="mobile">Mobile App (PWA)</option>
+                  <option value="saas">SaaS / Dashboard</option>
+                  <option value="landing">Landing Page cu funcții</option>
+                </select>
+              </div>
+            </div>
+            <div class="cp-lbl" style="margin-bottom:6px">Descriere & funcționalități principale</div>
+            <textarea class="ws-ta" id="app-spec" placeholder="Descrie ce face aplicația, pentru cine e, ce funcționalități are... Cu cât mai detaliat, cu atât Claude generează mai bine." style="min-height:120px;margin-bottom:10px"></textarea>
+            <div class="cp-lbl" style="margin-bottom:6px">Model de monetizare</div>
+            <select class="add-sel" id="app-mono" style="width:100%;margin-bottom:12px">
+              <option>Abonament lunar</option>
+              <option>Plată unică</option>
+              <option>Freemium + Pro</option>
+              <option>Pay-per-use</option>
+              <option>B2B / White-label</option>
+            </select>
+            <div class="val-zone">
+              <p>Când specificațiile sunt clare și complete, apasă OK pentru a trece la design UI.<br><strong style="color:var(--accent)">Sfat:</strong> Copiază descrierea și deschide Claude pentru a genera un document de specificații complet.</p>
+              <button class="btn-val" onclick="appValidate(1)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Trecem la Design UI</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASUL 2 — UI / Design -->
+        <div class="ws" id="aws2" style="opacity:.35;pointer-events:none">
+          <div class="ws-head">
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg>Pasul 2 — UI / Design (Claude + Genspark)</div>
+            <div class="ws-acts">
+              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
+              <a href="https://genspark.ai" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Genspark</a>
+            </div>
+          </div>
+          <div class="ws-body">
+            <div style="background:rgba(95,179,212,0.05);border:1px solid rgba(95,179,212,0.15);border-radius:9px;padding:13px;margin-bottom:12px;font-size:12px;color:var(--sub);line-height:1.7">
+              <strong style="color:var(--accent)">Workflow recomandat:</strong><br>
+              1. Deschide Claude → cere un wireframe HTML complet bazat pe specificațiile tale<br>
+              2. Copiază HTML-ul generat în preview-ul de mai jos<br>
+              3. Ajustează culorile, fonturile, layout-ul după preferință<br>
+              4. Folosește Genspark pentru componente vizuale sau imagini UI
+            </div>
+            <div class="cp-lbl" style="margin-bottom:6px">Note design / prompt folosit la Claude</div>
+            <textarea class="ws-ta" id="app-design-notes" placeholder="ex: Am cerut Claude un dashboard cu sidebar negru, carduri cu statistici, tabel cu date..." style="min-height:80px;margin-bottom:12px"></textarea>
+            <!-- PREVIEW HTML LIVE -->
+            <div style="background:rgba(10,16,32,0.8);border:1px solid rgba(201,168,76,0.2);border-radius:11px;overflow:hidden;margin-bottom:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(20,30,50,0.8)">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#e05555"></div>
+                  <div style="width:10px;height:10px;border-radius:50%;background:var(--gold)"></div>
+                  <div style="width:10px;height:10px;border-radius:50%;background:var(--green)"></div>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-left:6px">preview.html — Live Editor</span>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <button class="wb sec" onclick="runPreview()" style="font-size:11px;padding:5px 10px"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>Run</button>
+                  <button class="wb sec" onclick="clearPreview()" style="font-size:11px;padding:5px 10px">Șterge</button>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+                <div style="border-right:1px solid rgba(20,30,50,0.8)">
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">EDITOR HTML</div>
+                  <textarea id="html-editor" style="width:100%;height:320px;background:rgba(5,8,15,0.9);border:none;color:#e8edf5;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;padding:12px;resize:none;outline:none" placeholder="Lipește HTML-ul generat de Claude aici...&#10;&#10;<!-- Exemplu: -->&#10;&lt;div style=&quot;background:#1a1a2e;color:white;padding:20px&quot;&gt;&#10;  &lt;h1&gt;Aplicația mea&lt;/h1&gt;&#10;&lt;/div&gt;" oninput="livePreview()"></textarea>
+                </div>
+                <div>
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">PREVIEW LIVE</div>
+                  <iframe id="preview-frame" style="width:100%;height:320px;border:none;background:white" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+              </div>
+              <div style="padding:8px 14px;border-top:1px solid rgba(20,30,50,0.8);display:flex;gap:8px;align-items:center">
+                <input id="app-cmd" class="add-inp" placeholder="Comandă rapidă: ex 'schimbă fundalul în negru', 'adaugă un buton verde'..." style="flex:1;font-size:12px">
+                <button class="wb gld" onclick="applyCmd()" style="font-size:11px;padding:6px 12px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Aplică</button>
+              </div>
+            </div>
+            <div class="val-zone">
+              <p>Când design-ul arată bine în preview, apasă OK pentru a trece la scrierea codului complet.</p>
+              <button class="btn-val" onclick="appValidate(2)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Design aprobat, trecem la Cod</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASUL 3 — Cod & Build -->
+        <div class="ws" id="aws3" style="opacity:.35;pointer-events:none">
+          <div class="ws-head">
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Pasul 3 — Cod & Build (Claude + Cursor)</div>
+            <div class="ws-acts">
+              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude</a>
+              <a href="https://cursor.com" target="_blank" class="wb grn"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Cursor</a>
+            </div>
+          </div>
+          <div class="ws-body">
+            <div style="background:rgba(0,214,143,0.05);border:1px solid rgba(0,214,143,0.15);border-radius:9px;padding:13px;margin-bottom:12px;font-size:12px;color:var(--sub);line-height:1.7">
+              <strong style="color:var(--green)">Workflow recomandat:</strong><br>
+              1. Deschide Cursor AI → importă structura HTML din preview<br>
+              2. Cere Claude să scrie componentele individuale (autentificare, baze de date, API)<br>
+              3. Folosește Cursor pentru a assembla și debugga codul<br>
+              4. Testează funcționalitățile local înainte de validare
+            </div>
+            <div class="cp-lbl" style="margin-bottom:6px">Tehnologii folosite</div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px" id="tech-tags">
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">HTML/CSS/JS</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">React</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">Node.js</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">Supabase</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">Firebase</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">Tailwind CSS</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">Next.js</button>
+              <button class="about-tag" onclick="toggleTech(this)" style="cursor:pointer;transition:all .2s" data-active="false">PWA / Mobile</button>
+            </div>
+            <!-- Preview cod în timpul build -->
+            <div style="background:rgba(10,16,32,0.8);border:1px solid rgba(0,214,143,0.15);border-radius:11px;overflow:hidden;margin-bottom:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(20,30,50,0.8)">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)">app-preview.html — Testare funcționalități</span>
+                <div style="display:flex;gap:6px">
+                  <button class="wb sec" onclick="runPreview2()" style="font-size:11px;padding:5px 10px"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>Run</button>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+                <div style="border-right:1px solid rgba(20,30,50,0.8)">
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">COD BUILD</div>
+                  <textarea id="html-editor2" style="width:100%;height:280px;background:rgba(5,8,15,0.9);border:none;color:#e8edf5;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;padding:12px;resize:none;outline:none" placeholder="Lipește versiunea finală a aplicației pentru testare..." oninput="livePreview2()"></textarea>
+                </div>
+                <div>
+                  <div style="padding:8px 12px;border-bottom:1px solid rgba(20,30,50,0.5);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px">PREVIEW FUNCȚIONAL</div>
+                  <iframe id="preview-frame2" style="width:100%;height:280px;border:none;background:white" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+              </div>
+              <div style="padding:8px 14px;border-top:1px solid rgba(20,30,50,0.8);display:flex;gap:8px;align-items:center">
+                <input id="app-cmd2" class="add-inp" placeholder="Comandă: ex 'adaugă localStorage pentru salvare date', 'fă butonul să deschidă un modal'..." style="flex:1;font-size:12px">
+                <button class="wb grn" onclick="applyCmd2()" style="font-size:11px;padding:6px 12px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Aplică</button>
+              </div>
+            </div>
+            <div class="cp-lbl" style="margin-bottom:6px">Note build / probleme rezolvate</div>
+            <textarea class="ws-ta" id="app-build-notes" placeholder="Documentează ce ai construit, ce bugs ai rezolvat, ce funcționează..." style="min-height:70px;margin-bottom:12px"></textarea>
+            <div class="val-zone">
+              <p>Testează toate funcționalitățile în preview. Când totul funcționează, apasă OK.</p>
+              <button class="btn-val" onclick="appValidate(3)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Build validat, trecem la Testare</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASUL 4 — Testare -->
+        <div class="ws" id="aws4" style="opacity:.35;pointer-events:none">
+          <div class="ws-head">
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Pasul 4 — Testare & QA</div>
+            <div class="ws-acts">
+              <a href="https://claude.ai" target="_blank" class="wb gld"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Claude QA</a>
+            </div>
+          </div>
+          <div class="ws-body">
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px" id="qa-list">
+              <div class="qa-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="qa1" onchange="checkQA()" style="accent-color:var(--green);width:15px;height:15px">
+                <label for="qa1" style="font-size:13px;color:var(--sub);cursor:pointer">Funcționalitățile principale funcționează pe desktop</label>
+              </div>
+              <div class="qa-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="qa2" onchange="checkQA()" style="accent-color:var(--green);width:15px;height:15px">
+                <label for="qa2" style="font-size:13px;color:var(--sub);cursor:pointer">Design responsive — arată bine pe mobil</label>
+              </div>
+              <div class="qa-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="qa3" onchange="checkQA()" style="accent-color:var(--green);width:15px;height:15px">
+                <label for="qa3" style="font-size:13px;color:var(--sub);cursor:pointer">Nu există erori de consolă (F12 → Console)</label>
+              </div>
+              <div class="qa-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="qa4" onchange="checkQA()" style="accent-color:var(--green);width:15px;height:15px">
+                <label for="qa4" style="font-size:13px;color:var(--sub);cursor:pointer">Textele sunt corecte și fără greșeli</label>
+              </div>
+              <div class="qa-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="qa5" onchange="checkQA()" style="accent-color:var(--green);width:15px;height:15px">
+                <label for="qa5" style="font-size:13px;color:var(--sub);cursor:pointer">Viteza de încărcare e acceptabilă</label>
+              </div>
+              <div class="qa-item" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="qa6" onchange="checkQA()" style="accent-color:var(--green);width:15px;height:15px">
+                <label for="qa6" style="font-size:13px;color:var(--sub);cursor:pointer">Modelul de monetizare e integrat (preturi, CTA, checkout)</label>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px;margin-bottom:12px">
+              <span style="font-size:12px;color:var(--sub)">Checklist complet:</span>
+              <div style="flex:1;height:6px;background:rgba(20,30,50,0.8);border-radius:3px"><div id="qa-progress" style="height:100%;background:var(--green);border-radius:3px;transition:width .4s;width:0%"></div></div>
+              <span id="qa-count" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green)">0/6</span>
+            </div>
+            <textarea class="ws-ta" id="app-qa-notes" placeholder="Bug-uri găsite, ajustări făcute, observații finale..." style="min-height:70px;margin-bottom:12px"></textarea>
+            <div class="val-zone">
+              <p>Bifează toate punctele din checklist. Când aplicația e gata, apasă OK.</p>
+              <button class="btn-val" id="qa-ok-btn" onclick="appValidate(4)" style="opacity:.4;pointer-events:none"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>OK — Testare completă, publicăm!</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASUL 5 — Deploy Vercel -->
+        <div class="ws" id="aws5" style="opacity:.35;pointer-events:none">
+          <div class="ws-head">
+            <div class="ws-head-title"><svg viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2z"></path></svg>Pasul 5 — Deploy pe Vercel</div>
+            <div class="ws-acts">
+              <a href="https://vercel.com" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"></path></svg>Vercel</a>
+              <a href="https://github.com" target="_blank" class="wb sec"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>GitHub</a>
+            </div>
+          </div>
+          <div class="ws-body">
+            <div style="background:rgba(95,179,212,0.05);border:1px solid rgba(95,179,212,0.15);border-radius:9px;padding:13px;margin-bottom:14px;font-size:12px;color:var(--sub);line-height:1.7">
+              <strong style="color:var(--accent)">Pași deploy Vercel:</strong><br>
+              1. <strong style="color:var(--text)">GitHub</strong> → Creează un repo nou → Upload fișierele proiectului<br>
+              2. <strong style="color:var(--text)">Vercel.com</strong> → New Project → Import din GitHub<br>
+              3. Configurează domeniu custom (subdomeniu.tirea.ro sau domeniu propriu)<br>
+              4. Vercel va face deploy automat la fiecare push pe GitHub
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+              <div>
+                <div class="cp-lbl" style="margin-bottom:6px">URL proiect (după deploy)</div>
+                <input class="add-inp" id="app-url" placeholder="https://app-mea.vercel.app" style="width:100%">
+              </div>
+              <div>
+                <div class="cp-lbl" style="margin-bottom:6px">Domeniu custom</div>
+                <input class="add-inp" id="app-domain" placeholder="ex: app.tirea.ro" style="width:100%">
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="dep1" style="accent-color:var(--accent);width:15px;height:15px">
+                <label for="dep1" style="font-size:13px;color:var(--sub);cursor:pointer">Repository GitHub creat și fișierele uploadate</label>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="dep2" style="accent-color:var(--accent);width:15px;height:15px">
+                <label for="dep2" style="font-size:13px;color:var(--sub);cursor:pointer">Proiect importat în Vercel cu succes</label>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="dep3" style="accent-color:var(--accent);width:15px;height:15px">
+                <label for="dep3" style="font-size:13px;color:var(--sub);cursor:pointer">Build trecut fără erori</label>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(5,8,15,0.6);border:1px solid rgba(20,30,50,0.8);border-radius:8px">
+                <input type="checkbox" id="dep4" style="accent-color:var(--accent);width:15px;height:15px">
+                <label for="dep4" style="font-size:13px;color:var(--sub);cursor:pointer">Domeniu custom configurat</label>
+              </div>
+            </div>
+            <div class="val-zone">
+              <p>Aplicația ta e live! Apasă butonul pentru a finaliza fluxul și a salva proiectul.</p>
+              <button class="btn-val" onclick="appValidate(5)"><svg viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2z"></path></svg>🚀 Aplicație publicată — Flux complet!</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DONE -->
+        <div id="app-done" style="display:none">
+          <div class="ws" style="border-color:rgba(0,214,143,0.3)">
+            <div class="ws-body" style="text-align:center;padding:32px">
+              <div style="font-size:40px;margin-bottom:12px">🚀</div>
+              <div style="font-size:18px;font-weight:700;margin-bottom:6px">Aplicație lansată!</div>
+              <p style="font-size:13px;color:var(--sub);margin-bottom:8px;font-weight:300">De la idee la live — complet.</p>
+              <div id="app-final-url" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);padding:8px 16px;background:rgba(95,179,212,0.06);border:1px solid rgba(95,179,212,0.15);border-radius:8px;display:inline-block;margin-bottom:18px"></div>
+              <br>
+              <button class="wb grn" onclick="appReset()" style="margin:0 auto;display:inline-flex"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path></svg>Flux nou</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROIECTE -->
+      <div class="fab-view" id="fv-proiecte">
+        <div class="pg-eyebrow">// Portofoliu Privat</div>
+        <div class="pg-title">Proiectele Mele</div>
+        <p class="pg-sub">Click pe nume sau descriere pentru a edita direct.</p>
+        <div class="proj-grid" id="proj-grid"></div>
+        <button class="wb gld" onclick="addProj()" style="margin-top:14px"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Adaugă proiect nou</button>
+      </div>
+
+      <!-- JURNAL -->
+      <div class="fab-view" id="fv-jurnal">
+        <div class="pg-eyebrow">// AI Feedback Loop</div>
+        <div class="pg-title">Jurnal de Erori & Lecții</div>
+        <p class="pg-sub">Documentează ce nu a mers. Claude citește acest jurnal și nu repetă greșelile.</p>
+        <div class="add-form">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">+ Intrare nouă</div>
+          <div class="add-row2">
+            <select class="add-sel" id="j-tool"><option>Claude</option><option>ElevenLabs</option><option>Genspark</option><option>Cursor</option><option>Suno</option></select>
+            <input class="add-inp" id="j-date" type="date">
+          </div>
+          <textarea class="ws-ta" id="j-err" placeholder="Ce a mers greșit?" style="min-height:70px;margin-bottom:8px"></textarea>
+          <textarea class="ws-ta" id="j-les" placeholder="Lecția învățată / cum evit data viitoare?" style="min-height:60px;margin-bottom:10px"></textarea>
+          <button class="wb gld" onclick="addJournalEntry()"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline></svg>Salvează în Jurnal</button>
+        </div>
+        <div class="jrn-list" id="jrn-list"></div>
+      </div>
+
+      <!-- CREDITE -->
+      <div class="fab-view" id="fv-credite">
+        <div class="pg-eyebrow">// Plan & Buget</div>
+        <div class="pg-title">Credite & Abonamente</div>
+        <p class="pg-sub">100€/lună · 5 abonamente · Trage barele pentru a actualiza utilizarea.</p>
+        <div class="cred-grid" id="cred-grid"></div>
+        <div class="ws"><div class="ws-head"><div class="ws-head-title"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Actualizează utilizarea</div></div><div class="ws-body"><div style="display:flex;flex-direction:column;gap:12px" id="cred-sliders"></div></div></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+// ── PAROLA ──
+const PW_KEY='tirea_pw';
+function getHash(){return localStorage.getItem(PW_KEY)||hp('tirea2025')}
+function hp(pw){let h=5381;for(let i=0;i<pw.length;i++){h=((h<<5)+h)+pw.charCodeAt(i);h&=h}return h.toString(36)+'|'+pw.length}
+
+// ── POPUP ──
+function togglePopup(e){
+  e.stopPropagation();
+  const p=document.getElementById('login-popup');
+  if(p.classList.contains('open')){closePopup()}
+  else{p.classList.add('open');setTimeout(()=>document.getElementById('lp-i').focus(),50)}
+}
+function closePopup(){document.getElementById('login-popup').classList.remove('open');document.getElementById('lp-e').textContent='';}
+document.addEventListener('click',e=>{const p=document.getElementById('login-popup');if(p.classList.contains('open')&&!p.contains(e.target)){closePopup()}});
+
+// ── LOGIN / LOGOUT ──
+function doLogin(){
+  const v=document.getElementById('lp-i').value,err=document.getElementById('lp-e');
+  if(!v){err.textContent='Introdu parola.';return}
+  if(hp(v)===getHash()){
+    closePopup();
+    document.getElementById('lp-i').value='';
+    switchToFabrica();
+  } else {
+    err.textContent='Parolă incorectă.';
+    const i=document.getElementById('lp-i');i.classList.add('err');
+    setTimeout(()=>i.classList.remove('err'),400);
+  }
+}
+function switchToFabrica(){
+  document.getElementById('page-public').style.display='none';
+  document.getElementById('page-fabrica').style.display='block';
+  document.getElementById('bg-pub').style.display='none';
+  document.getElementById('bg-pub-grid').style.display='none';
+  document.getElementById('bg-pub-glow').style.display='none';
+  document.getElementById('bg-fab').style.display='block';
+  document.getElementById('bg-fab-grid').style.display='block';
+  document.getElementById('pub-links').style.display='none';
+  document.getElementById('pub-live').style.display='none';
+  document.getElementById('pub-cta').style.display='none';
+  document.getElementById('fab-badge').style.display='flex';
+  document.getElementById('fab-out').style.display='flex';
+  document.getElementById('nav-clock').style.display='block';
+  document.getElementById('nav-logo-btn').onclick=null;
+  document.getElementById('nav-logo-btn').style.cursor='default';
+  window.scrollTo(0,0);
+  updateClock();
+}
+function doLogout(){
+  document.getElementById('page-public').style.display='block';
+  document.getElementById('page-fabrica').style.display='none';
+  document.getElementById('bg-pub').style.display='block';
+  document.getElementById('bg-pub-grid').style.display='block';
+  document.getElementById('bg-pub-glow').style.display='block';
+  document.getElementById('bg-fab').style.display='none';
+  document.getElementById('bg-fab-grid').style.display='none';
+  document.getElementById('pub-links').style.display='flex';
+  document.getElementById('pub-live').style.display='flex';
+  document.getElementById('pub-cta').style.display='inline-flex';
+  document.getElementById('fab-badge').style.display='none';
+  document.getElementById('fab-out').style.display='none';
+  document.getElementById('nav-clock').style.display='none';
+  document.getElementById('nav-logo-btn').onclick=togglePopup;
+  document.getElementById('nav-logo-btn').style.cursor='pointer';
+  window.scrollTo(0,0);
+}
+
+// ── CLOCK ──
+function updateClock(){const n=new Date();document.getElementById('nav-clock').textContent=n.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+setInterval(updateClock,1000);
+
+// ── TOGGLE VIS ──
+function tvis(id,btn){
+  const i=document.getElementById(id),s=btn.querySelector('svg');
+  if(i.type==='password'){i.type='text';s.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';}
+  else{i.type='password';s.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';}
+}
+
+// ── CHANGE PW ──
+let cpC=null,cpEM='',cpOK=false;
+function openCp(){document.getElementById('cp-overlay').classList.add('open');resetCp()}
+function closeCp(){document.getElementById('cp-overlay').classList.remove('open');resetCp()}
+function resetCp(){
+  ['cp1','cp2','cp3','cp4'].forEach((id,i)=>document.getElementById(id).classList.toggle('on',i===0));
+  ['cp-cur','cp-em','cp-new','cp-cf'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=''});
+  document.querySelectorAll('.cd').forEach(d=>d.value='');
+  ['cp-e1','cp-e2','cp-e3'].forEach(id=>document.getElementById(id).textContent='');
+  cpC=null;cpEM='';cpOK=false;
+}
+function cpGo(n){['cp1','cp2','cp3','cp4'].forEach((id,i)=>document.getElementById(id).classList.toggle('on',i===n-1))}
+function cpS1(){
+  const cur=document.getElementById('cp-cur').value,em=document.getElementById('cp-em').value,e=document.getElementById('cp-e1');
+  if(!cur){e.textContent='Introdu parola curentă.';return}
+  if(hp(cur)!==getHash()){e.textContent='Parola curentă este greșită.';return}
+  if(!em||!em.includes('@')){e.textContent='Email invalid.';return}
+  e.textContent='';cpEM=em;cpC=Math.floor(100000+Math.random()*900000).toString();
+  document.getElementById('cp-es').textContent=em;
+  setTimeout(()=>alert('📧 Cod confirmare (DEMO)\nCod: '+cpC+'\nEmail: '+em),80);
+  cpGo(2);setTimeout(()=>document.querySelectorAll('.cd')[0].focus(),100);
+}
+function cpS2(){
+  const d=Array.from(document.querySelectorAll('.cd')).map(x=>x.value).join(''),e=document.getElementById('cp-e2');
+  if(d.length<6){e.textContent='Completează toate câmpurile.';return}
+  if(d===cpC){e.textContent='';cpOK=true;cpGo(3);setTimeout(()=>document.getElementById('cp-new').focus(),100)}
+  else{e.textContent='Cod incorect.';document.querySelectorAll('.cd').forEach(x=>x.value='');setTimeout(()=>document.querySelectorAll('.cd')[0].focus(),100)}
+}
+function cpResend(){cpC=Math.floor(100000+Math.random()*900000).toString();alert('📧 Cod nou (DEMO):\n'+cpC)}
+function cpS3(){
+  if(!cpOK)return;
+  const np=document.getElementById('cp-new').value,cf=document.getElementById('cp-cf').value,e=document.getElementById('cp-e3');
+  if(np.length<8){e.textContent='Minim 8 caractere.';return}
+  if(np!==cf){e.textContent='Parolele nu coincid.';return}
+  e.textContent='';localStorage.setItem(PW_KEY,hp(np));cpGo(4);
+}
+function chkStr(pw){
+  let s=0;if(pw.length>=8)s++;if(pw.length>=12)s++;if(/[A-Z]/.test(pw))s++;if(/[0-9]/.test(pw))s++;if(/[^A-Za-z0-9]/.test(pw))s++;
+  const c=['#e05555','#c9a84c','#c9a84c','#5fb3d4','#00d68f'],l=['Foarte slabă','Slabă','Acceptabilă','Bună','Puternică'];
+  document.getElementById('sf').style.cssText='width:'+(s/5*100)+'%;background:'+c[Math.max(0,s-1)];
+  document.getElementById('sl').textContent=pw.length?l[Math.max(0,s-1)]:'—';
+}
+function cdi(el,i){el.value=el.value.replace(/\D/g,'');if(el.value){const n=document.querySelectorAll('.cd')[i+1];if(n)n.focus();if(Array.from(document.querySelectorAll('.cd')).map(d=>d.value).join('').length===6)document.getElementById('cp-vb').focus();}}
+function cdk(e,i){if(e.key==='Backspace'&&!e.target.value){const p=document.querySelectorAll('.cd')[i-1];if(p){p.focus();p.value=''}}}
+
+// ── TOAST ──
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast'),tm=document.getElementById('toast-msg');
+  t.className='toast '+type;tm.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── FAB VIEWS ──
+function showFab(name,btn){
+  document.querySelectorAll('.fab-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('fv-'+name).classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+}
+
+// ── WORKFLOW ──
+let valCount=0;
+function wfValidate(step){
+  const txt=document.getElementById('wt'+step)?.value||'';
+  if(step===1&&!txt.trim()){showToast('Scrie un scenariu înainte!','warning');return;}
+  valCount++;document.getElementById('stat-val').textContent=valCount;
+  if(step===1){
+    document.getElementById('ps1-s').textContent='✓ Validat';document.getElementById('ps1-s').style.color='var(--green)';
+    document.getElementById('pb1').style.width='100%';
+    document.getElementById('ps2').classList.add('ps-active');document.getElementById('ps2-s').textContent='În lucru';document.getElementById('ps2-s').style.color='var(--gold)';document.getElementById('pb2').style.width='50%';
+    document.getElementById('ws2').style.opacity='1';document.getElementById('ws2').style.pointerEvents='auto';
+    showToast('✓ Text trimis spre ElevenLabs!');
+  } else if(step===2){
+    document.getElementById('ps2-s').textContent='✓ Validat';document.getElementById('ps2-s').style.color='var(--green)';
+    document.getElementById('pb2').style.width='100%';document.getElementById('ps2').classList.remove('ps-active');document.getElementById('ps2').classList.add('ps-done');
+    document.getElementById('ps3').classList.add('ps-active');document.getElementById('ps3-s').textContent='În lucru';document.getElementById('ps3-s').style.color='var(--gold)';document.getElementById('pb3').style.width='50%';
+    document.getElementById('ws3').style.opacity='1';document.getElementById('ws3').style.pointerEvents='auto';
+    showToast('✓ Voce validată → trimis spre Genspark!');
+  } else if(step===3){
+    document.getElementById('ps3-s').textContent='✓ Validat';document.getElementById('ps3-s').style.color='var(--green)';
+    document.getElementById('pb3').style.width='100%';document.getElementById('ps3').classList.remove('ps-active');document.getElementById('ps3').classList.add('ps-done');
+    document.getElementById('ps4').classList.add('ps-done');document.getElementById('ps4-s').textContent='✓ Gata!';document.getElementById('ps4-s').style.color='var(--green)';document.getElementById('pb4').style.width='100%';
+    document.getElementById('ws-done').style.display='block';
+    showToast('🎉 Producție finalizată!');
+  }
+}
+function wfReset(){
+  ['ws2','ws3'].forEach(id=>{document.getElementById(id).style.opacity='.35';document.getElementById(id).style.pointerEvents='none';});
+  document.getElementById('ws-done').style.display='none';
+  ['wt1','wt2','wt3'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  ['ps1','ps2','ps3','ps4'].forEach(id=>{document.getElementById(id).classList.remove('ps-active','ps-done');});
+  document.getElementById('ps1').classList.add('ps-active');
+  const statuses=[['ps1-s','În lucru','var(--gold)'],['ps2-s','Așteaptă OK','var(--dim)'],['ps3-s','Așteaptă OK','var(--dim)'],['ps4-s','—','var(--dim)']];
+  statuses.forEach(([id,txt,col])=>{const e=document.getElementById(id);e.textContent=txt;e.style.color=col;});
+  ['pb1','pb2','pb3','pb4'].forEach((id,i)=>document.getElementById(id).style.width=i===0?'60%':'0%');
+  showToast('Flux resetat — proiect nou!');
+}
+
+// ── PROIECTE ──
+let projects=JSON.parse(localStorage.getItem('tp')||'[]');
+if(!projects.length){projects=[{id:1,name:'Proiect Alpha',desc:'Descrie primul tău proiect privat.',status:'activ'},{id:2,name:'Proiect Beta',desc:'Al doilea proiect, aproape gata.',status:'lansare'},{id:3,name:'Proiect Gamma',desc:'Idee validată, urmează construcție.',status:'idee'}];localStorage.setItem('tp',JSON.stringify(projects));}
+const SM={activ:{l:'Activ',c:'var(--accent)'},lansare:{l:'Lansare curând',c:'var(--green)'},idee:{l:'Idee validată',c:'var(--gold)'},pauza:{l:'Pauză',c:'var(--dim)'}};
+function saveProj(){localStorage.setItem('tp',JSON.stringify(projects));document.getElementById('stat-proj').textContent=projects.filter(p=>p.status==='activ').length;}
+function renderProj(){
+  document.getElementById('proj-grid').innerHTML=projects.map(p=>`
+    <div class="proj-card">
+      <div class="pc-top"><div class="pc-icon" style="background:rgba(201,168,76,0.1)">📁</div><div class="pc-dot" style="background:${SM[p.status]?.c||'var(--dim)'}"></div></div>
+      <div class="pc-name" contenteditable="true" onblur="updProj(${p.id},'name',this.textContent)">${p.name}</div>
+      <div class="pc-desc" contenteditable="true" onblur="updProj(${p.id},'desc',this.textContent)">${p.desc}</div>
+      <div class="pc-foot">
+        <select class="pc-sel" onchange="updProj(${p.id},'status',this.value)" style="color:${SM[p.status]?.c||'var(--dim)'}">
+          ${Object.entries(SM).map(([k,v])=>`<option value="${k}" ${p.status===k?'selected':''}>${v.l}</option>`).join('')}
+        </select>
+        <button class="pc-del" onclick="delProj(${p.id})">Șterge</button>
+      </div>
+    </div>`).join('');
+}
+function updProj(id,f,v){const p=projects.find(x=>x.id===id);if(p){p[f]=v;saveProj();if(f==='status')renderProj();}}
+function delProj(id){if(confirm('Ștergi proiectul?')){projects=projects.filter(p=>p.id!==id);saveProj();renderProj();showToast('Proiect șters','warning');}}
+function addProj(){projects.push({id:Date.now(),name:'Proiect Nou',desc:'Descrie proiectul...',status:'idee'});saveProj();renderProj();showToast('Proiect adăugat!');}
+renderProj();
+
+// ── JURNAL ──
+let journal=JSON.parse(localStorage.getItem('tj')||'[]');
+if(!journal.length){journal=[{tool:'Genspark',date:'2025-06-01',err:'Videoul a ieșit neclar cu scenarii prea lungi.',les:'Împarte scenariile în fragmente de max 200 cuvinte.'}];localStorage.setItem('tj',JSON.stringify(journal));}
+const TC={Claude:'var(--gold)',ElevenLabs:'var(--purple)',Genspark:'var(--accent)',Cursor:'var(--green)',Suno:'var(--orange)'};
+function renderJournal(){
+  const el=document.getElementById('jrn-list');
+  if(!journal.length){el.innerHTML='<p style="color:var(--dim);font-size:13px;text-align:center;padding:20px">Nicio intrare încă.</p>';return;}
+  el.innerHTML=journal.slice().reverse().map(j=>`<div class="jrn-entry"><div class="je-head"><span class="je-tool-badge" style="color:${TC[j.tool]||'var(--sub)'}">${j.tool}</span><span class="je-date">${j.date}</span></div><div class="je-txt">${j.err}</div>${j.les?`<div class="je-lesson">${j.les}</div>`:''}</div>`).join('');
+}
+function addJournalEntry(){
+  const tool=document.getElementById('j-tool').value,date=document.getElementById('j-date').value||new Date().toISOString().split('T')[0],err=document.getElementById('j-err').value.trim(),les=document.getElementById('j-les').value.trim();
+  if(!err){showToast('Descrie problema mai întâi!','warning');return;}
+  journal.push({tool,date,err,les});localStorage.setItem('tj',JSON.stringify(journal));renderJournal();
+  document.getElementById('j-err').value='';document.getElementById('j-les').value='';
+  showToast('Salvat în Jurnal!');
+}
+renderJournal();
+document.getElementById('j-date').value=new Date().toISOString().split('T')[0];
+
+// ── CREDITE ──
+const CD=[{n:'Claude Pro',c:'var(--gold)',v:70,p:'20€'},{n:'Genspark Plus',c:'var(--accent)',v:40,p:'29€'},{n:'ElevenLabs',c:'var(--purple)',v:55,p:'22€'},{n:'Cursor AI',c:'var(--green)',v:30,p:'20€'},{n:'Suno AI',c:'var(--orange)',v:20,p:'9€'}];
+function renderCred(){
+  document.getElementById('cred-grid').innerHTML=CD.map((c,i)=>`<div class="cred-card"><div class="cc-top"><div class="cc-icon" style="background:rgba(0,0,0,0.2)">${['🤖','🎬','🎙️','⌨️','🎵'][i]}</div><div><div class="cc-name">${c.n}</div><div class="cc-sub">${c.p}/lună</div></div></div><div class="cc-bar-wrap"><div class="cc-bar" id="cb-${i}" style="background:${c.c};width:${c.v}%"></div></div><div class="cc-nums"><span id="cn-${i}">${c.v}% utilizat</span><span>${c.p}</span></div></div>`).join('');
+  document.getElementById('cred-sliders').innerHTML=CD.map((c,i)=>`<div style="display:flex;align-items:center;gap:12px"><span style="font-size:12px;color:var(--sub);width:130px;flex-shrink:0">${c.n}</span><input type="range" min="0" max="100" value="${c.v}" oninput="updCred(${i},this.value)" style="flex:1"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${c.c};width:36px;text-align:right" id="cv-${i}">${c.v}%</span></div>`).join('');
+}
+function updCred(i,v){CD[i].v=parseInt(v);const b=document.getElementById('cb-'+i),n=document.getElementById('cn-'+i),cv=document.getElementById('cv-'+i);if(b)b.style.width=v+'%';if(n)n.textContent=v+'% utilizat';if(cv)cv.textContent=v+'%';}
+renderCred();
+
+// ── NAV MOB ──
+function toggleMob(){const m=document.getElementById('mob');m.style.display=m.style.display==='none'?'block':'none'}
+function closeMob(){document.getElementById('mob').style.display='none'}
+
+// ── SCROLL ANIM PUBLIC ──
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}}),{threshold:0.07});
+document.querySelectorAll('.cat-card,.how-item,.about-row,.hm').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(14px)';el.style.transition=`opacity .5s ease ${i*0.06}s, transform .5s ease ${i*0.06}s`;obs.observe(el);});
+
+// ── FLUX APP ──
+function appValidate(step){
+  const steps=['ap1','ap2','ap3','ap4','ap5'];
+  const bars=['apb1','apb2','apb3','apb4','apb5'];
+  const statuses=['ap1-s','ap2-s','ap3-s','ap4-s','ap5-s'];
+  const panels=['aws1','aws2','aws3','aws4','aws5'];
+  const colors=['var(--gold)','var(--accent)','var(--green)','var(--purple)','var(--accent)'];
+
+  // validare camp obligatoriu pasul 1
+  if(step===1){
+    const name=document.getElementById('app-name').value.trim();
+    const spec=document.getElementById('app-spec').value.trim();
+    if(!name||!spec){showToast('Completează numele și specificațiile!','warning');return;}
+  }
+
+  // marcheaza pasul curent ca done
+  const doneEl=document.getElementById(steps[step-1]);
+  doneEl.classList.remove('ps-active');doneEl.classList.add('ps-done');
+  const statusEl=document.getElementById(statuses[step-1]);
+  statusEl.textContent='✓ Gata';statusEl.style.color='var(--green)';
+  document.getElementById(bars[step-1]).style.width='100%';
+  document.getElementById(bars[step-1]).style.background='var(--green)';
+
+  // pasul curent lock
+  document.getElementById(panels[step-1]).style.opacity='.5';
+  document.getElementById(panels[step-1]).style.pointerEvents='none';
+
+  if(step<5){
+    // activeaza urmatorul pas
+    const nextEl=document.getElementById(steps[step]);
+    nextEl.classList.add('ps-active');
+    document.getElementById(statuses[step]).textContent='În lucru';
+    document.getElementById(statuses[step]).style.color=colors[step];
+    document.getElementById(bars[step]).style.width='40%';
+    document.getElementById(bars[step]).style.background=colors[step];
+    document.getElementById(panels[step]).style.opacity='1';
+    document.getElementById(panels[step]).style.pointerEvents='auto';
+    const msgs=['✓ Specificații salvate — trecem la Design!','✓ Design aprobat — deschide Cursor!','✓ Build validat — testăm!','✓ Testare completă — deploy pe Vercel!'];
+    showToast(msgs[step-1]);
+    document.getElementById(panels[step]).scrollIntoView({behavior:'smooth',block:'start'});
+  } else {
+    // finalizare
+    document.getElementById('app-done').style.display='block';
+    const url=document.getElementById('app-url').value||'app-tău.vercel.app';
+    document.getElementById('app-final-url').textContent='🔗 '+url;
+    document.getElementById('app-done').scrollIntoView({behavior:'smooth',block:'start'});
+    showToast('🚀 Aplicație lansată cu succes!');
+  }
+}
+
+function appReset(){
+  ['ap1','ap2','ap3','ap4','ap5'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.classList.remove('ps-active','ps-done');
+    if(i===0)el.classList.add('ps-active');
+  });
+  ['ap1-s','ap2-s','ap3-s','ap4-s','ap5-s'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.textContent=i===0?'Activ':'Așteaptă';
+    el.style.color=i===0?'var(--gold)':'var(--dim)';
+  });
+  ['apb1','apb2','apb3','apb4','apb5'].forEach((id,i)=>{
+    document.getElementById(id).style.width=i===0?'100%':'0%';
+    document.getElementById(id).style.background='var(--gold)';
+  });
+  ['aws1','aws2','aws3','aws4','aws5'].forEach((id,i)=>{
+    document.getElementById(id).style.opacity=i===0?'1':'.35';
+    document.getElementById(id).style.pointerEvents=i===0?'auto':'none';
+  });
+  document.getElementById('app-done').style.display='none';
+  ['app-name','app-spec','app-design-notes','app-build-notes','app-qa-notes','app-url','app-domain','html-editor','html-editor2'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  ['qa1','qa2','qa3','qa4','qa5','qa6','dep1','dep2','dep3','dep4'].forEach(id=>{const e=document.getElementById(id);if(e)e.checked=false;});
+  checkQA();
+  // clear previews
+  const f1=document.getElementById('preview-frame');const f2=document.getElementById('preview-frame2');
+  if(f1)f1.srcdoc='';if(f2)f2.srcdoc='';
+  // reset tech tags
+  document.querySelectorAll('#tech-tags button').forEach(b=>{b.setAttribute('data-active','false');b.style.color='';b.style.borderColor='';b.style.background='';});
+  showToast('Flux App resetat!');
+}
+
+// ── PREVIEW HTML LIVE ──
+function livePreview(){
+  const code=document.getElementById('html-editor').value;
+  const frame=document.getElementById('preview-frame');
+  if(frame)frame.srcdoc=code;
+}
+function livePreview2(){
+  const code=document.getElementById('html-editor2').value;
+  const frame=document.getElementById('preview-frame2');
+  if(frame)frame.srcdoc=code;
+}
+function runPreview(){livePreview();showToast('Preview actualizat!');}
+function runPreview2(){livePreview2();showToast('Preview actualizat!');}
+function clearPreview(){
+  document.getElementById('html-editor').value='';
+  document.getElementById('preview-frame').srcdoc='';
+  showToast('Preview șters','warning');
+}
+
+// Comanda rapida pasul 2 (injectare in HTML)
+function applyCmd(){
+  const cmd=document.getElementById('app-cmd').value.trim();
+  if(!cmd){showToast('Scrie o comandă mai întâi!','warning');return;}
+  let html=document.getElementById('html-editor').value;
+  // comenzi simple predefinite
+  const lower=cmd.toLowerCase();
+  if(lower.includes('fundal negru')||lower.includes('background negru')){html=html.replace(/background\s*:\s*[^;'"]+/gi,'background:#0a0a0a');}
+  else if(lower.includes('fundal alb')||lower.includes('background alb')){html=html.replace(/background\s*:\s*[^;'"]+/gi,'background:#ffffff');}
+  else if(lower.includes('font mare')||lower.includes('text mare')){html=html.replace(/font-size\s*:\s*[^;'"]+/gi,'font-size:20px');}
+  else{
+    // fallback: adauga un comentariu cu comanda — sa fie trimis la Claude
+    showToast('Comandă notată — trimite la Claude pentru implementare','warning');
+    const note=document.getElementById('app-design-notes');
+    note.value=(note.value?note.value+'\n':'')+`[COMANDA]: ${cmd}`;
+    document.getElementById('app-cmd').value='';
+    return;
+  }
+  document.getElementById('html-editor').value=html;
+  livePreview();
+  document.getElementById('app-cmd').value='';
+  showToast('Comandă aplicată!');
+}
+
+function applyCmd2(){
+  const cmd=document.getElementById('app-cmd2').value.trim();
+  if(!cmd){showToast('Scrie o comandă!','warning');return;}
+  const note=document.getElementById('app-build-notes');
+  note.value=(note.value?note.value+'\n':'')+`[COMANDA CURSOR]: ${cmd}`;
+  document.getElementById('app-cmd2').value='';
+  showToast('Comandă salvată pentru Cursor!','warning');
+}
+
+// ── QA CHECKLIST ──
+function checkQA(){
+  const total=6;
+  const done=['qa1','qa2','qa3','qa4','qa5','qa6'].filter(id=>document.getElementById(id)?.checked).length;
+  document.getElementById('qa-progress').style.width=(done/total*100)+'%';
+  document.getElementById('qa-count').textContent=done+'/'+total;
+  const okBtn=document.getElementById('qa-ok-btn');
+  if(done===total){okBtn.style.opacity='1';okBtn.style.pointerEvents='auto';}
+  else{okBtn.style.opacity='.4';okBtn.style.pointerEvents='none';}
+}
+
+// ── TECH TAGS TOGGLE ──
+function toggleTech(btn){
+  const active=btn.getAttribute('data-active')==='true';
+  btn.setAttribute('data-active',!active);
+  btn.style.color=active?'':'var(--green)';
+  btn.style.borderColor=active?'':'rgba(0,214,143,0.4)';
+  btn.style.background=active?'':'rgba(0,214,143,0.07)';
+}
+</script>
+</body>
+</html>
